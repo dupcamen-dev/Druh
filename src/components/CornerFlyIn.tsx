@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
+import { useEffect, useRef, ReactNode } from "react";
 
 export type Corner = "tl" | "tr" | "bl" | "br";
 
@@ -14,72 +14,44 @@ export default function CornerFlyIn({
   children,
   corner = "tl",
   rotate = 0,
-  delay = 0,
   className = "",
-  style,
 }: {
   children: ReactNode;
   corner?: Corner;
   rotate?: number;
-  delay?: number;
   className?: string;
-  style?: CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [p, setP] = useState(0);
-  const [vw, setVw] = useState(1400);
-  const [vh, setVh] = useState(900);
 
   useEffect(() => {
-    const setSize = () => {
-      setVw(window.innerWidth);
-      setVh(window.innerHeight);
-    };
-    setSize();
+    const el = ref.current;
+    if (!el) return;
 
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const el = ref.current;
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      const v = window.innerHeight;
-      const start = v * 0.95;
-      let k = (start - r.top) / (v * 0.85);
-      k = Math.max(0, Math.min(1, k));
-      setP(k);
-    };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
+    // compute start position
+    const vpW = window.innerWidth;
+    const vpH = window.innerHeight;
+    const [sx, sy] = DIRS[corner];
+    // start offset: 50% of viewport width/height in that corner direction
+    const startX = sx * vpW * 0.5;
+    const startY = sy * vpH * 0.45;
 
-  const [sx, sy] = DIRS[corner];
-  const e = 1 - Math.pow(1 - p, 2.5);
-  const dx = sx * vw * 0.4 * (1 - e);
-  const dy = sy * vh * 0.3 * (1 - e);
-  const rot = rotate + rotate * -2.2 * (1 - e);
+    // set initial "from" state (trigger reflow)
+    el.style.transition = "none";
+    el.style.transform = `translate3d(${startX}px, ${startY}px, 0) rotate(${rotate}deg)`;
+    el.style.opacity = "0";
+    void el.offsetWidth; // trigger reflow
+
+    // set initial "to" state with transition
+    el.style.transition = "transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.5s cubic-bezier(0.34,1.56,0.64,1)";
+    el.style.transform = `translate3d(0,0,0) rotate(${rotate}deg)`;
+    el.style.opacity = "1";
+  }, [corner, rotate]);
 
   return (
     <div
       ref={ref}
       className={className}
-      style={{
-        ...style,
-        transform: `translate3d(${dx}px, ${dy}px, 0) rotate(${rot}deg)`,
-        opacity: Math.min(1, p * 2),
-        transition: "transform 0.1s linear, opacity 0.35s ease-out",
-        transitionDelay: `${delay}ms`,
-        willChange: "transform, opacity",
-      }}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </div>

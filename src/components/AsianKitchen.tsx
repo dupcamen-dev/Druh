@@ -13,7 +13,7 @@ const DISHES = [
     name: "Seafood ramen",
     desc: "Umami-packed broth with prawns, a silky egg and hand-made noodles.",
     rotate: -4,
-    corner: "tl" as const,
+    corner: "tl",
   },
   {
     img: "/images/asian/ramen-beef.png",
@@ -23,7 +23,7 @@ const DISHES = [
     name: "Beef ramen",
     desc: "Slow-simmered broth with melt-in-the-mouth su-vid beef and a soft egg.",
     rotate: 3,
-    corner: "tr" as const,
+    corner: "tr",
   },
   {
     img: "/images/asian/ramen-katsu.png",
@@ -33,7 +33,7 @@ const DISHES = [
     name: "Chicken katsu ramen",
     desc: "Crispy golden katsu over a rich broth with nori and spring onion.",
     rotate: -3,
-    corner: "bl" as const,
+    corner: "bl",
   },
   {
     img: "/images/asian/onigiri-unagi.png",
@@ -43,7 +43,7 @@ const DISHES = [
     name: "Onigiri with eel",
     desc: "Warm sushi rice, glazed eel, unagi sauce and a crisp nori wrap.",
     rotate: 5,
-    corner: "br" as const,
+    corner: "br",
   },
   {
     img: "/images/asian/yakitori-chicken.png",
@@ -53,7 +53,7 @@ const DISHES = [
     name: "Yakitori chicken",
     desc: "Grilled chicken thigh brushed with tare sauce, sprinkled with sesame.",
     rotate: -2,
-    corner: "tl" as const,
+    corner: "tl",
   },
   {
     img: "/images/asian/hambagu.png",
@@ -63,7 +63,7 @@ const DISHES = [
     name: "Hambagu",
     desc: "Japanese-style beef patty with demi-glace sauce, served with rice.",
     rotate: 2,
-    corner: "bl" as const,
+    corner: "bl",
   },
 ];
 
@@ -73,91 +73,89 @@ export default function AsianKitchen() {
       id="asian"
       className="relative py-24 lg:py-32 bg-white overflow-hidden"
     >
-      {/* gradient container */}
+      {/* gradient container for soft background */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-[--cream] to-white opacity-95"
+        className="absolute inset-0 bg-gradient-to-b from-[--cream] to-white"
       />
-      {/* ghost kanji watermarks */}
+      {/* subtle ghost kanji watermarks – smaller, positioned to the sides, very low opacity */}
       <svg
         aria-hidden
-        className="absolute -top-10 -left-10 lg:-left-6 select-none pointer-events-none opacity-20 text-[120px] lg-text-[180px] font-bold fill-[rgb(0,0,0)] font-family-'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif transform-none transition-transform lg:transition-none"
+        className="absolute -top-4 -left-4 select-none pointer-events-none opacity-5 text-[80px] lg:text-[100px] font-bold fill-[rgb(0,0,0)] font-family-'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif"
         viewBox="0 0 64 64"
       >
         <text x="6" y="52" fontSize="56" fontWeight="800">食</text>
       </svg>
       <svg
         aria-hidden
-        className="absolute -bottom-12 -right-10 lg:-right-6 select-none pointer-events-none opacity-20 text-[120px] lg-text-[180px] font-bold fill-[rgb(0,0,0)] font-family-'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif"
+        className="absolute -bottom-8 -right-8 select-none pointer-events-none opacity-5 text-[80px] lg:text-[100px] font-bold fill-[rgb(0,0,0)] font-family-'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif"
         viewBox="0 0 64 64"
       >
         <text x="-8" y="54" fontSize="58" fontWeight="800" transform="rotate(6 32 32)">麺</text>
       </svg>
 
-      {/* vertical japanese dish names accent */}
+      {/* vertical japanese dish names accent – smaller, subtler, hidden on mobile */}
       <svg
         aria-hidden
-        className="hidden lg:block absolute left-4 top-1/2 -translate-y-1/2 select-none pointer-events-none opacity-100 text-[15px] text-[rgb(0,0,0)] h-[420px] w-auto"
-        viewBox="0 0 28 420"
+        className="hidden lg:block absolute left-4 top-1/2 -translate-y-1/2 select-none pointer-events-none opacity-8 text-[12px] text-[rgb(0,0,0)] h-[300px] w-auto"
+        viewBox="0 0 28 300"
         width="28"
-        height="420"
+        height="300"
       >
         <text
           x="18"
           y="0"
-          fontSize="20"
+          fontSize="12"
           fontWeight="700"
           fill="#000000"
           fontFamily="'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif"
-          letterSpacing="10"
+          letterSpacing="8"
           writingMode="vertical-rl"
           style={{ writingMode: "vertical-rl" }}
         >
-          海鮮ラーメン・牛ラーメン・カツラーメン・うなぎおにぎり・焼き鳥・ハンバーグ
+          海鮮ラーメン・牛ラーメン・カツラーメン・うなぎおにぎり
         </text>
       </svg>
 
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-10">
-        <Reveal className="text-center max-w-[760px] mx-auto mb-16 lg:mb-28">
-          <span className="inline-block font-hand text-2xl text-[#2596be] mb-4">Asian kitchen</span>
-          <h2 className="font-display font-bold text-[#1A1715] leading-[1.1] mb-6 tracking-tight" style={{ fontSize: "clamp(2.2rem, 4.8vw, 3.5rem)" }}>
+        <Reveal className="text-center max-w-[760px] mx-auto mb-12 lg:mb-16">
+          <span className="inline-block font-hand text-2xl text-[#2596be] mb-3">Asian kitchen</span>
+          <h2 className="font-display font-bold text-[#1A1715] leading-[1.1] mb-4 tracking-tight" style={{ fontSize: "clamp(2rem, 4.5vw, 3rem)" }}>
             Tokyo street food,<br className="hidden sm:block" /> brewed right here
           </h2>
-          <p className="text-[#555] text-[17px] sm:text-[18px] leading-[1.9]">
+          <p className="text-[#555] text-[15px] sm:text-[16px] leading-[1.8]">
             From the broth‑bubbling stalls of Osaka to the sizzling grills of Tokyo’s alleyways —
             a Japanese street walk, without leaving Ternopil. Each dish tells a story of tradition,
             craft, and the freshest seasonal ingredients.
           </p>
         </Reveal>
 
-        {/* masonry collage of cutout dishes */}
-        <div
-          className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 xl:grid-cols-3 gap-y-8 pt-8"
-        >
+        {/* masonry collage of cutout dishes – entrance from corners, no scroll dependency */}
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 xl:grid-cols-3 gap-y-6 pt-4">
           {DISHES.map((d, i) => (
             <div
               key={d.img}
-              className="group relative overflow-hidden rounded-lg group-hover:shadow-xl group-hover:transition-shadow duration-300"
+              className="group relative rounded-lg overflow-hidden group-hover:shadow-xl group-hover:transition-shadow duration-300"
             >
-              {/* photo flies in from its own corner */}
-              <CornerFlyIn corner={d.corner} rotate={d.rotate} delay={i * 100}>
+              {/* photo flies in from its own corner on mount – single smooth animation, no steps */}
+              <CornerFlyIn corner={d.corner as "tl" | "tr" | "bl" | "br"} rotate={d.rotate}>
                 <Image
                   src={asset(d.img)}
                   alt={d.name}
                   width={d.w}
                   height={d.h}
                   priority={i === 0}
-                  className="w-full h-auto drop-shadow-[0_20px_25px_rgba(26,23,21,0.2)] transition-transform duration-700 ease-out group-hover:scale-[1.05] group-hover:filter brightness-110"
-                    sizes="(max-width: 1024px) 90vw, 40vw"
+                  className="w-full h-auto drop-shadow-[0_15px_18px_rgba(26,23,21,0.18)] transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:filter brightness-105"
+                    sizes="(max-width: 1024px) 90vw, 45vw"
                 />
-                <span className="absolute top-2 right-2 font-display text-[10px] font-bold uppercase tracking-[0.15em] text-white bg-[#2596be] px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="absolute top-1 right-1 font-display text-[9px] font-bold uppercase tracking-[0.12em] text-white bg-[#2596be] px-1 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {d.kanji}
                 </span>
               </CornerFlyIn>
 
-              {/* caption lands separately, after the photo */}
-              <Reveal delay={420 + i * 140} variant="up" className="text-center mt-3 lg:mt-4 px-2">
-                <h3 className="font-display font-bold text-[#1A1715] text-[16px] sm:text-[18px] leading-snug">{d.name}</h3>
-                <p className="text-[#555] text-[13px] sm:text-[14px] leading-[1.6] mt-1 max-w-[280px] mx-auto">{d.desc}</p>
+              {/* caption fades up slightly after photo – reduced delay, separate animation */}
+              <Reveal delay={200 + i * 60} variant="up" className="text-center mt-2 lg:mt-1.5 px-1">
+                <h3 className="font-display font-bold text-[#1A1715] text-[14px] sm:text-[15px] leading-snug">{d.name}</h3>
+                <p className="text-[#555] text-[11px] sm:text-[12px] leading-[1.5] mt-0.5 max-w-[240px] mx-auto">{d.desc}</p>
               </Reveal>
             </div>
           ))}
