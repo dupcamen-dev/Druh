@@ -92,7 +92,7 @@ function CartDrawer({
         {/* header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#1A1715]/10">
           <h3 className="font-display font-bold text-[#1A1715] text-[18px]">
-            Кошик {count > 0 && <span className="text-[#555] text-[14px]">({count})</span>}
+            Cart {count > 0 && <span className="text-[#555] text-[14px]">({count})</span>}
           </h3>
           <button
             onClick={onClose}
@@ -110,9 +110,9 @@ function CartDrawer({
           <div className="flex-1 flex items-center justify-center px-6 text-center">
             <div>
               <p className="font-display font-bold text-[#1A1715] text-[16px] mb-2">
-                Кошик порожній
+                Your cart is empty
               </p>
-              <p className="text-[#555] text-[14px]">Додайте щось смачненьке</p>
+              <p className="text-[#555] text-[14px]">Add something tasty</p>
             </div>
           </div>
         ) : (
@@ -155,7 +155,7 @@ function CartDrawer({
         {items.length > 0 && (
           <div className="border-t border-[#1A1715]/10 px-6 py-5 space-y-4">
             <div className="flex items-center justify-between">
-              <p className="font-display font-bold text-[#1A1715] text-[15px]">Разом</p>
+              <p className="font-display font-bold text-[#1A1715] text-[15px]">Total</p>
               <p className="font-display font-extrabold text-[#1A1715] text-[18px]">
                 {fmtPrice(total)}
               </p>
@@ -167,7 +167,7 @@ function CartDrawer({
               rel="noopener noreferrer"
               className="flex w-full items-center justify-center gap-2.5 px-8 py-4 rounded-lg bg-[#ebe859] text-[#1A1715] font-bold text-[14px] uppercase tracking-wider hover:bg-[#59eb59] transition-colors"
             >
-              Замовити в Telegram
+              Order via Telegram
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
                 <path d="M18 8l4 4-4 4M6 20V11a1 1 0 0 1 1-1h11" />
               </svg>
@@ -177,7 +177,7 @@ function CartDrawer({
               onClick={() => setCart({})}
               className="w-full text-center text-[#555] text-[13px] font-bold underline-anim"
             >
-              Очистити кошик
+              Clear cart
             </button>
           </div>
         )}
@@ -261,7 +261,7 @@ export default function Kramnychka() {
                         {it.name}
                       </p>
                       <p className="text-[#1A1715]/70 text-[12px] leading-[1.6] mb-4 line-clamp-3">
-                        {it.description.replace(/\n+/g, " · ").replace(/Дискриптори: /, "")}
+                        {it.description.replace(/\n+/g, " · ").replace(/Tasting notes: /, "")}
                       </p>
                       <div className="mt-auto flex items-end justify-between gap-3">
                         <div>
@@ -278,7 +278,7 @@ export default function Kramnychka() {
                             onClick={() => addItem(it.id)}
                             className="shine shrink-0 px-5 py-3 rounded-lg bg-[#ebe859] text-[#1A1715] font-bold text-[13px] uppercase tracking-wider hover:bg-[#59eb59] transition-colors active:scale-95"
                           >
-                            Додати
+                            Add
                           </button>
                         ) : (
                           <Stepper

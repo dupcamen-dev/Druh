@@ -19,15 +19,15 @@ export type ShopItem = {
 };
 
 export const CATEGORIES: ShopCategory[] = [
-  { id: "kava-v-zernah", name: "Кава в зернах" },
-  { id: "matcha-v-sashe", name: "Матча в саше" },
+  { id: "kava-v-zernah", name: "Coffee beans" },
+  { id: "matcha-v-sashe", name: "Matcha sachets" },
 ];
 
 const LABEL_MAP: Record<ShopLabel, string> = {
-  new: "Новинка",
-  recommended: "Рекомендуємо",
-  vegetarian: "Вегетаріанське",
-  gluten: "Без глютену",
+  new: "New",
+  recommended: "Recommended",
+  vegetarian: "Vegetarian",
+  gluten: "Gluten-free",
 };
 
 export const labelLabel = (l: ShopLabel) => LABEL_MAP[l];
@@ -35,70 +35,70 @@ export const labelLabel = (l: ShopLabel) => LABEL_MAP[l];
 export const SHOP_ITEMS: ShopItem[] = [
   {
     id: "cafeboutique-decaf-colombia",
-    name: "CAFEBOUTIQUE DECAF Colombia Popayan (омні)",
+    name: "CAFEBOUTIQUE DECAF Colombia Popayan (omni)",
     category: "kava-v-zernah",
     priceGrn: 487,
     weight: "250",
     weightType: "g",
     kcal: null,
     description:
-      "Обробка: EA\nРегіон: Попаян, Каука\nСтанція: Різні\nСорт: катура, кастіло, колумбія\n\nДескриптори: заварний пряник, вишневий джем, білий виноград, кунжутний козинак",
+      "Process: EA\nRegion: Popayán, Cauca\nStation: Various\nVariety: caturra, castillo, colombia\n\nTasting notes: spice cake, cherry jam, white grape, sesame brittle",
     imageUrl:
       "/images/shop/cafeboutique-decaf-colombia.png",
     labels: ["new"],
   },
   {
     id: "cafeboutique-ethiopia-gedeb",
-    name: "🇪🇹CAFEBOUTIQUE Ethiopia Gedeb (еспресо)",
+    name: "🇪🇹CAFEBOUTIQUE Ethiopia Gedeb (espresso)",
     category: "kava-v-zernah",
     priceGrn: 440,
     weight: "250",
     weightType: "g",
     kcal: null,
     description:
-      "Обробка: натуральна\nРегіон: Гедеб, Йіргачеф\nСтанція: Лайодача\nСорт: гібриди jarc та локальні\n\nДискриптори: абрикос, малина, лимон, мигдаль, вершкове печиво",
+      "Process: natural\nRegion: Gedeb, Yirgacheffe\nStation: Layodacha\nVariety: JARC hybrids & local\n\nTasting notes: apricot, raspberry, lemon, almond, butter cookie",
     imageUrl:
       "/images/shop/cafeboutique-ethiopia-gedeb.png",
     labels: ["new"],
   },
   {
     id: "cafeboutique-brazil-divisa",
-    name: "CAFEBOUTIQUE Brazil Divisa (еспресо)",
+    name: "CAFEBOUTIQUE Brazil Divisa (espresso)",
     category: "kava-v-zernah",
     priceGrn: 400,
     weight: "250",
     weightType: "g",
     kcal: null,
     description:
-      "Обробка: натуральна\nРегіон: Кармо де Мінас\nСтанція: Дівіза\nСорт: жовтий бурбон\n\nДискриптори: мандарин, бісквіт, молочний шоколад, кеш'ю",
+      "Process: natural\nRegion: Carmo de Minas\nStation: Divisa\nVariety: yellow bourbon\n\nTasting notes: mandarin, sponge cake, milk chocolate, cashew",
     imageUrl:
       "/images/shop/cafeboutique-brazil-divisa.png",
     labels: [],
   },
   {
     id: "cafeboutique-peru-piura",
-    name: "CAFEBOUTIQUE Peru Piura (еспресо)",
+    name: "CAFEBOUTIQUE Peru Piura (espresso)",
     category: "kava-v-zernah",
     priceGrn: 436,
     weight: "250",
     weightType: "g",
     kcal: null,
     description:
-      "Обробка: натуральна\nРегіон: Кахамарка\nСтанція: Аромас Дель Велі\nСорт: бурбон, катура, типіка\n\nДискриптори: сушене яблуко, стиглий грейпфрут, молочний шоколад, марципан",
+      "Process: natural\nRegion: Cajamarca\nStation: Aromas del Valle\nVariety: bourbon, caturra, typica\n\nTasting notes: dried apple, ripe grapefruit, milk chocolate, marzipan",
     imageUrl:
       "/images/shop/cafeboutique-peru-piura.png",
     labels: [],
   },
   {
     id: "cafeboutique-kenya-kikuyu",
-    name: "🇪🇹CAFEBOUTIQUE Kenya Kikuyu (фільтр)",
+    name: "🇪🇹CAFEBOUTIQUE Kenya Kikuyu (filter)",
     category: "kava-v-zernah",
     priceGrn: 428,
     weight: "250",
     weightType: "g",
     kcal: null,
     description:
-      "Обробка: мита\nРегіон: Нієрі\nСтанція: різні\nСорт: SL-28, SL-34, RUIRU 11\n\nДискриптори: печене яблуко, порічки, ревінь",
+      "Process: washed\nRegion: Nyeri\nStation: Various\nVariety: SL-28, SL-34, RUIRU 11\n\nTasting notes: baked apple, redcurrant, rhubarb",
     imageUrl:
       "/images/shop/cafeboutique-kenya-kikuyu.png",
     labels: [],
@@ -112,49 +112,49 @@ export const SHOP_ITEMS: ShopItem[] = [
     weightType: "g",
     kcal: null,
     description:
-      "Обробка: натуральна\nРегіон: Уябал, Кахамарка\nСтанція: Санта Роза\nСорт: марсельєза\n\nДискриптори: лимонад, зефір, яблучносливова пастила, какаонібси",
+      "Process: natural\nRegion: Uyabal, Cajamarca\nStation: Santa Rosa\nVariety: marsellesa\n\nTasting notes: lemonade, marshmallow, apple-plum fruit leather, cacao nibs",
     imageUrl:
       "/images/shop/cafeboutique-peru-santa-rosa.png",
     labels: [],
   },
   {
     id: "kokosoviy-matcha-late",
-    name: "Кокосовий матча лате",
+    name: "Coconut matcha latte",
     category: "matcha-v-sashe",
     priceGrn: 68,
     weight: "18",
     weightType: "g",
     kcal: 111,
     description:
-      "Справжній матча лате на кокосовому вдома за 1 хвилину. Зручний формат, щоб взяти з собою в офіс або подорож та заварити будь-де.\n\nУ складі якісний японський матча, сублімовані кокосові вершки та трохи стевії. Легкий у приготуванні — просто залийте водою та збийте до ідеальної пінки.",
+      "Real matcha latte with coconut at home in 1 minute. A convenient format to take to the office or on a trip and brew anywhere.\n\nMade with high-quality Japanese matcha, freeze-dried coconut cream and a touch of stevia. Easy to prepare — just pour water over it and whisk to a perfect froth.",
     imageUrl:
       "/images/shop/kokosoviy-matcha-late.png",
     labels: ["recommended", "gluten", "vegetarian"],
   },
   {
     id: "kokosoviy-cbd-matcha-late",
-    name: "Кокосовий CBD матча лате",
+    name: "Coconut CBD matcha latte",
     category: "matcha-v-sashe",
     priceGrn: 97,
     weight: "18",
     weightType: "g",
     kcal: 111,
     description:
-      "Справжній матча лате на кокосовому вдома за 1 хвилину. Ще й заспокійливий! Поєднання порції CBD, преміум матча, ніжних кокосових вершків.\n\nЛегкий у приготуванні — просто залийте водою та збийте. CBD допоможе розслабитися та сфокусуватись, а органічний матча подарує природну енергію.",
+      "Real matcha latte with coconut at home in 1 minute. Calming, too! A blend of a dose of CBD, premium matcha and gentle coconut cream.\n\nEasy to prepare — just pour water over it and whisk. CBD helps you relax and focus, while organic matcha gives you natural energy.",
     imageUrl:
       "/images/shop/kokosoviy-cbd-matcha-late.png",
     labels: ["new", "recommended", "gluten", "vegetarian"],
   },
   {
     id: "kokosoviy-kolagen-matcha-late",
-    name: "Кокосовий колаген матча лате",
+    name: "Coconut collagen matcha latte",
     category: "matcha-v-sashe",
     priceGrn: 97,
     weight: "18",
     weightType: "g",
     kcal: 100,
     description:
-      "Улюблена матча-лате тепер з колагеном від Perla. Напій, який посилює молодість та додає шкірі пружність. У складі — церемоніальна матча та морський колаген.\n\nПростота приготування — просто додайте води та розмішайте, а для кремової пінки скористайтесь капучинатором.",
+      "Your favourite matcha latte, now with collagen from Perla. A drink that boosts youthful glow and adds firmness to skin. Made with ceremonial matcha and marine collagen.\n\nSo easy to make — just add water and stir, or use a frother for a creamy foam.",
     imageUrl:
       "/images/shop/kokosoviy-kolagen-matcha-late.png",
     labels: ["recommended", "gluten", "vegetarian"],
@@ -168,7 +168,7 @@ export const SHOP_BY_CATEGORY = CATEGORIES.map((cat) => ({
 
 export function fmtPrice(n: number): string {
   const formatted = n.toLocaleString("uk-UA", { maximumFractionDigits: 0 });
-  return `${formatted} грн`;
+  return `${formatted} UAH`;
 }
 
 export function buildTelegramOrder(cart: Record<string, number>): string {
@@ -184,7 +184,7 @@ export function buildTelegramOrder(cart: Record<string, number>): string {
       const it = SHOP_ITEMS.find((x) => x.id === id)!;
       return sum + it.priceGrn * qty;
     }, 0);
-  const header = `Замовлення у ДРУГ`;
-  const body = [header, "", ...lines, "", `Разом: ${fmtPrice(total)}`].join("\n");
+  const header = `Order from DRUH`;
+  const body = [header, "", ...lines, "", `Total: ${fmtPrice(total)}`].join("\n");
   return `https://t.me/druhk15?text=${encodeURIComponent(body)}`;
 }

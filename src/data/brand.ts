@@ -1,10 +1,8 @@
 export const BRAND = {
   name: "DRUH",
-  nameUk: "ДРУГ",
   tagline: "Where every guest is a friend",
-  taglineUk: "Кафе, в якому ти не просто гість, а справжній друг",
   address: "vul. 15-ho Kvitnia 2, Ternopil",
-  addressFull: "вул. 15-го Квітня 2м, Тернопіль",
+  addressFull: "vul. 15-ho Kvitnia 2, Ternopil",
   phone: "+380 97 450 77 15",
   phoneLink: "+380974507715",
   hours: {
