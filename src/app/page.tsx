@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import FlyIn from "@/components/FlyIn";
 import { PinIcon, PhoneIcon, ClockIcon, ScooterIcon, BoxIcon, HandIcon } from "@/components/OutlineIcons";
 import Kramnychka from "@/components/Kramnychka";
+import AsianKitchen from "@/components/AsianKitchen";
 import { BRAND } from "@/data/brand";
 import { asset } from "@/lib/base";
 
@@ -32,8 +32,8 @@ function Hero() {
             Browse the menu
             <svg className="transition-transform duration-300 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a href="#story" className="shine inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-lg border-2 border-white text-white font-bold text-[14px] uppercase tracking-wider hover:bg-white hover:text-[#2596be] transition-colors active:scale-95">
-            Read our story
+          <a href="#asian" className="shine inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-lg border-2 border-white text-white font-bold text-[14px] uppercase tracking-wider hover:bg-white hover:text-[#2596be] transition-colors active:scale-95">
+            Explore the kitchen
           </a>
         </div>
       </div>
@@ -54,37 +54,6 @@ function Marquee() {
             </span>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function Story() {
-  return (
-    <section id="story" className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-white">
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-        <Reveal variant="left">
-          <span className="inline-block font-hand text-xl text-[#2596be] mb-3">About us</span>
-          <h2 className="font-display font-bold text-[#1A1715] leading-[1.1] mb-8 tracking-tight" style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)" }}>
-            After all, a friend is exactly what you call a person who feels at home.
-          </h2>
-          <p className="text-[#555] text-[15px] leading-[1.8] mb-8 max-w-[480px]">
-            We bake our own bread and cinnabons fresh every morning. Our specialty coffee
-            comes from carefully selected roasters, our matcha and teas are sourced directly from
-            Japan and China, and our seasonal dishes feature the best local produce. At Druh,
-            we cook everything from scratch — because friends deserve nothing less.
-          </p>
-        </Reveal>
-
-        <FlyIn className="w-full">
-          <Image
-            src={asset("/images/story-new.png")}
-            alt="Inside Druh"
-            width={1274}
-            height={1235}
-            className="w-full h-auto drop-shadow-[0_25px_35px_rgba(26,23,21,0.25)]"
-          />
-        </FlyIn>
       </div>
     </section>
   );
@@ -227,7 +196,7 @@ export default function HomePage() {
       <Hero />
       <Marquee />
       <Kramnychka />
-      <Story />
+      <AsianKitchen />
       <PdfBanner />
       <Gallery />
       <VisitUs />

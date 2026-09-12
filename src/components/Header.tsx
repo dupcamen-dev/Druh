@@ -5,7 +5,7 @@ import Link from "next/link";
 import { asset } from "@/lib/base";
 
 const NAV = [
-  { href: "/#story", label: "Our story" },
+  { href: "/#asian", label: "Asian kitchen" },
   { href: "/#gallery", label: "Gallery" },
   { href: "/#visit", label: "Visit us" },
 ];
