@@ -226,9 +226,9 @@ export default function HomePage() {
     <main className="flex-1">
       <Hero />
       <Marquee />
+      <Kramnychka />
       <Story />
       <PdfBanner />
-      <Kramnychka />
       <Gallery />
       <VisitUs />
     </main>
