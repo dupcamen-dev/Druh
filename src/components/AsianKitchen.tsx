@@ -71,7 +71,7 @@ export default function AsianKitchen() {
   return (
     <section
       id="asian"
-      className="relative py-24 lg:py-32 bg-white overflow-hidden"
+      className="relative py-16 lg:py-32 bg-white overflow-hidden"
     >
       {/* gradient container for soft background */}
       <div
@@ -117,13 +117,13 @@ export default function AsianKitchen() {
       </svg>
 
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-10">
-        <Reveal className="text-center max-w-[760px] mx-auto mb-12 lg:mb-16">
-          <span className="inline-block font-hand text-2xl text-[#2596be] mb-3">Asian kitchen</span>
-          <h2 className="font-display font-bold text-[#1A1715] leading-[1.1] mb-4 tracking-tight" style={{ fontSize: "clamp(2rem, 4.5vw, 3rem)" }}>
+        <Reveal className="max-w-[760px] mx-auto mb-12 lg:mb-16 text-center">
+          <span className="eyebrow">Asian kitchen</span>
+          <h2 className="h-section">
             Tokyo street food,<br className="hidden sm:block" /> brewed right here
           </h2>
-          <p className="text-[#555] text-[15px] sm:text-[16px] leading-[1.8]">
-            From the broth‑bubbling stalls of Osaka to the sizzling grills of Tokyo’s alleyways —
+          <p className="lead">
+            From the broth-bubbling stalls of Osaka to the sizzling grills of Tokyo&apos;s alleyways —
             a Japanese street walk, without leaving Ternopil. Each dish tells a story of tradition,
             craft, and the freshest seasonal ingredients.
           </p>
@@ -153,7 +153,7 @@ export default function AsianKitchen() {
               </CornerFlyIn>
 
               {/* caption fades up slightly after photo – reduced delay, separate animation */}
-              <Reveal delay={200 + i * 60} variant="up" className="text-center mt-2 lg:mt-1.5 px-1">
+              <Reveal variant="up" className="text-center mt-2 lg:mt-1.5 px-1">
                 <h3 className="font-display font-bold text-[#1A1715] text-[14px] sm:text-[15px] leading-snug">{d.name}</h3>
                 <p className="text-[#555] text-[11px] sm:text-[12px] leading-[1.5] mt-0.5 max-w-[240px] mx-auto">{d.desc}</p>
               </Reveal>

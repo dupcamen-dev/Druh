@@ -1,6 +1,6 @@
 "use client";
-import { type ReactNode } from "react";
-import { motion, MotionConfig } from "motion/react";
+import { useRef, type ReactNode, type RefObject } from "react";
+import { motion, MotionConfig, useInView } from "motion/react";
 
 type Props = {
   children: ReactNode;
@@ -31,15 +31,25 @@ export default function Reveal({
   id,
   delay,
 }: Props) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref as RefObject<Element | null>, {
+    once: true,
+    amount: 0.12,
+  });
+
+  const shared = {
+    ref,
+    id,
+    className,
+    initial: "hidden",
+    animate: inView ? "visible" : "hidden",
+  } as const;
+
   if (variant === "stagger") {
     return (
       <MotionConfig reducedMotion="user">
         <motion.div
-          id={id}
-          className={className}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.12 }}
+          {...shared}
           variants={{
             hidden: {},
             visible: {
@@ -59,11 +69,7 @@ export default function Reveal({
   return (
     <MotionConfig reducedMotion="user">
       <MotionTag
-        id={id}
-        className={className}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.12 }}
+        {...shared}
         variants={{
           hidden: v.hidden,
           visible: {

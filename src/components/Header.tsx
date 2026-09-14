@@ -61,7 +61,7 @@ export default function Header() {
             href={asset("/menu/druh-menu-en.pdf")}
             target="_blank"
             rel="noopener"
-            className={`shine hidden sm:inline-flex items-center gap-1.5 px-5 py-2 rounded-lg text-[12px] font-bold uppercase tracking-wider transition-colors active:scale-95 ${isTop ? "border-2 border-white text-white hover:bg-white hover:text-[#2596be]" : "bg-[#1A1715] text-white hover:bg-[#2596be]"}`}
+            className={`shine hidden sm:inline-flex btn btn--sm ${isTop ? "btn--outline-light" : "btn--ink"}`}
           >
             Menu
           </a>
@@ -85,7 +85,7 @@ export default function Header() {
                 {n.label}
               </a>
             ))}
-            <a href={asset("/menu/druh-menu-en.pdf")} target="_blank" rel="noopener" onClick={() => setOpen(false)} className="mt-2 inline-flex items-center justify-center px-5 py-3 rounded-lg bg-[#1A1715] text-white text-[13px] font-bold uppercase tracking-wider">
+            <a href={asset("/menu/druh-menu-en.pdf")} target="_blank" rel="noopener" onClick={() => setOpen(false)} className="mt-2 btn btn--sm btn--ink btn--block">
               Menu (PDF)
             </a>
           </nav>

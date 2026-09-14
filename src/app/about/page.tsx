@@ -21,7 +21,7 @@ function Hero() {
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* left copy */}
         <Reveal variant="up">
-          <span className="inline-block font-hand text-xl text-[#2596be] mb-3">
+          <span className="eyebrow">
             About Druh
           </span>
           <h1
@@ -33,7 +33,7 @@ function Hero() {
               friend
             </AnimatedGradientText>
           </h1>
-          <p className="text-white/70 text-[15px] leading-[1.8] max-w-lg mb-10">
+          <p className="lead lead--white max-w-lg mb-10">
             A corner of Ternopil where mornings last all day, the broth bubbles since sunrise, and
             every seat comes with a smile.
           </p>
@@ -51,7 +51,7 @@ function Hero() {
               href={asset("/menu/druh-menu-en.pdf")}
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-white/20 text-white text-[14px] font-bold uppercase tracking-wider hover:border-white/60 hover:bg-white/5 transition-all active:scale-95"
+              className="btn btn--outline-light-soft"
             >
               See the menu
             </a>
@@ -109,7 +109,7 @@ function Stats() {
     <section className="py-12 lg:py-14 bg-[#ebe859]">
       <div className="max-w-[1000px] mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         {items.map((s, i) => (
-          <Reveal key={s.label} variant="up" delay={i * 60} className="flex flex-col items-center gap-1">
+          <Reveal key={s.label} variant="up" className="flex flex-col items-center gap-1">
             <div className="flex items-baseline gap-1">
               <NumberTicker
                 value={s.val}
@@ -136,7 +136,7 @@ function Stats() {
 /* -------------------------------------------------------------------------- */
 function Story() {
   return (
-    <section id="story" className="py-20 lg:py-32 bg-white">
+    <section id="story" className="py-16 lg:py-32 bg-white">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* image collage */}
         <Reveal variant="left" className="relative h-[260px] sm:h-[320px] lg:h-[380px]">
@@ -162,12 +162,11 @@ function Story() {
 
         {/* copy */}
         <Reveal variant="right">
-          <span className="inline-block font-hand text-xl text-[#2596be] mb-3">
+          <span className="eyebrow">
             Our story
           </span>
           <h2
-            className="font-display font-bold text-[#1A1715] leading-[1.1] mb-6 tracking-tight"
-            style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)" }}
+            className="h-section"
           >
             A place where strangers become friends
           </h2>
@@ -195,7 +194,7 @@ function Story() {
 /* -------------------------------------------------------------------------- */
 function Manifesto() {
   return (
-    <section className="py-20 bg-[#FDFAF7]">
+    <section className="py-16 lg:py-32 bg-[#FDFAF7]">
       <div className="max-w-[900px] mx-auto px-5 sm:px-8 lg:px-10">
         <TextReveal>
           A café should feel like coming home — where the barista knows your order, the ramen
@@ -211,19 +210,18 @@ function Manifesto() {
 /* -------------------------------------------------------------------------- */
 function Values() {
   return (
-    <section id="values" className="py-20 lg:py-32 bg-[#FDFAF7]">
+    <section id="values" className="py-16 lg:py-32 bg-[#FDFAF7]">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10">
-        <Reveal className="text-center mb-12 lg:mb-16">
-          <span className="inline-block font-hand text-xl text-[#2596be] mb-3">
+        <Reveal className="section-head">
+          <span className="eyebrow">
             What we stand for
           </span>
           <h2
-            className="font-display font-bold text-[#1A1715] leading-[1.1] mb-4 tracking-tight"
-            style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)" }}
+            className="h-section"
           >
             Small things, done right
           </h2>
-          <p className="text-[#555] text-[15px]">
+          <p className="lead">
             Every detail on the menu is a choice — honest ingredients, time, and care.
           </p>
         </Reveal>
@@ -289,24 +287,24 @@ function Values() {
 /* -------------------------------------------------------------------------- */
 function FindUs() {
   return (
-    <section id="find" className="py-20 lg:py-28 bg-[#2596be]">
+    <section id="find" className="py-16 lg:py-32 bg-[#2596be]">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-10">
-        <Reveal variant="up" delay={0}>
-          <span className="text-[#ebe859] font-hand text-lg mb-2 block">Find us</span>
-          <h3 className="font-display font-bold text-white text-[22px] mb-4">{BRAND.name}</h3>
+        <Reveal variant="up">
+          <span className="eyebrow eyebrow--yellow">Find us</span>
+          <h3 className="h-sub text-white">{BRAND.name}</h3>
           <p className="text-white/80 text-[15px] leading-relaxed">{BRAND.addressFull}</p>
         </Reveal>
 
-        <Reveal variant="up" delay={80}>
-          <span className="text-[#ebe859] font-hand text-lg mb-2 block">Opening hours</span>
+        <Reveal variant="up">
+          <span className="eyebrow eyebrow--yellow">Opening hours</span>
           <div className="text-white/80 text-[15px] leading-relaxed space-y-1">
             <p>Mon – Fri: {BRAND.hours.weekdays}</p>
             <p>Sat – Sun: {BRAND.hours.weekends}</p>
           </div>
         </Reveal>
 
-        <Reveal variant="up" delay={160}>
-          <span className="text-[#ebe859] font-hand text-lg mb-2 block">Say hello</span>
+        <Reveal variant="up">
+          <span className="eyebrow eyebrow--yellow">Say hello</span>
           <div className="space-y-2">
             <a href={`tel:${BRAND.phoneLink}`} className="block text-white/80 text-[15px] hover:text-white transition-colors">
               {BRAND.phone}
@@ -326,15 +324,14 @@ function FindUs() {
 /* -------------------------------------------------------------------------- */
 function CTA() {
   return (
-    <section className="py-16 lg:py-28 bg-[#ebe859]">
+    <section className="py-16 lg:py-32 bg-[#ebe859]">
       <Reveal className="max-w-[700px] mx-auto px-5 text-center">
         <h2
-          className="font-display font-bold text-[#1A1715] mb-4 tracking-tight"
-          style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)" }}
+          className="h-section"
         >
           Ready to take a seat?
         </h2>
-        <p className="text-[#1A1715]/60 text-[15px] mb-10 max-w-lg mx-auto leading-relaxed">
+        <p className="lead lead--soft mb-10 max-w-lg mx-auto">
           Browse the full menu, drop by for a matcha, or grab a bag of our house-roasted coffee to go.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -349,7 +346,7 @@ function CTA() {
             href={BRAND.socials.instagram}
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-[#1A1715]/20 text-[#1A1715] text-[14px] font-bold uppercase tracking-wider hover:border-[#1A1715] hover:bg-[#1A1715]/5 transition-all active:scale-95"
+            className="btn btn--outline-dark"
           >
             Follow us
           </a>

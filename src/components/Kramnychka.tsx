@@ -165,7 +165,7 @@ function CartDrawer({
               href={buildTelegramOrder(cart)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-full items-center justify-center gap-2.5 px-8 py-4 rounded-lg bg-[#ebe859] text-[#1A1715] font-bold text-[14px] uppercase tracking-wider hover:bg-[#59eb59] transition-colors"
+              className="btn btn--yellow btn--block"
             >
               Order via Telegram
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
@@ -226,11 +226,10 @@ export default function Kramnychka() {
       <div className="max-w-[1200px] mx-auto space-y-12 lg:space-y-20">
         {SHOP_BY_CATEGORY.map((cat) => (
           <div key={cat.id}>
-            <div className="text-center mb-8 lg:mb-12">
-              <span className="inline-block font-hand text-xl text-[#2596be] mb-3">Little shop</span>
+            <div className="section-head">
+              <span className="eyebrow">Little shop</span>
               <h2
-                className="font-display font-bold text-[#1A1715] mb-3 tracking-tight"
-                style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)" }}
+                className="h-section"
               >
                 {cat.name}
               </h2>
@@ -276,7 +275,7 @@ export default function Kramnychka() {
                         {qty === 0 ? (
                           <button
                             onClick={() => addItem(it.id)}
-                            className="shine shrink-0 px-5 py-3 rounded-lg bg-[#ebe859] text-[#1A1715] font-bold text-[13px] uppercase tracking-wider hover:bg-[#59eb59] transition-colors active:scale-95"
+                            className="shine shrink-0 btn btn--sm btn--yellow"
                           >
                             Add
                           </button>

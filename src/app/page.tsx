@@ -30,11 +30,11 @@ function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href={asset("/menu/druh-menu-en.pdf")} target="_blank" rel="noopener" className="group shine inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-lg bg-[#ebe859] text-[#1A1715] font-bold text-[14px] uppercase tracking-wider hover:bg-white transition-colors active:scale-95">
+          <a href={asset("/menu/druh-menu-en.pdf")} target="_blank" rel="noopener" className="group shine btn btn--yellow">
             Browse the menu
             <svg className="transition-transform duration-300 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a href="#asian" className="shine inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-lg border-2 border-white text-white font-bold text-[14px] uppercase tracking-wider hover:bg-white hover:text-[#2596be] transition-colors active:scale-95">
+          <a href="#asian" className="shine btn btn--outline-light">
             Explore the kitchen
           </a>
         </div>
@@ -63,13 +63,13 @@ function Marquee() {
 
 function PdfBanner() {
   return (
-    <section className="py-16 lg:py-28 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
+    <section className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
       <Reveal className="max-w-[600px] mx-auto text-center text-[#1A1715]">
-        <h2 className="font-display font-bold mb-4 tracking-tight" style={{ fontSize: "clamp(1.5rem, 4vw, 2.2rem)" }}>Take the menu with you</h2>
-        <p className="text-[#1A1715]/70 text-[15px] mb-8 max-w-md mx-auto leading-relaxed">
+        <h2 className="h-section">Take the menu with you</h2>
+        <p className="lead mb-8 max-w-md mx-auto">
           Our full menu is a beautifully designed PDF — open it to browse everything, anytime.
         </p>
-        <a href={asset("/menu/druh-menu-en.pdf")} target="_blank" rel="noopener" className="group shine inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-lg bg-[#1A1715] text-[#ebe859] font-bold text-[14px] uppercase tracking-wider hover:bg-[#2596be] hover:text-white transition-colors active:scale-95">
+        <a href={asset("/menu/druh-menu-en.pdf")} target="_blank" rel="noopener" className="group shine btn btn--dark">
           Open menu (PDF)
           <svg className="transition-transform duration-300 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square"><path d="M18 8l4 4-4 4M6 20V11a1 1 0 0 1 1-1h11"/></svg>
         </a>
@@ -81,15 +81,14 @@ function PdfBanner() {
 /* ---- Our story teaser ---- */
 function StoryTeaser() {
   return (
-    <section className="py-20 lg:py-28 bg-[#1A1715]">
+    <section className="py-16 lg:py-32 bg-[#1A1715]">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         <Reveal variant="up">
-          <span className="inline-block font-hand text-xl text-[#2596be] mb-3">
+          <span className="eyebrow">
             Our story
           </span>
           <h2
-            className="font-display font-bold text-white leading-[1.1] mb-6 tracking-tight"
-            style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)" }}
+            className="h-section text-white"
           >
             A place where strangers<br className="hidden sm:block" /> become friends
           </h2>
@@ -128,12 +127,12 @@ function Gallery() {
     <section id="gallery" className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10">
       <div className="max-w-[1200px] mx-auto">
         <Reveal>
-          <div className="text-center mb-12">
-            <span className="inline-block font-hand text-xl text-[#2596be] mb-3">Gallery</span>
-            <h2 className="font-display font-bold text-[#1A1715] mb-4 tracking-tight" style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)" }}>
+          <div className="section-head">
+            <span className="eyebrow">Gallery</span>
+            <h2 className="h-section">
               Moments at Druh
             </h2>
-            <p className="text-[#555] text-[15px]">
+            <p className="lead">
               Follow us on{" "}
               <a href={BRAND.socials.instagram} className="underline-anim font-bold" target="_blank" rel="noopener">
                 @druh.cafe
@@ -178,8 +177,8 @@ function VisitUs() {
     <section id="visit" className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#2596be]">
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
         <Reveal variant="left">
-          <span className="inline-block font-hand text-xl text-[#ebe859] mb-3">Visit us</span>
-          <h2 className="font-display font-bold text-white leading-[1.1] mb-10 tracking-tight" style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)" }}>
+          <span className="eyebrow eyebrow--yellow">Visit us</span>
+          <h2 className="h-section text-white">
             Come say hello
           </h2>
           <div className="space-y-8">
@@ -211,14 +210,8 @@ function VisitUs() {
           </div>
         </Reveal>
 
-        <Reveal variant="right" delay={100}>
-          <motion.div
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
-            }}
-            className="space-y-4"
-          >
+        <Reveal variant="right">
+          <Reveal variant="stagger" className="space-y-4">
             {[
                 { icon: ScooterIcon, title: "Delivery", desc: "Via Bolt Food & Glovo" },
                 { icon: BoxIcon, title: "Takeaway", desc: "Order ahead via our online menu" },
@@ -236,7 +229,7 @@ function VisitUs() {
                 <p className="font-display font-bold text-[16px]">Follow @druh.cafe</p>
                 <p className="text-[#1A1715]/60 text-[13px] mt-1">Daily specials & behind the scenes</p>
               </motion.a>
-          </motion.div>
+          </Reveal>
         </Reveal>
       </div>
     </section>
