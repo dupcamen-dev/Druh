@@ -16,7 +16,7 @@ export default function ScrollToTop() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-[92px] right-5 z-40 w-11 h-11 rounded-full bg-[#1A1715] text-[#ebe859] flex items-center justify-center shadow-lg hover:bg-[#2596be] hover:text-white hover:scale-110 active:scale-90 transition-all duration-300"
+      className="fixed bottom-[92px] right-5 z-40 w-11 h-11 rounded-full bg-[#1A1715] text-[#ebe859] flex items-center justify-center shadow-lg hover:bg-[#187492] hover:text-white hover:scale-110 active:scale-90 transition-all duration-300"
       aria-label="Scroll to top"
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">

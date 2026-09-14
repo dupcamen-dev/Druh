@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-[11px] uppercase tracking-[0.15em] text-white/40 mb-5">Visit us</h4>
+            <h4 className="font-display font-bold text-[11px] uppercase tracking-[0.15em] text-white/50 mb-5">Visit us</h4>
             <div className="space-y-2 text-[14px] text-white/70">
               <p>{BRAND.addressFull}</p>
               <p>{BRAND.phone}</p>
@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-[11px] uppercase tracking-[0.15em] text-white/40 mb-5">Follow along</h4>
+            <h4 className="font-display font-bold text-[11px] uppercase tracking-[0.15em] text-white/50 mb-5">Follow along</h4>
             <div className="flex flex-col gap-1">
               <a href={BRAND.socials.instagram} target="_blank" rel="noopener" className="inline-block py-1.5 text-[14px] text-white/70 hover:text-[#ebe859] hover:-translate-y-0.5 transition-all">Instagram</a>
               <a href={BRAND.socials.telegram} target="_blank" rel="noopener" className="inline-block py-1.5 text-[14px] text-white/70 hover:text-[#ebe859] hover:-translate-y-0.5 transition-all">Telegram</a>
@@ -33,8 +33,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 pt-6 border-t border-white/10 space-y-2">
-          <p className="text-[12px] text-white/30 text-center font-display">© {new Date().getFullYear()} DRUH Café & Kitchen.</p>
-          <p className="text-[12px] text-white/50 text-center font-display">
+          <p className="text-[12px] text-white/50 text-center font-display">© {new Date().getFullYear()} DRUH Café & Kitchen.</p>
+          <p className="text-[12px] text-white/60 text-center font-display">
             Designed &amp; Built by{" "}
             <a
               href="https://www.millionpixels.dev/"

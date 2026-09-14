@@ -20,7 +20,7 @@ function Hero() {
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* left copy */}
         <Reveal variant="up">
-          <span className="eyebrow">
+          <span className="eyebrow eyebrow--on-dark">
             About Druh
           </span>
           <h1
@@ -28,7 +28,7 @@ function Hero() {
             style={{ fontSize: "clamp(2.4rem, 5.5vw, 3.6rem)" }}
           >
             Come as a guest,<br />leave as a{" "}
-            <AnimatedGradientText colorFrom="#ebe859" colorTo="#2596be">
+            <AnimatedGradientText colorFrom="#ebe859" colorTo="#187492">
               friend
             </AnimatedGradientText>
           </h1>
@@ -117,7 +117,7 @@ function Stats() {
                 <span className="font-display font-extrabold text-[#1A1715] text-3xl sm:text-4xl">{s.suffix}</span>
               )}
             </div>
-            <span className="font-display font-bold text-[#1A1715]/60 text-[12px] uppercase tracking-[0.12em]">
+            <span className="font-display font-bold text-[#1A1715]/70 text-[12px] uppercase tracking-[0.12em]">
               {s.label}
             </span>
           </Reveal>
@@ -260,7 +260,7 @@ function Values() {
           <div className="relative overflow-hidden rounded-2xl md:col-span-1">
             <BorderBeam
               colorFrom="#ebe859"
-              colorTo="#2596be"
+              colorTo="#187492"
               size={80}
               duration={4}
               className="rounded-2xl"
@@ -283,17 +283,17 @@ function Values() {
 /* -------------------------------------------------------------------------- */
 function FindUs() {
   return (
-    <section id="find" className="py-16 lg:py-32 bg-[#2596be]">
+    <section id="find" className="py-16 lg:py-32 bg-[#187492]">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-10">
         <Reveal variant="up">
           <span className="eyebrow eyebrow--yellow">Find us</span>
           <h3 className="h-sub text-white">{BRAND.name}</h3>
-          <p className="text-white/80 text-[15px] leading-relaxed">{BRAND.addressFull}</p>
+          <p className="text-white/90 text-[15px] leading-relaxed">{BRAND.addressFull}</p>
         </Reveal>
 
         <Reveal variant="up">
           <span className="eyebrow eyebrow--yellow">Opening hours</span>
-          <div className="text-white/80 text-[15px] leading-relaxed space-y-1">
+          <div className="text-white/90 text-[15px] leading-relaxed space-y-1">
             <p>Mon – Fri: {BRAND.hours.weekdays}</p>
             <p>Sat – Sun: {BRAND.hours.weekends}</p>
           </div>
@@ -302,10 +302,10 @@ function FindUs() {
         <Reveal variant="up">
           <span className="eyebrow eyebrow--yellow">Say hello</span>
           <div className="space-y-2">
-            <a href={`tel:${BRAND.phoneLink}`} className="block text-white/80 text-[15px] hover:text-white transition-colors">
+            <a href={`tel:${BRAND.phoneLink}`} className="block text-white/90 text-[15px] hover:text-white transition-colors">
               {BRAND.phone}
             </a>
-            <a href={BRAND.socials.instagram} target="_blank" rel="noopener" className="block text-white/80 text-[15px] hover:text-white transition-colors">
+            <a href={BRAND.socials.instagram} target="_blank" rel="noopener" className="block text-white/90 text-[15px] hover:text-white transition-colors">
               Instagram
             </a>
           </div>

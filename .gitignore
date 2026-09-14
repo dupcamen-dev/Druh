@@ -46,3 +46,6 @@ next-env.d.ts
 /Comic_Sans_MS.ttf
 /0676408f-*.png
 /8623549c-*.png
+
+# dev
+/dev-server.log

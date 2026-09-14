@@ -28,7 +28,7 @@ export default function SplashScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] bg-[#2596be] flex items-center justify-center transition-opacity duration-500 ease-out ${
+      className={`fixed inset-0 z-[100] bg-[#187492] flex items-center justify-center transition-opacity duration-500 ease-out ${
         state === "leaving" ? "opacity-0" : "opacity-100"
       }`}
       aria-hidden

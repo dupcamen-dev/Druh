@@ -5,8 +5,9 @@
   --fg: #1A1715;
   --fg-muted: #555;
   --ink: #1A1715;
-  --blue: #2596be;
+  --blue: #187492;
   --yellow: #ebe859;
+  --yellow-light: #f1f38b;
   --green: #59eb59;
   --cream: #FDFAF7;
 }
@@ -198,8 +199,8 @@ body {
 .btn--dark { background: var(--ink); color: var(--yellow); }
 .btn--dark:hover { background: var(--blue); color: #fff; }
 
-.btn--ink { background: var(--ink); color: #fff; }
-.btn--ink:hover { background: var(--blue); color: #fff; }
+.btn--ink { background: var(--ink) !important; color: #fff; }
+.btn--ink:hover { background: var(--blue) !important; color: #fff; }
 
 .btn--blue { background: var(--blue); color: #fff; }
 .btn--blue:hover { background: #1a7ea0; color: #fff; }
@@ -222,8 +223,9 @@ body {
   color: var(--blue);
   margin-bottom: 0.75rem;
 }
-.eyebrow--yellow { color: var(--yellow); }
-.eyebrow--soft { color: rgba(26, 23, 21, 0.7); }
+.eyebrow--yellow { color: var(--yellow-light) !important; }
+.eyebrow--ink { color: var(--ink) !important; }
+.eyebrow--on-dark { color: #7ec8ec !important; }
 
 .h-section {
   font-family: var(--font-display);
@@ -241,7 +243,7 @@ body {
   color: var(--fg-muted);
 }
 .lead--white { color: rgba(255, 255, 255, 0.72); }
-.lead--soft { color: rgba(26, 23, 21, 0.7); }
+.lead--soft { color: rgba(26, 23, 21, 0.85); }
 
 .h-sub {
   font-family: var(--font-display);

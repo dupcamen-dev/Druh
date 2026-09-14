@@ -16,7 +16,7 @@ const MARQUEE = [
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#2596be]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#187492]">
       <div className="hero-enter relative z-10 text-center w-full max-w-[900px] mx-auto px-5 sm:px-8">
 
         <h1 className="font-display font-extrabold text-white leading-[1.0] mb-8 tracking-tight" style={{ fontSize: "clamp(3rem, 9vw, 6rem)" }}>
@@ -24,7 +24,7 @@ function Hero() {
           is a <span className="text-[#ebe859]">friend</span>
         </h1>
 
-        <p className="font-hand text-white/80 mb-12 max-w-md mx-auto leading-snug" style={{ fontSize: "clamp(1.2rem, 3vw, 1.6rem)" }}>
+        <p className="font-hand text-white/90 mb-12 max-w-md mx-auto leading-snug" style={{ fontSize: "clamp(1.2rem, 3vw, 1.6rem)" }}>
           Come as a guest, leave as a friend
         </p>
 
@@ -83,7 +83,7 @@ function StoryTeaser() {
     <section className="py-16 lg:py-32 bg-[#1A1715]">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         <Reveal variant="up">
-          <span className="eyebrow">
+          <span className="eyebrow eyebrow--on-dark">
             Our story
           </span>
           <h2
@@ -169,7 +169,7 @@ function Gallery() {
 
 function VisitUs() {
   return (
-    <section id="visit" className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#2596be]">
+    <section id="visit" className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#187492]">
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
         <Reveal variant="left">
           <span className="eyebrow eyebrow--yellow">Visit us</span>
@@ -180,17 +180,17 @@ function VisitUs() {
             {[
               { icon: PinIcon, label: "Address", content: (
                 <>
-                  <p className="text-white/80 text-[15px]">{BRAND.addressFull}</p>
-                  <a href="https://maps.google.com/?q=Druh+Cafe+Ternopil+15+Kvitnia+2" target="_blank" rel="noopener" className="text-[13px] text-[#ebe859] font-bold underline-anim mt-1 inline-block py-1">Open in Google Maps</a>
+                  <p className="text-white/90 text-[15px]">{BRAND.addressFull}</p>
+                  <a href="https://maps.google.com/?q=Druh+Cafe+Ternopil+15+Kvitnia+2" target="_blank" rel="noopener" className="text-[13px] text-[var(--yellow-light)] font-bold underline-anim mt-1 inline-block py-1">Open in Google Maps</a>
                 </>
               )},
               { icon: PhoneIcon, label: "Call us", content: (
-                <a href={`tel:${BRAND.phoneLink}`} className="text-white/80 text-[15px] hover:text-[#ebe859] transition-colors inline-block py-1">{BRAND.phone}</a>
+                <a href={`tel:${BRAND.phoneLink}`} className="text-white/90 text-[15px] hover:text-[#ebe859] transition-colors inline-block py-1">{BRAND.phone}</a>
               )},
               { icon: ClockIcon, label: "Opening hours", content: (
                 <>
-                  <p className="text-white/80 text-[15px]">Mon–Fri: {BRAND.hours.weekdays}</p>
-                  <p className="text-white/80 text-[15px]">Sat–Sun: {BRAND.hours.weekends}</p>
+                  <p className="text-white/90 text-[15px]">Mon–Fri: {BRAND.hours.weekdays}</p>
+                  <p className="text-white/90 text-[15px]">Sat–Sun: {BRAND.hours.weekends}</p>
                 </>
               )},
             ].map((c) => (
@@ -212,17 +212,17 @@ function VisitUs() {
                 { icon: BoxIcon, title: "Takeaway", desc: "Order ahead via our online menu" },
                 { icon: HandIcon, title: "Reservations", desc: "Call us to reserve a table" },
               ].map((c) => (
-                <motion.div key={c.title} variants={STAGGER_CHILD} className="card-lift bg-white/10 hover:bg-white/15 p-6 flex items-start gap-5 rounded-lg transition-colors">
+                <motion.div key={c.title} variants={STAGGER_CHILD} className="card-lift bg-black/10 hover:bg-white/10 p-6 flex items-start gap-5 rounded-lg transition-colors">
                   <c.icon className="shrink-0 mt-0.5" size={32} />
                   <div>
                     <h4 className="font-display font-bold text-white text-[14px] mb-1">{c.title}</h4>
-                    <p className="text-[13px] text-white/60">{c.desc}</p>
+                    <p className="text-[13px] text-white/90">{c.desc}</p>
                   </div>
                 </motion.div>
               ))}
               <motion.a variants={STAGGER_CHILD} href={BRAND.socials.instagram} target="_blank" rel="noopener" className="card-lift block bg-[#ebe859] text-[#1A1715] p-6 text-center hover:bg-[#59eb59] transition-colors rounded-lg active:scale-[0.98]">
                 <p className="font-display font-bold text-[16px]">Follow @druh.cafe</p>
-                <p className="text-[#1A1715]/60 text-[13px] mt-1">Daily specials & behind the scenes</p>
+                <p className="text-[#1A1715]/80 text-[13px] mt-1">Daily specials & behind the scenes</p>
               </motion.a>
           </Reveal>
         </Reveal>

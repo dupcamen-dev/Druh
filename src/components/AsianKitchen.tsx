@@ -147,7 +147,7 @@ export default function AsianKitchen() {
                   className="w-full h-auto drop-shadow-[0_15px_18px_rgba(26,23,21,0.18)] transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:filter brightness-105"
                     sizes="(max-width: 1024px) 90vw, 45vw"
                 />
-                <span className="absolute top-1 right-1 font-display text-[9px] font-bold uppercase tracking-[0.12em] text-white bg-[#2596be] px-1 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="absolute top-1 right-1 font-display text-[9px] font-bold uppercase tracking-[0.12em] text-white bg-[#187492] px-1 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {d.kanji}
                 </span>
               </CornerFlyIn>

@@ -64,7 +64,7 @@ export function BentoCard({
       {href && cta && (
         <a
           href={href}
-          className="relative z-10 mt-4 inline-flex items-center gap-1.5 self-start text-[13px] font-bold text-[#2596be] underline-anim"
+          className="relative z-10 mt-4 inline-flex items-center gap-1.5 self-start text-[13px] font-bold text-[#187492] underline-anim"
         >
           {cta}
           <svg

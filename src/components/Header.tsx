@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/base";
@@ -23,6 +24,8 @@ export default function Header() {
   }, []);
 
   const isTop = !scrolled;
+  const pathname = usePathname();
+  const onLightHero = isTop && pathname === "/menu";
 
   return (
     <header
@@ -49,7 +52,7 @@ export default function Header() {
             <a
               key={n.href}
               href={asset(n.href)}
-              className={`underline-anim text-[12px] font-bold uppercase tracking-[0.12em] transition-colors ${isTop ? "text-white/70 hover:text-[#ebe859]" : "text-[#1A1715]/60 hover:text-[#1A1715]"}`}
+              className={`underline-anim text-[12px] font-bold uppercase tracking-[0.12em] transition-colors ${isTop ? (onLightHero ? "text-[#1A1715]/80 hover:text-[#1A1715]" : "text-white/90 hover:text-[#ebe859]") : "text-[#1A1715]/60 hover:text-[#1A1715]"}`}
             >
               {n.label}
             </a>
@@ -61,13 +64,13 @@ export default function Header() {
             href={asset("/menu/druh-menu-en.pdf")}
             target="_blank"
             rel="noopener"
-            className={`shine hidden sm:inline-flex btn btn--sm ${isTop ? "btn--outline-light" : "btn--ink"}`}
+            className={`shine hidden sm:inline-flex btn btn--sm btn--ink`}
           >
             Menu
           </a>
           <button
             onClick={() => setOpen(!open)}
-            className={`md:hidden p-3 -m-1 transition-colors ${isTop ? "text-white" : "text-[#1A1715]"}`}
+            className={`md:hidden p-3 -m-1 transition-colors ${isTop ? (onLightHero ? "text-[#1A1715]" : "text-white") : "text-[#1A1715]"}`}
             aria-label="Toggle menu"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
@@ -81,7 +84,7 @@ export default function Header() {
         <div className="md:hidden bg-white border-t-2 border-[#1A1715] animate-menu">
           <nav className="flex flex-col p-5 gap-4">
             {NAV.map((n) => (
-              <a key={n.href} href={asset(n.href)} onClick={() => setOpen(false)} className="underline-anim block py-1.5 text-[13px] font-bold uppercase tracking-[0.1em] text-[#1A1715]/70 hover:text-[#2596be] transition-colors">
+              <a key={n.href} href={asset(n.href)} onClick={() => setOpen(false)} className="underline-anim block py-1.5 text-[13px] font-bold uppercase tracking-[0.1em] text-[#1A1715]/70 hover:text-[#187492] transition-colors">
                 {n.label}
               </a>
             ))}

@@ -227,7 +227,7 @@ export default function Kramnychka() {
         {SHOP_BY_CATEGORY.map((cat) => (
           <div key={cat.id}>
             <div className="section-head">
-              <span className="eyebrow">Little shop</span>
+              <span className="eyebrow eyebrow--ink">Little shop</span>
               <h2
                 className="h-section"
               >
@@ -259,7 +259,7 @@ export default function Kramnychka() {
                       <p className="font-display font-bold text-[#1A1715] text-[15px] leading-snug mb-1.5">
                         {it.name}
                       </p>
-                      <p className="text-[#1A1715]/70 text-[12px] leading-[1.6] mb-4 line-clamp-3">
+                      <p className="text-[#1A1715]/80 text-[12px] leading-[1.6] mb-4 line-clamp-3">
                         {it.description.replace(/\n+/g, " · ").replace(/Tasting notes: /, "")}
                       </p>
                       <div className="mt-auto flex items-end justify-between gap-3">
@@ -267,7 +267,7 @@ export default function Kramnychka() {
                           <p className="font-display font-extrabold text-[#1A1715] text-[18px]">
                             {fmtPrice(it.priceGrn)}
                           </p>
-                          <p className="text-[#1A1715]/70 text-[12px]">
+                          <p className="text-[#1A1715]/80 text-[12px]">
                             {it.weight} {it.weightType}
                             {it.kcal ? ` · ${it.kcal} kcal` : ""}
                           </p>
@@ -299,7 +299,7 @@ export default function Kramnychka() {
       {/* floating cart button */}
       <button
         onClick={() => setDrawerOpen(true)}
-        className={`fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full bg-[#2596be] text-white flex items-center justify-center shadow-lg hover:bg-[#1a7ea0] hover:scale-110 hover:rotate-6 active:scale-90 transition-all duration-300 ${
+        className={`fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full bg-[#187492] text-white flex items-center justify-center shadow-lg hover:bg-[#155f78] hover:scale-110 hover:rotate-6 active:scale-90 transition-all duration-300 ${
           cartCount > 0 ? "scale-100 opacity-100" : "scale-90 opacity-0 pointer-events-none"
         }`}
         aria-label="Open cart"

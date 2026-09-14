@@ -5,7 +5,7 @@ export default function MenuPage() {
     <main className="flex-1">
       <section className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
         <div className="max-w-[600px] mx-auto text-center text-[#1A1715]">
-          <span className="eyebrow eyebrow--soft">Menu</span>
+          <span className="eyebrow eyebrow--ink">Menu</span>
           <h1 className="h-section">
             Take the menu with you
           </h1>
