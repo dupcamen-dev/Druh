@@ -5,6 +5,7 @@ import Reveal, { STAGGER_CHILD } from "@/components/Reveal";
 import { PinIcon, PhoneIcon, ClockIcon, ScooterIcon, BoxIcon, HandIcon } from "@/components/OutlineIcons";
 import Kramnychka from "@/components/Kramnychka";
 import AsianKitchen from "@/components/AsianKitchen";
+import Hero from "@/components/hero/Hero";
 import { BRAND } from "@/data/brand";
 import { asset } from "@/lib/base";
 
@@ -13,34 +14,6 @@ const MARQUEE = [
   "Yakitori grill", "Matcha bar", "Specialty coffee",
   "Premium teas", "Cocktails", "Bowls", "Little shop",
 ];
-
-function Hero() {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#187492]">
-      <div className="hero-enter relative z-10 text-center w-full max-w-[900px] mx-auto px-5 sm:px-8">
-
-        <h1 className="font-display font-extrabold text-white leading-[1.0] mb-8 tracking-tight" style={{ fontSize: "clamp(3rem, 9vw, 6rem)" }}>
-          Where every guest<br />
-          is a <span className="text-[#ebe859]">friend</span>
-        </h1>
-
-        <p className="font-hand text-white/90 mb-12 max-w-md mx-auto leading-snug" style={{ fontSize: "clamp(1.2rem, 3vw, 1.6rem)" }}>
-          Come as a guest, leave as a friend
-        </p>
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href={asset("/menu/druh-menu-en.pdf")} target="_blank" rel="noopener" className="group shine btn btn--yellow">
-            Browse the menu
-            <svg className="transition-transform duration-300 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a href="#asian" className="shine btn btn--outline-light">
-            Explore the kitchen
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function Marquee() {
   const items = [...MARQUEE, ...MARQUEE, ...MARQUEE];
