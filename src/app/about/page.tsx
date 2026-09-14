@@ -7,7 +7,6 @@ import { BRAND } from "@/data/brand";
 import { asset } from "@/lib/base";
 import { BentoGrid, BentoCard } from "@/components/ui/bento-grid";
 import { BorderBeam } from "@/components/ui/border-beam";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
 import { TextReveal } from "@/components/ui/text-reveal";
@@ -38,15 +37,12 @@ function Hero() {
             every seat comes with a smile.
           </p>
           <div className="flex flex-wrap gap-4">
-            <ShimmerButton
+            <a
               href="#story"
-              shimmerColor="#ffffff"
-              shimmerDuration={2.5}
-              background="rgba(37,150,190,1)"
-              borderRadius="0.6rem"
+              className="shine btn btn--blue"
             >
               Read our story
-            </ShimmerButton>
+            </a>
             <a
               href={asset("/menu/druh-menu-en.pdf")}
               target="_blank"
@@ -335,13 +331,14 @@ function CTA() {
           Browse the full menu, drop by for a matcha, or grab a bag of our house-roasted coffee to go.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <ShimmerButton
+          <a
             href={asset("/menu/druh-menu-en.pdf")}
-            shimmerDuration={2.8}
-            borderRadius="0.6rem"
+            target="_blank"
+            rel="noopener"
+            className="shine btn btn--dark"
           >
             Open the menu
-          </ShimmerButton>
+          </a>
           <a
             href={BRAND.socials.instagram}
             target="_blank"

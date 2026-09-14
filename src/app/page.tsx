@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import Reveal, { STAGGER_CHILD } from "@/components/Reveal";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { PinIcon, PhoneIcon, ClockIcon, ScooterIcon, BoxIcon, HandIcon } from "@/components/OutlineIcons";
 import Kramnychka from "@/components/Kramnychka";
 import AsianKitchen from "@/components/AsianKitchen";
@@ -96,13 +95,9 @@ function StoryTeaser() {
             A café should feel like home — mornings that never seem to end, broth that warms you
             from the inside, and a little shop to take that warmth with you.
           </p>
-          <ShimmerButton
-            href={asset("/about")}
-            borderRadius="0.6rem"
-            shimmerDuration={2.5}
-          >
+          <a href={asset("/about")} className="shine btn btn--yellow">
             Read our story
-          </ShimmerButton>
+          </a>
         </Reveal>
 
         <Reveal variant="scale" className="relative mx-auto w-full max-w-[480px]">
