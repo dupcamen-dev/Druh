@@ -1,6 +1,6 @@
 "use client";
 import { type ReactNode } from "react";
-import { useReveal } from "@/hooks/useReveal";
+import { motion, MotionConfig } from "motion/react";
 
 type Props = {
   children: ReactNode;
@@ -11,6 +11,18 @@ type Props = {
   delay?: number;
 };
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const ENTRY: Record<
+  "up" | "scale" | "left" | "right",
+  { hidden: Record<string, number>; visible: Record<string, number> }
+> = {
+  up: { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } },
+  left: { hidden: { opacity: 0, x: -30 }, visible: { opacity: 1, x: 0 } },
+  right: { hidden: { opacity: 0, x: 30 }, visible: { opacity: 1, x: 0 } },
+  scale: { hidden: { opacity: 0, scale: 0.97 }, visible: { opacity: 1, scale: 1 } },
+};
+
 export default function Reveal({
   children,
   className = "",
@@ -19,27 +31,54 @@ export default function Reveal({
   id,
   delay,
 }: Props) {
-  const ref = useReveal();
-  const Tag = as;
-  const variantClass =
-    variant === "scale"
-      ? "reveal-scale"
-      : variant === "left"
-        ? "reveal-left"
-        : variant === "right"
-          ? "reveal-right"
-          : variant === "stagger"
-            ? "stagger"
-            : "reveal";
+  if (variant === "stagger") {
+    return (
+      <MotionConfig reducedMotion="user">
+        <motion.div
+          id={id}
+          className={className}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.12 }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: { staggerChildren: 0.06, delayChildren: delay ?? 0 },
+            },
+          }}
+        >
+          {children}
+        </motion.div>
+      </MotionConfig>
+    );
+  }
+
+  const v = ENTRY[variant];
+  const MotionTag = as === "section" ? motion.section : motion.div;
 
   return (
-    <Tag
-      ref={ref}
-      id={id}
-      className={`${variantClass} ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-    >
-      {children}
-    </Tag>
+    <MotionConfig reducedMotion="user">
+      <MotionTag
+        id={id}
+        className={className}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.12 }}
+        variants={{
+          hidden: v.hidden,
+          visible: {
+            ...v.visible,
+            transition: { duration: 0.5, ease: EASE, delay: delay ?? 0 },
+          },
+        }}
+      >
+        {children}
+      </MotionTag>
+    </MotionConfig>
   );
 }
+
+export const STAGGER_CHILD = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } },
+};

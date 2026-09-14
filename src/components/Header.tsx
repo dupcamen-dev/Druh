@@ -8,6 +8,7 @@ const NAV = [
   { href: "/#asian", label: "Asian kitchen" },
   { href: "/#gallery", label: "Gallery" },
   { href: "/#visit", label: "Visit us" },
+  { href: "/about", label: "About" },
 ];
 
 export default function Header() {

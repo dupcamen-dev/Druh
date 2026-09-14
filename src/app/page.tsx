@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
-import Reveal from "@/components/Reveal";
+import { motion } from "motion/react";
+import Reveal, { STAGGER_CHILD } from "@/components/Reveal";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { PinIcon, PhoneIcon, ClockIcon, ScooterIcon, BoxIcon, HandIcon } from "@/components/OutlineIcons";
 import Kramnychka from "@/components/Kramnychka";
 import AsianKitchen from "@/components/AsianKitchen";
@@ -72,6 +74,51 @@ function PdfBanner() {
           <svg className="transition-transform duration-300 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square"><path d="M18 8l4 4-4 4M6 20V11a1 1 0 0 1 1-1h11"/></svg>
         </a>
       </Reveal>
+    </section>
+  );
+}
+
+/* ---- Our story teaser ---- */
+function StoryTeaser() {
+  return (
+    <section className="py-20 lg:py-28 bg-[#1A1715]">
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+        <Reveal variant="up">
+          <span className="inline-block font-hand text-xl text-[#2596be] mb-3">
+            Our story
+          </span>
+          <h2
+            className="font-display font-bold text-white leading-[1.1] mb-6 tracking-tight"
+            style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)" }}
+          >
+            A place where strangers<br className="hidden sm:block" /> become friends
+          </h2>
+          <p className="text-white/70 text-[15px] leading-[1.8] max-w-lg mb-10">
+            A café should feel like home — mornings that never seem to end, broth that warms you
+            from the inside, and a little shop to take that warmth with you.
+          </p>
+          <ShimmerButton
+            href={asset("/about")}
+            borderRadius="0.6rem"
+            shimmerDuration={2.5}
+          >
+            Read our story
+          </ShimmerButton>
+        </Reveal>
+
+        <Reveal variant="scale" className="relative mx-auto w-full max-w-[480px]">
+          <div className="overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10 rotate-2 bg-white">
+            <Image
+              src={asset("/images/story-new.png")}
+              alt="About Druh"
+              width={480}
+              height={480}
+              className="h-auto w-full object-contain"
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
+          </div>
+        </Reveal>
+      </div>
     </section>
   );
 }
@@ -165,25 +212,31 @@ function VisitUs() {
         </Reveal>
 
         <Reveal variant="right" delay={100}>
-          <Reveal variant="stagger" as="div" className="space-y-4">
-              {[
+          <motion.div
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
+            }}
+            className="space-y-4"
+          >
+            {[
                 { icon: ScooterIcon, title: "Delivery", desc: "Via Bolt Food & Glovo" },
                 { icon: BoxIcon, title: "Takeaway", desc: "Order ahead via our online menu" },
                 { icon: HandIcon, title: "Reservations", desc: "Call us to reserve a table" },
               ].map((c) => (
-                <div key={c.title} className="card-lift bg-white/10 hover:bg-white/15 p-6 flex items-start gap-5 rounded-lg transition-colors">
+                <motion.div key={c.title} variants={STAGGER_CHILD} className="card-lift bg-white/10 hover:bg-white/15 p-6 flex items-start gap-5 rounded-lg transition-colors">
                   <c.icon className="shrink-0 mt-0.5" size={32} />
                   <div>
                     <h4 className="font-display font-bold text-white text-[14px] mb-1">{c.title}</h4>
                     <p className="text-[13px] text-white/60">{c.desc}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
-              <a href={BRAND.socials.instagram} target="_blank" rel="noopener" className="card-lift block bg-[#ebe859] text-[#1A1715] p-6 text-center hover:bg-[#59eb59] transition-colors rounded-lg active:scale-[0.98]">
+              <motion.a variants={STAGGER_CHILD} href={BRAND.socials.instagram} target="_blank" rel="noopener" className="card-lift block bg-[#ebe859] text-[#1A1715] p-6 text-center hover:bg-[#59eb59] transition-colors rounded-lg active:scale-[0.98]">
                 <p className="font-display font-bold text-[16px]">Follow @druh.cafe</p>
                 <p className="text-[#1A1715]/60 text-[13px] mt-1">Daily specials & behind the scenes</p>
-              </a>
-          </Reveal>
+              </motion.a>
+          </motion.div>
         </Reveal>
       </div>
     </section>
@@ -198,6 +251,7 @@ export default function HomePage() {
       <Kramnychka />
       <AsianKitchen />
       <PdfBanner />
+      <StoryTeaser />
       <Gallery />
       <VisitUs />
     </main>
