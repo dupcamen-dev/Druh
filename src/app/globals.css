@@ -54,12 +54,11 @@ body {
   min-height: 100vh;
   background: #187492;
 }
-/* 220vh scroll track: pins the viewport still so the ramen bowl
-   can glide in on scroll, then holds ~2-3 empty scrolls before
-   the page advances to the next section */
+/* 160vh scroll track: pins the viewport while the composition glides in,
+   then holds for ~2-3 scroll-wheel notches before the page advances */
 .hero-track {
   position: relative;
-  height: 220vh;
+  height: 160vh;
   overflow: hidden;
 }
 .hero-pin {
