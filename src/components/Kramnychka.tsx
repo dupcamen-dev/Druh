@@ -191,30 +191,34 @@ function CartDrawer({
    and mirrored orientation. Pure decoration: no animation, no scroll. */
 type Grain = { src: string; size: number; x: string; y: string; rot: number; flip: boolean };
 const GRAINS: Grain[] = [
-  { src: "kava1.png", size: 42, x: "4%", y: "7%", rot: -24, flip: false },
-  { src: "kava2.png", size: 54, x: "88%", y: "4%", rot: 137, flip: true },
-  { src: "kava3.png", size: 36, x: "22%", y: "13%", rot: 66, flip: false },
-  { src: "kava4.png", size: 48, x: "74%", y: "16%", rot: -70, flip: true },
-  { src: "kava5.png", size: 32, x: "12%", y: "22%", rot: 12, flip: false },
-  { src: "kava1.png", size: 60, x: "56%", y: "24%", rot: 100, flip: true },
-  { src: "kava2.png", size: 40, x: "36%", y: "31%", rot: -132, flip: false },
-  { src: "kava3.png", size: 66, x: "70%", y: "32%", rot: 24, flip: true },
-  { src: "kava4.png", size: 44, x: "8%", y: "38%", rot: -52, flip: false },
-  { src: "kava5.png", size: 74, x: "82%", y: "40%", rot: 210, flip: true },
-  { src: "kava1.png", size: 30, x: "28%", y: "44%", rot: 85, flip: false },
-  { src: "kava2.png", size: 56, x: "48%", y: "49%", rot: -30, flip: true },
-  { src: "kava3.png", size: 38, x: "64%", y: "52%", rot: 147, flip: false },
-  { src: "kava4.png", size: 50, x: "18%", y: "56%", rot: 250, flip: true },
-  { src: "kava5.png", size: 70, x: "90%", y: "56%", rot: -18, flip: false },
-  { src: "kava1.png", size: 46, x: "38%", y: "62%", rot: 175, flip: true },
-  { src: "kava2.png", size: 58, x: "8%", y: "68%", rot: -96, flip: false },
-  { src: "kava3.png", size: 34, x: "52%", y: "72%", rot: 24, flip: true },
-  { src: "kava4.png", size: 48, x: "74%", y: "72%", rot: 108, flip: false },
-  { src: "kava5.png", size: 62, x: "28%", y: "78%", rot: -150, flip: true },
-  { src: "kava1.png", size: 38, x: "88%", y: "80%", rot: 57, flip: false },
-  { src: "kava2.png", size: 44, x: "58%", y: "84%", rot: 262, flip: true },
-  { src: "kava3.png", size: 52, x: "44%", y: "88%", rot: -76, flip: false },
-  { src: "kava4.png", size: 30, x: "14%", y: "90%", rot: 190, flip: true },
+  /* ── outer rim only: top / bottom strips + left / right gutters.
+     Central column (headings & text) stays clean so dark beans never sit
+     under dark ink. Each grain: size, pos, rotation, optional mirror. ── */
+  { src: "kava1.png", size: 36, x: "2%", y: "4%", rot: -24, flip: false },
+  { src: "kava2.png", size: 46, x: "14%", y: "3%", rot: 137, flip: true },
+  { src: "kava3.png", size: 30, x: "86%", y: "2%", rot: 66, flip: false },
+  { src: "kava4.png", size: 42, x: "97%", y: "6%", rot: -70, flip: true },
+  { src: "kava5.png", size: 34, x: "3%", y: "94%", rot: 12, flip: false },
+  { src: "kava1.png", size: 52, x: "16%", y: "95%", rot: 178, flip: true },
+  { src: "kava2.png", size: 38, x: "34%", y: "93%", rot: -33, flip: false },
+  { src: "kava3.png", size: 48, x: "50%", y: "94%", rot: 101, flip: true },
+  { src: "kava4.png", size: 58, x: "66%", y: "95%", rot: -140, flip: false },
+  { src: "kava5.png", size: 40, x: "83%", y: "93%", rot: 26, flip: true },
+  { src: "kava1.png", size: 44, x: "96%", y: "95%", rot: 214, flip: false },
+  /* left gutter */
+  { src: "kava2.png", size: 32, x: "2%", y: "20%", rot: -90, flip: false },
+  { src: "kava3.png", size: 24, x: "1%", y: "34%", rot: 245, flip: true },
+  { src: "kava4.png", size: 28, x: "3%", y: "47%", rot: -130, flip: false },
+  { src: "kava5.png", size: 36, x: "1%", y: "61%", rot: 150, flip: true },
+  { src: "kava1.png", size: 30, x: "2%", y: "74%", rot: -42, flip: false },
+  { src: "kava2.png", size: 26, x: "3%", y: "85%", rot: 72, flip: true },
+  /* right gutter */
+  { src: "kava3.png", size: 34, x: "97%", y: "20%", rot: 33, flip: true },
+  { src: "kava4.png", size: 26, x: "98%", y: "33%", rot: -76, flip: false },
+  { src: "kava5.png", size: 30, x: "97%", y: "46%", rot: 142, flip: true },
+  { src: "kava1.png", size: 40, x: "98%", y: "59%", rot: -22, flip: false },
+  { src: "kava2.png", size: 28, x: "96%", y: "72%", rot: 168, flip: true },
+  { src: "kava3.png", size: 32, x: "97%", y: "84%", rot: -54, flip: false },
 ];
 
 export default function Kramnychka() {
@@ -293,7 +297,7 @@ export default function Kramnychka() {
                 return (
                   <div
                     key={it.id}
-                    className="card-lift group flex flex-col rounded-xl overflow-hidden"
+                    className="card-lift group relative flex flex-col rounded-xl overflow-hidden bg-[#ebe859] z-10"
                   >
                     {/* image */}
                     <div className="relative aspect-[4/3]">
