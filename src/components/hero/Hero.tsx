@@ -85,7 +85,7 @@ export default function Hero() {
   /* ── lime: behind pepper, flies in from the right; on mobile it is
      significantly enlarged (scale 1.4), lands higher & further right,
      and starts fully outside the viewport ── */
-  const lmX = useTransform(comp, [0, 1], [isMobile ? "50vw" : "30vw", isMobile ? "4vw" : shorter("30vw", "4vw", trio)]);
+  const lmX = useTransform(comp, [0, 1], [isMobile ? "50vw" : "30vw", isMobile ? "6vw" : shorter("30vw", "4vw", trio)]);
   const lmY = useTransform(comp, [0, 1], ["10vh", isMobile ? "-6vh" : shorter("10vh", "0vh", trio)]);
   const lmSc = useTransform(comp, [0, 1], [1, isMobile ? 1.4 : 1]);
 
