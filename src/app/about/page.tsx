@@ -59,7 +59,7 @@ function Hero() {
           <motion.div
             initial={{ rotate: 0 }}
             animate={{ rotate: -4 }}
-            className="absolute left-0 bottom-0 z-10 w-[60%] sm:w-[55%] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10"
+            className="absolute left-0 bottom-0 z-10 w-[60%] sm:w-[55%] overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10"
           >
             <Image
               src={asset("/images/hero-7.jpg")}
@@ -73,7 +73,7 @@ function Hero() {
           <motion.div
             initial={{ rotate: 0 }}
             animate={{ rotate: 5 }}
-            className="absolute right-0 top-0 z-20 w-[60%] sm:w-[55%] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10"
+            className="absolute right-0 top-0 z-20 w-[60%] sm:w-[55%] overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10"
           >
             <Image
               src={asset("/images/hero-4.jpg")}
@@ -136,7 +136,7 @@ function Story() {
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* image collage */}
         <Reveal variant="left" className="relative h-[260px] sm:h-[320px] lg:h-[380px]">
-          <div className="absolute left-0 bottom-0 z-10 w-[58%] overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/5">
+          <div className="absolute left-0 bottom-0 z-10 w-[58%] overflow-hidden rounded-xl shadow-xl ring-1 ring-black/5">
             <Image
               src={asset("/images/hero-5.jpg")}
               alt="Interior at Druh"
@@ -145,7 +145,7 @@ function Story() {
               className="h-auto w-full object-cover"
             />
           </div>
-          <div className="absolute right-0 top-0 z-20 w-[55%] overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/5 rotate-2">
+          <div className="absolute right-0 top-0 z-20 w-[55%] overflow-hidden rounded-xl shadow-xl ring-1 ring-black/5 rotate-2">
             <Image
               src={asset("/images/story-new.png")}
               alt="About Druh"
@@ -257,13 +257,13 @@ function Values() {
           />
 
           {/* card with border beam */}
-          <div className="relative overflow-hidden rounded-2xl md:col-span-1">
+          <div className="relative overflow-hidden rounded-xl md:col-span-1">
             <BorderBeam
               colorFrom="#ebe859"
               colorTo="#187492"
               size={80}
               duration={4}
-              className="rounded-2xl"
+              className="rounded-xl"
             />
             <BentoCard
               name="Friendly, always"

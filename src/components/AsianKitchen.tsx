@@ -134,7 +134,7 @@ export default function AsianKitchen() {
           {DISHES.map((d, i) => (
             <div
               key={d.img}
-              className="group relative rounded-lg overflow-hidden group-hover:shadow-xl group-hover:transition-shadow duration-300"
+              className="group relative rounded-xl overflow-hidden group-hover:shadow-xl group-hover:transition-shadow duration-300"
             >
               {/* photo flies in from its own corner on mount – single smooth animation, no steps */}
               <CornerFlyIn corner={d.corner as "tl" | "tr" | "bl" | "br"} rotate={d.rotate}>
@@ -147,7 +147,7 @@ export default function AsianKitchen() {
                   className="w-full h-auto drop-shadow-[0_15px_18px_rgba(26,23,21,0.18)] transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:filter brightness-105"
                     sizes="(max-width: 1024px) 90vw, 45vw"
                 />
-                <span className="absolute top-1 right-1 font-display text-[9px] font-bold uppercase tracking-[0.12em] text-white bg-[#187492] px-1 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="absolute top-1 right-1 font-display text-[9px] font-bold uppercase tracking-[0.12em] text-white bg-[#187492] px-1 py-0.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {d.kanji}
                 </span>
               </CornerFlyIn>

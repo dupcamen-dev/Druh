@@ -44,7 +44,7 @@ export function BentoCard({
   return (
     <div
       className={cn(
-        "group relative col-span-1 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#1A1715]/10 bg-white p-5 shadow-[0_2px_4px_rgba(26,23,21,0.04),0_12px_24px_rgba(26,23,21,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_rgba(26,23,21,0.12)]",
+        "group relative col-span-1 flex flex-col justify-between overflow-hidden rounded-xl border border-[#1A1715]/10 bg-white p-5 shadow-[0_2px_4px_rgba(26,23,21,0.04),0_12px_24px_rgba(26,23,21,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_rgba(26,23,21,0.12)]",
         className,
       )}
       {...props}

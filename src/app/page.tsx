@@ -74,7 +74,7 @@ function StoryTeaser() {
         </Reveal>
 
         <Reveal variant="scale" className="relative mx-auto w-full max-w-[480px]">
-          <div className="overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10 rotate-2 bg-white">
+          <div className="overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10 rotate-2 bg-white">
             <Image
               src={asset("/images/story-new.png")}
               alt="About Druh"
@@ -115,7 +115,7 @@ function Gallery() {
               <div
                 key={n}
                 className="group relative overflow-hidden"
-                style={{ aspectRatio: "1/1", borderRadius: "0.5rem" }}
+                style={{ aspectRatio: "1/1", borderRadius: "0.75rem" }}
               >
                 <Image
                   src={asset(`/images/gallery-${String(n).padStart(2, "0")}.jpg`)}
@@ -185,7 +185,7 @@ function VisitUs() {
                 { icon: BoxIcon, title: "Takeaway", desc: "Order ahead via our online menu" },
                 { icon: HandIcon, title: "Reservations", desc: "Call us to reserve a table" },
               ].map((c) => (
-                <motion.div key={c.title} variants={STAGGER_CHILD} className="card-lift bg-black/10 hover:bg-white/10 p-6 flex items-start gap-5 rounded-lg transition-colors">
+                <motion.div key={c.title} variants={STAGGER_CHILD} className="card-lift bg-black/10 hover:bg-white/10 p-6 flex items-start gap-5 rounded-xl transition-colors">
                   <c.icon className="shrink-0 mt-0.5" size={32} />
                   <div>
                     <h4 className="font-display font-bold text-white text-[14px] mb-1">{c.title}</h4>
@@ -193,7 +193,7 @@ function VisitUs() {
                   </div>
                 </motion.div>
               ))}
-              <motion.a variants={STAGGER_CHILD} href={BRAND.socials.instagram} target="_blank" rel="noopener" className="card-lift block bg-[#ebe859] text-[#1A1715] p-6 text-center hover:bg-[#59eb59] transition-colors rounded-lg active:scale-[0.98]">
+              <motion.a variants={STAGGER_CHILD} href={BRAND.socials.instagram} target="_blank" rel="noopener" className="card-lift block bg-[#ebe859] text-[#1A1715] p-6 text-center hover:bg-[#59eb59] transition-colors rounded-xl active:scale-[0.98]">
                 <p className="font-display font-bold text-[16px]">Follow @druh.cafe</p>
                 <p className="text-[#1A1715]/80 text-[13px] mt-1">Daily specials & behind the scenes</p>
               </motion.a>

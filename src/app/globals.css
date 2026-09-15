@@ -241,7 +241,7 @@ body {
   justify-content: center;
   gap: 0.625rem;
   padding: 1rem 2rem;
-  border-radius: 0.6rem;
+  border-radius: 0.75rem;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 14px;
@@ -261,7 +261,7 @@ body {
 .btn:active { transform: scale(0.96); }
 .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
-.btn--sm { padding: 0.625rem 1.25rem; font-size: 12px; border-radius: 0.6rem; }
+.btn--sm { padding: 0.625rem 1.25rem; font-size: 12px; border-radius: 0.75rem; }
 .btn--block { width: 100%; }
 
 .btn--yellow { background: var(--yellow); color: var(--ink); }

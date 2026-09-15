@@ -19,7 +19,7 @@ function Stepper({
   onRemove: () => void;
 }) {
   return (
-    <div className="flex items-center border border-[#1A1715]/15 rounded-lg overflow-hidden text-[13px] font-bold">
+    <div className="flex items-center border border-[#1A1715]/15 rounded-xl overflow-hidden text-[13px] font-bold">
       <button
         onClick={onRemove}
         className="w-10 h-10 flex items-center justify-center hover:bg-[#1A1715]/5 transition-colors active:scale-90"
@@ -96,7 +96,7 @@ function CartDrawer({
           </h3>
           <button
             onClick={onClose}
-            className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-[#1A1715]/5 transition-colors"
+            className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-[#1A1715]/5 transition-colors"
             aria-label="Close"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1715" strokeWidth="2" strokeLinecap="square">
@@ -119,7 +119,7 @@ function CartDrawer({
           <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
             {items.map((it) => (
               <div key={it.id} className="flex gap-4">
-                <div className="relative w-[72px] h-[54px] shrink-0 rounded-md overflow-hidden bg-[#1A1715]/5">
+                <div className="relative w-[72px] h-[54px] shrink-0 rounded-xl overflow-hidden bg-[#1A1715]/5">
                   <Image
                     src={asset(it.imageUrl)}
                     alt={it.name}
