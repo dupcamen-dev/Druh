@@ -50,12 +50,12 @@ export default function Hero() {
     offset: ["start start", "end end"],
   });
 
-  /* elements finish at 80% of the track's scroll range; the remaining
-     20% is "empty scroll" so the page pauses before the next section.
-     easeSmoothOut spreads the motion across many small wheel steps —
-     the composition glides slowly instead of jumping in one scroll */
+  /* elements finish at 80% of the track's scroll range (60% on mobile);
+     the remainder is "empty scroll" so the page pauses before the next
+     section. easeSmoothOut spreads the motion across many small wheel
+     steps — the composition glides slowly instead of jumping one scroll */
   const comp = useTransform(scrollYProgress, (v) => {
-    const t = Math.min(1, Math.max(0, v / 0.8));
+    const t = Math.min(1, Math.max(0, v / (isMobile ? 0.6 : 0.8)));
     return easeSmoothOut(t);
   });
 
