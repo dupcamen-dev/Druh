@@ -63,8 +63,9 @@ export default function Hero() {
   });
 
   /* ── ramen bowl: bottom-left → diagonal upward (full flight). On
-     mobile only the right 60% shows, 40% stays outside the left edge ── */
-  const bowlX   = useTransform(comp, [0, 1], ["-110%", isMobile ? "-37%" : "2%"]);
+     mobile only the right 60% shows, 40% stays outside the left edge,
+     and it starts fully hidden off-screen ── */
+  const bowlX   = useTransform(comp, [0, 1], [isMobile ? "-125%" : "-110%", isMobile ? "-37%" : "2%"]);
   const bowlY   = useTransform(comp, [0, 1], ["40vh", "24vh"]);
   const bowlRot = useTransform(comp, [0, 1], [-8, 0]);
   const bowlSc  = useTransform(comp, [0, 1], [1.2, 1.35]);
@@ -82,12 +83,14 @@ export default function Hero() {
   const plY = useTransform(comp, [0, 1], ["-20vh", "0vh"]);
 
   /* ── lime: behind pepper, flies in from right → left; on mobile ends
-     just inside the viewport so it doesn't clip ── */
-  const lmX = useTransform(comp, [0, 1], ["30vw", isMobile ? "0vw" : shorter("30vw", "4vw", trio)]);
+     slightly right (2vw) and scales up to 1.1 so it reads bigger ── */
+  const lmX = useTransform(comp, [0, 1], ["30vw", isMobile ? "2vw" : shorter("30vw", "4vw", trio)]);
   const lmY = useTransform(comp, [0, 1], ["10vh", shorter("10vh", "0vh", trio)]);
+  const lmSc = useTransform(comp, [0, 1], [1, isMobile ? 1.1 : 1]);
 
-  /* ── pepper: short hop from the right edge; full flight ── */
-  const ppX = useTransform(comp, [0, 1], ["30vw", shorter("30vw", "-4vw", trio)]);
+  /* ── pepper: short hop from the right edge; starts fully off-screen on
+     mobile (pushed right past the viewport), full flight → -4vw ── */
+  const ppX = useTransform(comp, [0, 1], [isMobile ? "48vw" : "30vw", shorter("30vw", "-4vw", trio)]);
   const ppY = useTransform(comp, [0, 1], ["10vh", shorter("10vh", "0vh", trio)]);
 
   const enter = (delay: number) => ({
@@ -142,7 +145,7 @@ export default function Hero() {
 
             {/* ── lime (behind chopsticks, z-[2]) ── */}
             <m.div
-              style={{ x: lmX, y: lmY }}
+              style={{ x: lmX, y: lmY, scale: lmSc }}
               aria-hidden
               className="hero-lime pointer-events-none select-none"
             >
