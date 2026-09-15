@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SplashScreen from "@/components/SplashScreen";
 import ScrollToTop from "@/components/ScrollToTop";
+import Grain from "@/components/Grain";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         {children}
         <Footer />
+        <Grain />
       </body>
     </html>
   );
