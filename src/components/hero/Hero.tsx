@@ -82,11 +82,12 @@ export default function Hero() {
   const plX = useTransform(comp, [0, 1], ["-120vw", "-12vw"]);
   const plY = useTransform(comp, [0, 1], ["-20vh", "0vh"]);
 
-  /* ── lime: behind pepper, flies in from right → left; on mobile ends
-     slightly right (2vw) and scales up to 1.1 so it reads bigger ── */
-  const lmX = useTransform(comp, [0, 1], ["30vw", isMobile ? "2vw" : shorter("30vw", "4vw", trio)]);
-  const lmY = useTransform(comp, [0, 1], ["10vh", shorter("10vh", "0vh", trio)]);
-  const lmSc = useTransform(comp, [0, 1], [1, isMobile ? 1.1 : 1]);
+  /* ── lime: behind pepper, flies in from the right; on mobile it is
+     significantly enlarged (scale 1.4), lands higher & further right,
+     and starts fully outside the viewport ── */
+  const lmX = useTransform(comp, [0, 1], [isMobile ? "50vw" : "30vw", isMobile ? "4vw" : shorter("30vw", "4vw", trio)]);
+  const lmY = useTransform(comp, [0, 1], ["10vh", isMobile ? "-6vh" : shorter("10vh", "0vh", trio)]);
+  const lmSc = useTransform(comp, [0, 1], [1, isMobile ? 1.4 : 1]);
 
   /* ── pepper: short hop from the right edge; starts fully off-screen on
      mobile (pushed right past the viewport), full flight → -4vw ── */
