@@ -241,7 +241,7 @@ export default function Kramnychka() {
                 return (
                   <div
                     key={it.id}
-                    className="card-lift group flex flex-col"
+                    className="card-lift group flex flex-col rounded-xl overflow-hidden"
                   >
                     {/* image */}
                     <div className="relative aspect-[4/3]">
