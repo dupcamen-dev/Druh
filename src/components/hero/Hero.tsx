@@ -11,6 +11,11 @@ import {
 } from "motion/react";
 import { asset } from "@/lib/base";
 
+/* easeSmoothOut: quick-ish start but a long decelerating tail, so the
+     composition settles over many scroll steps instead of one big jump —
+     "slow the whole composition down" */
+const easeSmoothOut = (t: number) => 1 - Math.pow(1 - t, 2.2);
+
 export default function Hero() {
   const reduced = useReducedMotion() ?? false;
   const heroRef = useRef<HTMLElement>(null);
@@ -25,13 +30,13 @@ export default function Hero() {
     offset: ["start start", "end end"],
   });
 
-  /* elements finish at 50% of the track; the remaining half is "empty scroll"
-     so the page pauses ~2-3 scrolls before the next section slides in.
-     easeOut smooths the whole composition (starts gently, settles softly) */
-  const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+  /* elements finish at 80% of the track's scroll range; the remaining
+     20% is "empty scroll" so the page pauses before the next section.
+     easeSmoothOut spreads the motion across many small wheel steps —
+     the composition glides slowly instead of jumping in one scroll */
   const comp = useTransform(scrollYProgress, (v) => {
-    const t = Math.min(1, Math.max(0, v / 0.5));
-    return easeOutCubic(t);
+    const t = Math.min(1, Math.max(0, v / 0.8));
+    return easeSmoothOut(t);
   });
 
   /* ── ramen bowl: bottom-left → diagonal upward, enters 110% ── */
@@ -63,8 +68,8 @@ export default function Hero() {
     animate: started ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 },
     transition: {
       delay: reduced ? 0 : delay,
-      duration: reduced ? 0 : 0.7,
-      ease: [0.22, 1, 0.36, 1] as const,
+      duration: reduced ? 0 : 1.5,
+      ease: [0.16, 1, 0.3, 1] as const,
     },
   });
 
