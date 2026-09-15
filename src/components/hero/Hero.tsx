@@ -44,10 +44,11 @@ export default function Hero() {
     const unit = to.replace(/[-\d.]/g, "");
     return `${a + (b - a) * f}${unit}`;
   };
-  /* right-side trio on mobile stops at 0.36 of its full flight (60% of
-     the previous 0.6 stop) so chopsticks/lime/pepper stay on the right
-     and never reach the bowl ─ right vs left compositions don't touch */
-  const trio = isMobile ? 0.36 : 1;
+  /* right-side trio on mobile stops at 0.26 of its full flight so
+     chopsticks/lime/pepper sit clearly on the right and never reach
+     the bowl, which lands a touch further left ─ right vs left
+     compositions keep a visible gap */
+  const trio = isMobile ? 0.26 : 1;
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -62,8 +63,8 @@ export default function Hero() {
     return easeSmoothOut(t);
   });
 
-  /* ── ramen bowl: bottom-left → diagonal upward (full flight) ── */
-  const bowlX   = useTransform(comp, [0, 1], ["-110%", "10%"]);
+  /* ── ramen bowl: bottom-left → diagonal upward (lands slightly left, full flight) ── */
+  const bowlX   = useTransform(comp, [0, 1], ["-110%", "2%"]);
   const bowlY   = useTransform(comp, [0, 1], ["40vh", "24vh"]);
   const bowlRot = useTransform(comp, [0, 1], [-8, 0]);
   const bowlSc  = useTransform(comp, [0, 1], [1.2, 1.35]);
