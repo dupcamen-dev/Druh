@@ -44,11 +44,10 @@ export default function Hero() {
     const unit = to.replace(/[-\d.]/g, "");
     return `${a + (b - a) * f}${unit}`;
   };
-  /* right-side trio on mobile stops at 0.26 of its full flight so
-     chopsticks/lime/pepper sit clearly on the right and never reach
-     the bowl, which lands a touch further left ─ right vs left
-     compositions keep a visible gap */
-  const trio = isMobile ? 0.26 : 1;
+  /* On mobile chopsticks land further left (scale 1.55, translate -26%)
+     and lime ends at the viewport edge (0vw) so the whole right trio
+     is almost fully visible and reaches toward the centre */
+  const trio = 1;
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -69,22 +68,24 @@ export default function Hero() {
   const bowlRot = useTransform(comp, [0, 1], [-8, 0]);
   const bowlSc  = useTransform(comp, [0, 1], [1.2, 1.35]);
 
-  /* ── chopsticks: top-right → diagonal in; on mobile stops at 0.36 of
-     the flight so they stay on the right, clear of the bowl ── */
-  const stX   = useTransform(comp, [0, 1], ["110%", shorter("110%", "-1%", trio)]);
+  /* ── chopsticks: top-right → diagonal in; on mobile they land
+     further left so they're almost fully visible, resting over the
+     bowl's right rim ── */
+  const stX   = useTransform(comp, [0, 1], ["110%", isMobile ? "-26%" : shorter("110%", "-1%", trio)]);
   const stY   = useTransform(comp, [0, 1], ["-10vh", shorter("-10vh", "16vh", trio)]);
   const stRot = useTransform(comp, [0, 1], [8, 8 + (0 - 8) * trio]);
-  const stSc  = useTransform(comp, [0, 1], [1.4, 1.4 + (1.7 - 1.4) * trio]);
+  const stSc  = useTransform(comp, [0, 1], [1.4, isMobile ? 1.55 : 1.4 + (1.7 - 1.4) * trio]);
 
   /* ── parsley leaf: flies in diagonally, stops left of center (full) ── */
   const plX = useTransform(comp, [0, 1], ["-120vw", "-12vw"]);
   const plY = useTransform(comp, [0, 1], ["-20vh", "0vh"]);
 
-  /* ── lime: behind pepper, flies in from right → left; mobile 0.36 ── */
-  const lmX = useTransform(comp, [0, 1], ["30vw", shorter("30vw", "4vw", trio)]);
+  /* ── lime: behind pepper, flies in from right → left; on mobile ends
+     just inside the viewport so it doesn't clip ── */
+  const lmX = useTransform(comp, [0, 1], ["30vw", isMobile ? "0vw" : shorter("30vw", "4vw", trio)]);
   const lmY = useTransform(comp, [0, 1], ["10vh", shorter("10vh", "0vh", trio)]);
 
-  /* ── pepper: short hop from outside the right edge; mobile 0.36 ── */
+  /* ── pepper: short hop from the right edge; full flight ── */
   const ppX = useTransform(comp, [0, 1], ["30vw", shorter("30vw", "-4vw", trio)]);
   const ppY = useTransform(comp, [0, 1], ["10vh", shorter("10vh", "0vh", trio)]);
 
