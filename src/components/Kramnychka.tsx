@@ -186,6 +186,37 @@ function CartDrawer({
   );
 }
 
+/* Scatter of coffee grains decorating the little-shop section — a handful
+   of kava1..5 sprites, each reused several times in varied size, rotation
+   and mirrored orientation. Pure decoration: no animation, no scroll. */
+type Grain = { src: string; size: number; x: string; y: string; rot: number; flip: boolean };
+const GRAINS: Grain[] = [
+  { src: "kava1.png", size: 42, x: "4%", y: "7%", rot: -24, flip: false },
+  { src: "kava2.png", size: 54, x: "88%", y: "4%", rot: 137, flip: true },
+  { src: "kava3.png", size: 36, x: "22%", y: "13%", rot: 66, flip: false },
+  { src: "kava4.png", size: 48, x: "74%", y: "16%", rot: -70, flip: true },
+  { src: "kava5.png", size: 32, x: "12%", y: "22%", rot: 12, flip: false },
+  { src: "kava1.png", size: 60, x: "56%", y: "24%", rot: 100, flip: true },
+  { src: "kava2.png", size: 40, x: "36%", y: "31%", rot: -132, flip: false },
+  { src: "kava3.png", size: 66, x: "70%", y: "32%", rot: 24, flip: true },
+  { src: "kava4.png", size: 44, x: "8%", y: "38%", rot: -52, flip: false },
+  { src: "kava5.png", size: 74, x: "82%", y: "40%", rot: 210, flip: true },
+  { src: "kava1.png", size: 30, x: "28%", y: "44%", rot: 85, flip: false },
+  { src: "kava2.png", size: 56, x: "48%", y: "49%", rot: -30, flip: true },
+  { src: "kava3.png", size: 38, x: "64%", y: "52%", rot: 147, flip: false },
+  { src: "kava4.png", size: 50, x: "18%", y: "56%", rot: 250, flip: true },
+  { src: "kava5.png", size: 70, x: "90%", y: "56%", rot: -18, flip: false },
+  { src: "kava1.png", size: 46, x: "38%", y: "62%", rot: 175, flip: true },
+  { src: "kava2.png", size: 58, x: "8%", y: "68%", rot: -96, flip: false },
+  { src: "kava3.png", size: 34, x: "52%", y: "72%", rot: 24, flip: true },
+  { src: "kava4.png", size: 48, x: "74%", y: "72%", rot: 108, flip: false },
+  { src: "kava5.png", size: 62, x: "28%", y: "78%", rot: -150, flip: true },
+  { src: "kava1.png", size: 38, x: "88%", y: "80%", rot: 57, flip: false },
+  { src: "kava2.png", size: 44, x: "58%", y: "84%", rot: 262, flip: true },
+  { src: "kava3.png", size: 52, x: "44%", y: "88%", rot: -76, flip: false },
+  { src: "kava4.png", size: 30, x: "14%", y: "90%", rot: 190, flip: true },
+];
+
 export default function Kramnychka() {
   const [cart, setCart] = useState<Record<string, number>>(() => {
     if (typeof window === "undefined") return {};
@@ -222,8 +253,29 @@ export default function Kramnychka() {
   }, []);
 
   return (
-    <section className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
-      <div className="max-w-[1200px] mx-auto space-y-12 lg:space-y-20">
+    <section className="relative overflow-hidden py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+        {GRAINS.map((g, i) => (
+          <Image
+            key={i}
+            src={asset(`/images/${g.src}`)}
+            alt=""
+            width={g.size}
+            height={g.size}
+            unoptimized
+            draggable={false}
+            className="absolute"
+            style={{
+              left: g.x,
+              top: g.y,
+              width: g.size,
+              height: g.size,
+              transform: `rotate(${g.rot}deg) scaleX(${g.flip ? -1 : 1})`,
+            }}
+          />
+        ))}
+      </div>
+      <div className="relative z-10 max-w-[1200px] mx-auto space-y-12 lg:space-y-20">
         {SHOP_BY_CATEGORY.map((cat) => (
           <div key={cat.id}>
             <div className="section-head">
