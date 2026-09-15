@@ -62,8 +62,9 @@ export default function Hero() {
     return easeSmoothOut(t);
   });
 
-  /* ── ramen bowl: bottom-left → diagonal upward (lands slightly left, full flight) ── */
-  const bowlX   = useTransform(comp, [0, 1], ["-110%", "2%"]);
+  /* ── ramen bowl: bottom-left → diagonal upward (full flight). On
+     mobile only the right 60% shows, 40% stays outside the left edge ── */
+  const bowlX   = useTransform(comp, [0, 1], ["-110%", isMobile ? "-37%" : "2%"]);
   const bowlY   = useTransform(comp, [0, 1], ["40vh", "24vh"]);
   const bowlRot = useTransform(comp, [0, 1], [-8, 0]);
   const bowlSc  = useTransform(comp, [0, 1], [1.2, 1.35]);
