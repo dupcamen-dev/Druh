@@ -31,6 +31,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -51,14 +52,15 @@ body {
 .hero-stage {
   position: relative;
   min-height: 100vh;
-  background:
-    radial-gradient(120% 90% at 50% 40%, #1b7f95 0%, #12606f 46%, #0a4a57 100%);
+  background: #187492;
 }
-/* 300vh scroll track: pins the video scrub, blocks the next section
-   until all frames have been scrolled through */
+/* 220vh scroll track: pins the viewport still so the ramen bowl
+   can glide in on scroll, then holds ~2-3 empty scrolls before
+   the page advances to the next section */
 .hero-track {
   position: relative;
-  height: 300vh;
+  height: 220vh;
+  overflow: hidden;
 }
 .hero-pin {
   position: sticky;
@@ -69,13 +71,68 @@ body {
   align-items: center;
   justify-content: center;
 }
-.hero-video {
+.hero-bg {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
+  background: #187492;
+}
+.hero-ramen {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: min(94vw, 820px);
+  will-change: transform;
+}
+.hero-parsley {
+  position: absolute;
+  left: 32%;
+  bottom: 22%;
+  z-index: 1;
+  width: min(12vw, 100px);
+  will-change: transform;
+}
+.hero-chopsticks {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  width: min(65vw, 560px);
+  will-change: transform;
+}
+.hero-lime {
+  position: absolute;
+  right: 8%;
+  bottom: 8%;
+  z-index: 3;
+  width: min(55vw, 460px);
+  will-change: transform;
+}
+.hero-pepper {
+  position: absolute;
+  right: 12%;
+  bottom: 15%;
+  z-index: 4;
+  width: min(30vw, 260px);
+  will-change: transform;
+}
+
+/* ── tablet ── */
+@media (max-width: 1024px) {
+  .hero-ramen { width: min(88vw, 640px); }
+  .hero-chopsticks { width: min(58vw, 480px); }
+  .hero-lime { width: min(50vw, 400px); }
+  .hero-pepper { width: min(32vw, 230px); }
+  .hero-parsley { width: min(13vw, 90px); }
+}
+
+/* ── mobile ── */
+@media (max-width: 768px) {
+  .hero-ramen { width: min(92vw, 420px); }
+  .hero-parsley { left: 24%; bottom: 16%; width: min(15vw, 70px); }
+  .hero-chopsticks { width: min(50vw, 220px); }
+  .hero-lime { right: 4%; bottom: 5%; width: min(42vw, 190px); }
+  .hero-pepper { right: 6%; bottom: 11%; width: min(36vw, 150px); }
 }
 /* ========== MARQUEE ========== */
 .marquee-wrap { overflow: hidden; white-space: nowrap; }
