@@ -87,7 +87,7 @@ export default function Hero() {
               className="hero-parsley pointer-events-none select-none"
             >
               <Image
-                src="/images/parsley.png"
+                src={asset("/images/parsley.png")}
                 alt=""
                 width={140}
                 height={180}
@@ -103,7 +103,7 @@ export default function Hero() {
               className="hero-ramen pointer-events-none select-none"
             >
               <Image
-                src="/images/ramen.png"
+                src={asset("/images/ramen.png")}
                 alt=""
                 width={840}
                 height={840}
@@ -120,7 +120,7 @@ export default function Hero() {
               className="hero-lime pointer-events-none select-none"
             >
               <Image
-                src="/images/lime.png"
+                src={asset("/images/lime.png")}
                 alt=""
                 width={584}
                 height={436}
@@ -136,7 +136,7 @@ export default function Hero() {
               className="hero-chopsticks pointer-events-none select-none"
             >
               <Image
-                src="/images/chopsticks.png"
+                src={asset("/images/chopsticks.png")}
                 alt=""
                 width={696}
                 height={937}
@@ -152,7 +152,7 @@ export default function Hero() {
               className="hero-pepper pointer-events-none select-none"
             >
               <Image
-                src="/images/pepper.png"
+                src={asset("/images/pepper.png")}
                 alt=""
                 width={197}
                 height={316}
