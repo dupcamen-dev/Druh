@@ -37,53 +37,55 @@ export default function Hero() {
     return () => mq.removeEventListener("change", apply);
   }, []);
 
-  /* compute a shortened endpoint: from + distance * factor (0.6 = 40% less travel) */
-  const shorter = (from: string, to: string, f = isMobile ? 0.6 : 1) => {
+  /* compute a shortened endpoint: from + distance * factor */
+  const shorter = (from: string, to: string, f: number) => {
     const a = Number.parseFloat(from);
     const b = Number.parseFloat(to);
     const unit = to.replace(/[-\d.]/g, "");
     return `${a + (b - a) * f}${unit}`;
   };
+  /* right-side trio on mobile stops at 0.36 of its full flight (60% of
+     the previous 0.6 stop) so chopsticks/lime/pepper stay on the right
+     and never reach the bowl ─ right vs left compositions don't touch */
+  const trio = isMobile ? 0.36 : 1;
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end end"],
   });
 
-  /* elements finish at 80% of the track's scroll range (60% on mobile);
-     the remainder is "empty scroll" so the page pauses before the next
-     section. easeSmoothOut spreads the motion across many small wheel
-     steps — the composition glides slowly instead of jumping one scroll */
+  /* elements finish at 80% of the track's scroll range; the
+     easeSmoothOut spreads the motion across many small wheel steps —
+     the composition glides slowly instead of jumping one scroll */
   const comp = useTransform(scrollYProgress, (v) => {
-    const t = Math.min(1, Math.max(0, v / (isMobile ? 0.6 : 0.8)));
+    const t = Math.min(1, Math.max(0, v / 0.8));
     return easeSmoothOut(t);
   });
 
-  /* ── ramen bowl: bottom-left → diagonal upward, enters 110% ── */
+  /* ── ramen bowl: bottom-left → diagonal upward (full flight) ── */
   const bowlX   = useTransform(comp, [0, 1], ["-110%", "10%"]);
   const bowlY   = useTransform(comp, [0, 1], ["40vh", "24vh"]);
   const bowlRot = useTransform(comp, [0, 1], [-8, 0]);
   const bowlSc  = useTransform(comp, [0, 1], [1.2, 1.35]);
 
-  /* ── chopsticks: top-right → diagonal in (mirrored, same speed) ── */
-  const stX   = useTransform(comp, [0, 1], ["110%", shorter("110%", "-1%")]);
-  const stY   = useTransform(comp, [0, 1], ["-10vh", shorter("-10vh", "16vh")]);
-  const stRot = useTransform(comp, [0, 1], [8, isMobile ? 8 + (0 - 8) * 0.6 : 0]);
-  const stSc  = useTransform(comp, [0, 1], [1.4, isMobile ? 1.4 + (1.7 - 1.4) * 0.6 : 1.7]);
+  /* ── chopsticks: top-right → diagonal in; on mobile stops at 0.36 of
+     the flight so they stay on the right, clear of the bowl ── */
+  const stX   = useTransform(comp, [0, 1], ["110%", shorter("110%", "-1%", trio)]);
+  const stY   = useTransform(comp, [0, 1], ["-10vh", shorter("-10vh", "16vh", trio)]);
+  const stRot = useTransform(comp, [0, 1], [8, 8 + (0 - 8) * trio]);
+  const stSc  = useTransform(comp, [0, 1], [1.4, 1.4 + (1.7 - 1.4) * trio]);
 
-  /* ── parsley leaf: flies in diagonally, stops left of center ── */
+  /* ── parsley leaf: flies in diagonally, stops left of center (full) ── */
   const plX = useTransform(comp, [0, 1], ["-120vw", "-12vw"]);
   const plY = useTransform(comp, [0, 1], ["-20vh", "0vh"]);
 
-  /* ── lime + pepper: right-side photos pile onto the bowl — on mobile
-     they stop at 60% of their flight (40% less travel) so they stay to
-     the right and don't overlap the ramen ── */
-  const lmX = useTransform(comp, [0, 1], ["30vw", shorter("30vw", "4vw")]);
-  const lmY = useTransform(comp, [0, 1], ["10vh", shorter("10vh", "0vh")]);
+  /* ── lime: behind pepper, flies in from right → left; mobile 0.36 ── */
+  const lmX = useTransform(comp, [0, 1], ["30vw", shorter("30vw", "4vw", trio)]);
+  const lmY = useTransform(comp, [0, 1], ["10vh", shorter("10vh", "0vh", trio)]);
 
-  /* ── pepper: short hop from outside the right edge, bottom-up diagonal ── */
-  const ppX = useTransform(comp, [0, 1], ["30vw", shorter("30vw", "-4vw")]);
-  const ppY = useTransform(comp, [0, 1], ["10vh", shorter("10vh", "0vh")]);
+  /* ── pepper: short hop from outside the right edge; mobile 0.36 ── */
+  const ppX = useTransform(comp, [0, 1], ["30vw", shorter("30vw", "-4vw", trio)]);
+  const ppY = useTransform(comp, [0, 1], ["10vh", shorter("10vh", "0vh", trio)]);
 
   const enter = (delay: number) => ({
     initial: false,
