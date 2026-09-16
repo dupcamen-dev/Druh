@@ -4,65 +4,126 @@ import Reveal from "@/components/Reveal";
 import CornerFlyIn from "@/components/CornerFlyIn";
 import { asset } from "@/lib/base";
 
-const DISHES = [
+type Dish = {
+  img: string;
+  local: boolean;
+  w: number;
+  h: number;
+  name: string;
+  price: number;
+  weight: string;
+  desc: string;
+  rotate: number;
+  corner: "tl" | "tr" | "bl" | "br";
+};
+
+const DISHES: Dish[] = [
   {
     img: "/images/asian/ramen-seafood.png",
+    local: true,
     w: 1000,
     h: 563,
-    kanji: "海鮮",
     name: "Seafood ramen",
-    desc: "Umami-packed broth with prawns, a silky egg and hand-made noodles.",
+    price: 325,
+    weight: "540 g",
+    desc: "Umami broth with prawns, squid, marinated egg & tofu, corn and nori.",
     rotate: -4,
     corner: "tl",
   },
   {
     img: "/images/asian/ramen-beef.png",
-    w: 1000,
-    h: 750,
-    kanji: "牛",
+    local: true,
+    w: 433,
+    h: 509,
     name: "Beef ramen",
-    desc: "Slow-simmered broth with melt-in-the-mouth su-vid beef and a soft egg.",
+    price: 285,
+    weight: "520 g",
+    desc: "Su-vid beef, spicy chili oil, marinated egg, corn and nori chips.",
     rotate: 3,
     corner: "tr",
   },
   {
     img: "/images/asian/ramen-katsu.png",
+    local: true,
     w: 1000,
     h: 562,
-    kanji: "カツ",
     name: "Chicken katsu ramen",
-    desc: "Crispy golden katsu over a rich broth with nori and spring onion.",
+    price: 265,
+    weight: "580 g",
+    desc: "Crispy golden katsu, wood-ear mushroom, marinated egg, house noodles.",
     rotate: -3,
     corner: "bl",
   },
   {
-    img: "/images/asian/onigiri-unagi.png",
-    w: 1367,
+    img: "/images/asian/yakitori-chicken.png",
+    local: true,
+    w: 1154,
     h: 769,
-    kanji: "うなぎ",
-    name: "Onigiri with eel",
-    desc: "Warm sushi rice, glazed eel, unagi sauce and a crisp nori wrap.",
+    name: "Yakitori chicken",
+    price: 215,
+    weight: "220 g",
+    desc: "Charcoal-grilled thigh brushed with tare — soy, mirin and sake.",
     rotate: 5,
     corner: "br",
   },
   {
-    img: "/images/asian/yakitori-chicken.png",
-    w: 1154,
-    h: 769,
-    kanji: "焼き鳥",
-    name: "Yakitori chicken",
-    desc: "Grilled chicken thigh brushed with tare sauce, sprinkled with sesame.",
+    img: "https://cdn-media.choiceqr.com/prod-eat-drug/menu/pHDJuIc-IDFOvbA-eRRkMGd_prepare.jpeg",
+    local: false,
+    w: 800,
+    h: 600,
+    name: "Yakitori prawn",
+    price: 185,
+    weight: "120 g",
+    desc: "Juicy prawns with spinach, lime and citrus yuzu sauce.",
     rotate: -2,
     corner: "tl",
   },
   {
-    img: "/images/asian/hambagu.png",
-    w: 1154,
+    img: "/images/asian/onigiri-unagi.png",
+    local: true,
+    w: 1367,
     h: 769,
-    kanji: "ハンバーグ",
-    name: "Hambagu",
-    desc: "Japanese-style beef patty with demi-glace sauce, served with rice.",
+    name: "Onigiri with eel",
+    price: 155,
+    weight: "125 g",
+    desc: "Warm sushi rice, glazed eel, unagi sauce and a crisp nori wrap.",
+    rotate: -2,
+    corner: "tl",
+  },
+  {
+    img: "https://cdn-media.choiceqr.com/prod-eat-drug/menu/hNkeASm-mcuAPZd-malJlBz_prepare.jpeg",
+    local: false,
+    w: 800,
+    h: 600,
+    name: "Onigiri with salmon",
+    price: 155,
+    weight: "120 g",
+    desc: "Warm sushi rice wrapped in nori, filled with fresh salmon.",
     rotate: 2,
+    corner: "tr",
+  },
+  {
+    img: "https://cdn-media.choiceqr.com/prod-eat-drug/menu/NTkyfRt-eOVQsDH-xkKkDUL_prepare.png",
+    local: false,
+    w: 800,
+    h: 600,
+    name: "Salmon rice bowl",
+    price: 325,
+    weight: "300 g",
+    desc: "Japanese rice bowl topped with salmon and fresh seasonal greens.",
+    rotate: 3,
+    corner: "br",
+  },
+  {
+    img: "https://cdn-media.choiceqr.com/prod-eat-drug/menu/LjTnUJv-nIregLm-LzalPCm_prepare.png",
+    local: false,
+    w: 800,
+    h: 600,
+    name: "Prawn rice bowl",
+    price: 245,
+    weight: "300 g",
+    desc: "Japanese rice bowl with grilled prawns and a citrus dressing.",
+    rotate: -3,
     corner: "bl",
   },
 ];
@@ -71,95 +132,127 @@ export default function AsianKitchen() {
   return (
     <section
       id="asian"
-      className="relative py-16 lg:py-32 bg-white overflow-hidden"
+      className="relative py-20 lg:py-32 bg-[#12100D] overflow-hidden"
     >
-      {/* gradient container for soft background */}
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-[--cream] to-white"
-      />
-      {/* subtle ghost kanji watermarks – smaller, positioned to the sides, very low opacity */}
-      <svg
-        aria-hidden
-        className="absolute -top-4 -left-4 select-none pointer-events-none opacity-5 text-[80px] lg:text-[100px] font-bold fill-[rgb(0,0,0)] font-family-'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif"
-        viewBox="0 0 64 64"
-      >
-        <text x="6" y="52" fontSize="56" fontWeight="800">食</text>
-      </svg>
-      <svg
-        aria-hidden
-        className="absolute -bottom-8 -right-8 select-none pointer-events-none opacity-5 text-[80px] lg:text-[100px] font-bold fill-[rgb(0,0,0)] font-family-'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif"
-        viewBox="0 0 64 64"
-      >
-        <text x="-8" y="54" fontSize="58" fontWeight="800" transform="rotate(6 32 32)">麺</text>
-      </svg>
+      {/* warm glow accents */}
+      <div className="asian-glow w-[480px] h-[480px] top-[-60px] left-[-120px] bg-[rgba(229,57,53,0.12)]" />
+      <div className="asian-glow w-[360px] h-[360px] bottom-[-40px] right-[-80px] bg-[rgba(255,183,77,0.09)]" />
 
-      {/* vertical japanese dish names accent – smaller, subtler, hidden on mobile */}
-      <svg
+      {/* ── ghost kanji watermarks ── */}
+      <span
         aria-hidden
-        className="hidden lg:block absolute left-4 top-1/2 -translate-y-1/2 select-none pointer-events-none opacity-8 text-[12px] text-[rgb(0,0,0)] h-[300px] w-auto"
-        viewBox="0 0 28 300"
-        width="28"
-        height="300"
+        className="absolute top-[8%] left-[-2%] select-none pointer-events-none opacity-[0.045] text-[#E63946] text-[120px] lg:text-[180px] font-black leading-none"
+        style={{ fontFamily: "var(--font-ja), sans-serif" }}
       >
-        <text
-          x="18"
-          y="0"
-          fontSize="12"
-          fontWeight="700"
-          fill="#000000"
-          fontFamily="'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif"
-          letterSpacing="8"
-          writingMode="vertical-rl"
-          style={{ writingMode: "vertical-rl" }}
-        >
-          海鮮ラーメン・牛ラーメン・カツラーメン・うなぎおにぎり
-        </text>
-      </svg>
+        ラーメン
+      </span>
+      <span
+        aria-hidden
+        className="absolute bottom-[4%] right-[-3%] select-none pointer-events-none opacity-[0.045] text-[#F5EFE6] text-[110px] lg:text-[160px] font-black leading-none"
+        style={{ fontFamily: "var(--font-ja), sans-serif" }}
+      >
+        焼き鳥
+      </span>
 
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-10">
-        <Reveal className="max-w-[760px] mx-auto mb-12 lg:mb-16 text-center">
-          <span className="eyebrow">Asian kitchen</span>
-          <h2 className="h-section">
-            Tokyo street food,<br className="hidden sm:block" /> brewed right here
+      {/* ── vertical accent text (desktop) ── */}
+      <span
+        aria-hidden
+        className="hidden lg:block absolute left-5 top-1/2 -translate-y-1/2 select-none pointer-events-none text-[11px] tracking-[6px] text-[rgba(245,239,230,0.12)] h-[320px] w-auto"
+        style={{
+          fontFamily: "var(--font-ja), sans-serif",
+          writingMode: "vertical-rl",
+        }}
+      >
+        海鮮ラーメン・牛ラーメン・カツラーメン・焼き鳥・海老・ハンバーグ
+      </span>
+
+      <div className="relative z-[2] max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-10">
+        {/* ── header ── */}
+        <Reveal className="max-w-[760px] mx-auto mb-14 lg:mb-20 text-center">
+          <span className="eyebrow" style={{ color: "#FFD27F" }}>
+            Asian kitchen
+          </span>
+          <h2 className="h-section" style={{ color: "#F5EFE6" }}>
+            Tokyo street food,{" "}
+            <br className="hidden sm:block" />
+            brewed right here
           </h2>
-          <p className="lead">
-            From the broth-bubbling stalls of Osaka to the sizzling grills of Tokyo&apos;s alleyways —
-            a Japanese street walk, without leaving Ternopil. Each dish tells a story of tradition,
-            craft, and the freshest seasonal ingredients.
+          <p
+            className="lead"
+            style={{ color: "rgba(245,239,230,0.55)" }}
+          >
+            From the broth-bubbling stalls of Osaka to the sizzling grills of
+            Tokyo&apos;s alleyways — a Japanese street walk, without leaving
+            Ternopil. Each dish tells a story of tradition, craft, and the
+            freshest seasonal ingredients.
           </p>
         </Reveal>
 
-        {/* masonry collage of cutout dishes – entrance from corners, no scroll dependency */}
-        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 xl:grid-cols-3 gap-y-6 pt-4">
+        {/* ── dish grid ── */}
+        <div className="grid grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-2 xl:grid-cols-3 pt-2">
           {DISHES.map((d, i) => (
-            <div
-              key={d.img}
-              className="group relative rounded-xl overflow-hidden group-hover:shadow-xl group-hover:transition-shadow duration-300"
-            >
-              {/* photo flies in from its own corner on mount – single smooth animation, no steps */}
-              <CornerFlyIn corner={d.corner as "tl" | "tr" | "bl" | "br"} rotate={d.rotate}>
+            <div key={d.name} className="group relative">
+              <CornerFlyIn corner={d.corner} rotate={d.rotate}>
+                {/* transparent photo, no frame — just the dish */}
                 <Image
-                  src={asset(d.img)}
+                  src={d.local ? asset(d.img) : d.img}
                   alt={d.name}
                   width={d.w}
                   height={d.h}
-                  priority={i === 0}
-                  className="w-full h-auto drop-shadow-[0_15px_18px_rgba(26,23,21,0.18)] transition-transform duration-500 ease-out group-hover:scale-[1.04] group-hover:filter brightness-105"
-                    sizes="(max-width: 1024px) 90vw, 45vw"
+                  priority={i < 2}
+                  className="w-full h-auto transition-transform duration-500 ease-out group-hover:scale-[1.04] drop-shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
+                  sizes="(max-width: 1024px) 90vw, (max-width: 1280px) 45vw, 30vw"
                 />
-                <span className="absolute top-1 right-1 font-display text-[9px] font-bold uppercase tracking-[0.12em] text-white bg-[#187492] px-1 py-0.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {d.kanji}
-                </span>
-              </CornerFlyIn>
 
-              {/* caption fades up slightly after photo – reduced delay, separate animation */}
-              <Reveal variant="up" className="text-center mt-2 lg:mt-1.5 px-1">
-                <h3 className="font-display font-bold text-[#1A1715] text-[14px] sm:text-[15px] leading-snug">{d.name}</h3>
-                <p className="text-[#555] text-[11px] sm:text-[12px] leading-[1.5] mt-0.5 max-w-[240px] mx-auto">{d.desc}</p>
-              </Reveal>
+                {/* caption — floats on the dark bg */}
+                <div className="pt-3 px-1 flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <h3 className="font-display font-bold text-[#F5EFE6] text-[15px] leading-snug">
+                      {d.name}
+                    </h3>
+                    <p className="text-[rgba(245,239,230,0.45)] text-[11px] leading-[1.6] mt-1 line-clamp-2">
+                      {d.desc}
+                    </p>
+                  </div>
+
+                  {/* price + weight */}
+                  <div className="shrink-0 text-right">
+                    <span className="block font-display font-bold text-[#F1E05A] text-[17px] leading-none">
+                      {d.price} ₴
+                    </span>
+                    <span className="block text-[rgba(245,239,230,0.3)] text-[10px] mt-1">
+                      {d.weight}
+                    </span>
+                  </div>
+                </div>
+              </CornerFlyIn>
             </div>
           ))}
         </div>
+
+        {/* ── CTA row ── */}
+        <Reveal className="mt-12 lg:mt-16 flex flex-wrap justify-center gap-4">
+          <a
+            href={asset("/menu/druh-menu-en.pdf")}
+            target="_blank"
+            rel="noopener"
+            className="group shine btn btn--yellow"
+          >
+            Open menu (PDF)
+            <svg
+              className="transition-transform duration-300 group-hover:translate-x-1"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="square"
+            >
+              <path d="M18 8l4 4-4 4M6 20V11a1 1 0 0 1 1-1h11" />
+            </svg>
+          </a>
+        </Reveal>
       </div>
     </section>
   );

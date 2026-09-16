@@ -1,6 +1,7 @@
 "use client";
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 import {
   SHOP_BY_CATEGORY,
   SHOP_ITEMS,
@@ -19,18 +20,18 @@ function Stepper({
   onRemove: () => void;
 }) {
   return (
-    <div className="flex items-center border border-[#1A1715]/15 rounded-xl overflow-hidden text-[13px] font-bold">
+    <div className="flex items-center border border-black/15 rounded-xl overflow-hidden text-[13px] font-bold text-[#1A1715]">
       <button
         onClick={onRemove}
-        className="w-10 h-10 flex items-center justify-center hover:bg-[#1A1715]/5 transition-colors active:scale-90"
+        className="w-10 h-10 flex items-center justify-center text-[#1A1715] hover:bg-black/5 transition-colors active:scale-90"
         aria-label="Remove"
       >
         −
       </button>
-      <span className="w-10 text-center font-display">{qty}</span>
+      <span className="w-10 text-center font-display text-[#1A1715]">{qty}</span>
       <button
         onClick={onAdd}
-        className="w-10 h-10 flex items-center justify-center hover:bg-[#1A1715]/5 transition-colors active:scale-90"
+        className="w-10 h-10 flex items-center justify-center text-[#1A1715] hover:bg-black/5 transition-colors active:scale-90"
         aria-label="Add"
       >
         +
@@ -186,40 +187,58 @@ function CartDrawer({
   );
 }
 
-/* Scatter of coffee grains decorating the little-shop section — a handful
-   of kava1..5 sprites, each reused several times in varied size, rotation
-   and mirrored orientation. Pure decoration: no animation, no scroll. */
-type Grain = { src: string; size: number; x: string; y: string; rot: number; flip: boolean };
-const GRAINS: Grain[] = [
-  /* ── outer rim only: top / bottom strips + left / right gutters.
-     Central column (headings & text) stays clean so dark beans never sit
-     under dark ink. Each grain: size, pos, rotation, optional mirror. ── */
-  { src: "kava1.png", size: 36, x: "2%", y: "4%", rot: -24, flip: false },
-  { src: "kava2.png", size: 46, x: "14%", y: "3%", rot: 137, flip: true },
-  { src: "kava3.png", size: 30, x: "86%", y: "2%", rot: 66, flip: false },
-  { src: "kava4.png", size: 42, x: "97%", y: "6%", rot: -70, flip: true },
-  { src: "kava5.png", size: 34, x: "3%", y: "94%", rot: 12, flip: false },
-  { src: "kava1.png", size: 52, x: "16%", y: "95%", rot: 178, flip: true },
-  { src: "kava2.png", size: 38, x: "34%", y: "93%", rot: -33, flip: false },
-  { src: "kava3.png", size: 48, x: "50%", y: "94%", rot: 101, flip: true },
-  { src: "kava4.png", size: 58, x: "66%", y: "95%", rot: -140, flip: false },
-  { src: "kava5.png", size: 40, x: "83%", y: "93%", rot: 26, flip: true },
-  { src: "kava1.png", size: 44, x: "96%", y: "95%", rot: 214, flip: false },
-  /* left gutter */
-  { src: "kava2.png", size: 32, x: "2%", y: "20%", rot: -90, flip: false },
-  { src: "kava3.png", size: 24, x: "1%", y: "34%", rot: 245, flip: true },
-  { src: "kava4.png", size: 28, x: "3%", y: "47%", rot: -130, flip: false },
-  { src: "kava5.png", size: 36, x: "1%", y: "61%", rot: 150, flip: true },
-  { src: "kava1.png", size: 30, x: "2%", y: "74%", rot: -42, flip: false },
-  { src: "kava2.png", size: 26, x: "3%", y: "85%", rot: 72, flip: true },
-  /* right gutter */
-  { src: "kava3.png", size: 34, x: "97%", y: "20%", rot: 33, flip: true },
-  { src: "kava4.png", size: 26, x: "98%", y: "33%", rot: -76, flip: false },
-  { src: "kava5.png", size: 30, x: "97%", y: "46%", rot: 142, flip: true },
-  { src: "kava1.png", size: 40, x: "98%", y: "59%", rot: -22, flip: false },
-  { src: "kava2.png", size: 28, x: "96%", y: "72%", rot: 168, flip: true },
-  { src: "kava3.png", size: 32, x: "97%", y: "84%", rot: -54, flip: false },
-];
+/* Scatter of coffee grains decorating the little-shop section — a random
+   handful of kava1..5 sprites tossed across the whole block. Each grain gets
+   a random size, position, rotation and optional mirror. Generated with a
+   seeded PRNG so the layout is deterministic (stable across SSR/hydration)
+   and dense enough to read as a chaotic scatter. Pure decoration. */
+type Grain = { src: string; size: number; x: string; y: string; rot: number; flip: boolean; aspect: number };
+
+const SRC_POOL = ["kava1.png", "kava2.png", "kava3.png", "kava4.png", "kava5.png"] as const;
+
+/* Native width/height ratio per sprite so oversized beans keep their real
+   proportions instead of being squashed into a square box. */
+const SPRITE_ASPECT: Record<(typeof SRC_POOL)[number], number> = {
+  "kava1.png": 426 / 402,
+  "kava2.png": 433 / 509,
+  "kava3.png": 411 / 341,
+  "kava4.png": 266 / 457,
+  "kava5.png": 397 / 317,
+};
+
+function mulberry32(seed: number) {
+  return function () {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+const GRAINS: Grain[] = (() => {
+  const rand = mulberry32(0xc0ffee);
+  const cols = 8;
+  const rows = 5;
+  const cellW = 100 / cols;
+  const cellH = 92 / rows;
+  return Array.from({ length: cols * rows }, (_, i) => {
+    const c = i % cols;
+    const r = Math.floor(i / cols);
+    const x = (1 + c * cellW + (0.15 + rand() * 0.7) * cellW).toFixed(1);
+    const y = (1 + r * cellH + (0.1 + rand() * 0.8) * cellH).toFixed(1);
+    const src = SRC_POOL[Math.floor(rand() * SRC_POOL.length)];
+    return {
+      src,
+      size: Math.round(70 + rand() * 70), // 70..140px
+      x: `${x}%`,
+      y: `${y}%`,
+      rot: Math.round(rand() * 360 - 180),
+      flip: rand() > 0.5,
+      aspect: SPRITE_ASPECT[src],
+    };
+  });
+})();
 
 export default function Kramnychka() {
   const [cart, setCart] = useState<Record<string, number>>(() => {
@@ -232,6 +251,57 @@ export default function Kramnychka() {
     }
   });
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  /* Pinned bean scatter with viewport clipping: the layer is position:fixed
+     (beans stay put while the page scrolls) but is clipped with clip-path to
+     the shop section's current on-screen rectangle. That way beans appear the
+     moment the section peeks in, yet never render over the hero or any other
+     section — only over the shop itself.
+     Geometry and visibility are applied imperatively straight to the DOM in
+     the same rAF that reads the section rect, so nothing lags behind the
+     scroll and we never trigger a React re-render per frame. */
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const beanLayerRef = useRef<HTMLDivElement | null>(null);
+  const blurLayerRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const beanLayer = beanLayerRef.current;
+      const blurLayer = blurLayerRef.current;
+      if (!beanLayer || !blurLayer) return;
+      const r = el.getBoundingClientRect();
+      const vw = document.documentElement.clientWidth || window.innerWidth;
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const visible = r.top < vh && r.bottom > 0;
+      const inset = !visible
+        ? "inset(0px 0px 100% 0px)"
+        : `inset(${Math.max(0, r.top)}px ${Math.max(0, vw - r.right)}px ${Math.max(0, vh - r.bottom)}px 0px)`;
+      for (const ln of [beanLayer, blurLayer]) {
+        ln.style.clipPath = inset;
+        ln.style.visibility = visible ? "visible" : "hidden";
+        ln.style.opacity = visible ? "1" : "0";
+        ln.style.transition = visible
+          ? "opacity 0.35s ease"
+          : "opacity 0.35s ease, visibility 0s linear 0.35s";
+      }
+    };
+    const tick = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    update();
+    window.addEventListener("scroll", tick, { passive: true });
+    window.addEventListener("resize", tick, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", tick);
+      window.removeEventListener("resize", tick);
+    };
+  }, []);
 
   /* persist */
   useEffect(() => {
@@ -257,35 +327,62 @@ export default function Kramnychka() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+    <section ref={sectionRef} className="relative overflow-hidden py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
+      <div
+        ref={beanLayerRef}
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{ visibility: "hidden", opacity: 0, clipPath: "inset(0px 0px 100% 0px)" }}
+      >
         {GRAINS.map((g, i) => (
-          <Image
+          <motion.div
             key={i}
-            src={asset(`/images/${g.src}`)}
-            alt=""
-            width={g.size}
-            height={g.size}
-            unoptimized
-            draggable={false}
             className="absolute"
-            style={{
-              left: g.x,
-              top: g.y,
-              width: g.size,
-              height: g.size,
-              transform: `rotate(${g.rot}deg) scaleX(${g.flip ? -1 : 1})`,
+            style={{ left: g.x, top: g.y, width: g.size, height: Math.round(g.size / g.aspect) }}
+            animate={{
+              x: [0, g.flip ? -12 : 12, 0],
+              y: [0, -16, 0],
+              rotate: [g.rot, g.rot + 6, g.rot],
             }}
-          />
+            transition={{
+              duration: 7 + (i % 5) * 1.4,
+              delay: (i % 7) * 0.55,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+          >
+            <Image
+              src={asset(`/images/${g.src}`)}
+              alt=""
+              width={g.size}
+              height={Math.round(g.size / g.aspect)}
+              unoptimized
+              draggable={false}
+              style={{ transform: `scaleX(${g.flip ? -1 : 1})` }}
+            />
+          </motion.div>
         ))}
       </div>
+      <div
+        ref={blurLayerRef}
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-[1] backdrop-blur-[4px]"
+        style={{ visibility: "hidden", opacity: 0, clipPath: "inset(0px 0px 100% 0px)" }}
+      />
       <div className="relative z-10 max-w-[1200px] mx-auto space-y-12 lg:space-y-20">
         {SHOP_BY_CATEGORY.map((cat) => (
           <div key={cat.id}>
             <div className="section-head">
-              <span className="eyebrow eyebrow--ink">Little shop</span>
+              <span
+                className="eyebrow eyebrow--ink"
+                style={{ color: "#187492" }}
+              >
+                Little shop
+              </span>
               <h2
                 className="h-section"
+                style={{ color: "#1A1715", fontSize: "clamp(2.1rem, 4.6vw, 3rem)" }}
               >
                 {cat.name}
               </h2>
@@ -297,7 +394,7 @@ export default function Kramnychka() {
                 return (
                   <div
                     key={it.id}
-                    className="card-lift group relative flex flex-col rounded-xl overflow-hidden bg-[#ebe859] z-10"
+                    className="card-lift group relative flex flex-col rounded-xl overflow-hidden bg-[#187492] z-10"
                   >
                     {/* image */}
                     <div className="relative aspect-[4/3]">
@@ -312,7 +409,7 @@ export default function Kramnychka() {
 
                     {/* body */}
                     <div className="p-5 flex flex-col flex-1">
-                      <p className="font-display font-bold text-[#1A1715] text-[15px] leading-snug mb-1.5">
+                      <p className="font-display font-bold text-[#1A1715] text-[18px] leading-snug mb-1.5">
                         {it.name}
                       </p>
                       <p className="text-[#1A1715]/80 text-[12px] leading-[1.6] mb-4 line-clamp-3">

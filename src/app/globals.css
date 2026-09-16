@@ -25,6 +25,7 @@
   --font-body: var(--font-montserrat);
   --font-display: var(--font-comic);
   --font-hand: var(--font-caveat);
+  --font-ja: var(--font-noto-ja);
 }
 
 html {
@@ -349,10 +350,27 @@ body {
 .section-head { text-align: center; margin-bottom: 3rem; }
 @media (min-width: 1024px) { .section-head { margin-bottom: 4rem; } }
 
+/* ========== ASIAN NIGHT MARKET ========== */
+@keyframes lanternSway {
+  0%, 100% { transform: rotate(-3deg); }
+  50%      { transform: rotate(3deg); }
+}
+.lantern {
+  animation: lanternSway 4s ease-in-out infinite;
+  transform-origin: top center;
+}
+.lantern:nth-child(even) { animation-delay: -1.5s; }
+
+.asian-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
 /* ========== REDUCED MOTION ========== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .marquee-track, .animate-splash,
+  .animate-splash,
   .animate-header, .animate-menu, .hover-wiggle,
   .animated-gradient-text { animation: none !important; }
   .card-lift, .shine::after, * { transition-duration: 0.01ms !important; }

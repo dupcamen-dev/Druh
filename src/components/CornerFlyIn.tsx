@@ -1,6 +1,6 @@
 "use client";
 import type { ReactNode } from "react";
-import { motion, MotionConfig } from "motion/react";
+import { motion } from "motion/react";
 
 export type Corner = "tl" | "tr" | "bl" | "br";
 
@@ -27,15 +27,13 @@ export default function CornerFlyIn({
   const start = START[corner];
 
   return (
-    <MotionConfig reducedMotion="user">
-      <motion.div
-        className={className}
-        initial={{ opacity: 0, x: start.x, y: start.y, rotate }}
-        animate={{ opacity: 1, x: 0, y: 0, rotate }}
-        transition={{ duration: 0.5, ease: SNAP }}
-      >
-        {children}
-      </motion.div>
-    </MotionConfig>
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, x: start.x, y: start.y, rotate }}
+      animate={{ opacity: 1, x: 0, y: 0, rotate }}
+      transition={{ duration: 0.5, ease: SNAP }}
+    >
+      {children}
+    </motion.div>
   );
 }

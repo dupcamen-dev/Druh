@@ -62,6 +62,11 @@ export default function Hero() {
     return easeSmoothOut(t);
   });
 
+  /* Decorative elements only surface once the composition actually starts
+     moving (first ~5% of the entry): pinned to the scroll progress, so no
+     matter what state the page hydrates in, nothing shows at the top. */
+  const decoOpacity = useTransform(comp, [0, 0.05], [0, 1]);
+
   /* ── ramen bowl: bottom-left → diagonal upward (full flight). On
      mobile only the right 60% shows, 40% stays outside the left edge,
      and it starts fully hidden off-screen ── */
@@ -113,7 +118,7 @@ export default function Hero() {
 
             {/* ── parsley leaf (bottom-right of bowl) ── */}
             <m.div
-              style={{ x: plX, y: plY }}
+              style={{ x: plX, y: plY, opacity: decoOpacity }}
               aria-hidden
               className="hero-parsley pointer-events-none select-none"
             >
@@ -129,7 +134,7 @@ export default function Hero() {
 
             {/* ── ramen bowl (on top of parsley, z-[2]) ── */}
             <m.div
-              style={{ x: bowlX, y: bowlY, rotate: bowlRot, scale: bowlSc }}
+              style={{ x: bowlX, y: bowlY, rotate: bowlRot, scale: bowlSc, opacity: decoOpacity }}
               aria-hidden
               className="hero-ramen pointer-events-none select-none"
             >
@@ -146,7 +151,7 @@ export default function Hero() {
 
             {/* ── lime (behind chopsticks, z-[2]) ── */}
             <m.div
-              style={{ x: lmX, y: lmY, scale: lmSc }}
+              style={{ x: lmX, y: lmY, scale: lmSc, opacity: decoOpacity }}
               aria-hidden
               className="hero-lime pointer-events-none select-none"
             >
@@ -162,7 +167,7 @@ export default function Hero() {
 
             {/* ── chopsticks (from right, z-[3]) ── */}
             <m.div
-              style={{ x: stX, y: stY, rotate: stRot, scale: stSc }}
+              style={{ x: stX, y: stY, rotate: stRot, scale: stSc, opacity: decoOpacity }}
               aria-hidden
               className="hero-chopsticks pointer-events-none select-none"
             >
@@ -178,7 +183,7 @@ export default function Hero() {
 
             {/* ── pepper (in front of chopsticks, z-[4]) ── */}
             <m.div
-              style={{ x: ppX, y: ppY }}
+              style={{ x: ppX, y: ppY, opacity: decoOpacity }}
               aria-hidden
               className="hero-pepper pointer-events-none select-none"
             >

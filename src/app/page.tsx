@@ -53,18 +53,18 @@ function PdfBanner() {
 /* ---- Our story teaser ---- */
 function StoryTeaser() {
   return (
-    <section className="py-16 lg:py-32 bg-[#1A1715]">
+    <section className="py-16 lg:py-32 bg-white">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         <Reveal variant="up">
-          <span className="eyebrow eyebrow--on-dark">
+          <span className="eyebrow eyebrow--ink">
             Our story
           </span>
           <h2
-            className="h-section text-white"
+            className="h-section text-[#1A1715]"
           >
             A place where strangers<br className="hidden sm:block" /> become friends
           </h2>
-          <p className="text-white/70 text-[15px] leading-[1.8] max-w-lg mb-10">
+          <p className="text-[#1A1715]/70 text-[15px] leading-[1.8] max-w-lg mb-10">
             A café should feel like home — mornings that never seem to end, broth that warms you
             from the inside, and a little shop to take that warmth with you.
           </p>
@@ -74,7 +74,7 @@ function StoryTeaser() {
         </Reveal>
 
         <Reveal variant="scale" className="relative mx-auto w-full max-w-[480px]">
-          <div className="overflow-hidden rounded-xl shadow-2xl ring-1 ring-white/10 rotate-2 bg-white">
+          <div className="overflow-hidden rounded-xl shadow-2xl ring-1 ring-black/10 rotate-2 bg-white">
             <Image
               src={asset("/images/story-new.png")}
               alt="About Druh"
@@ -92,7 +92,7 @@ function StoryTeaser() {
 
 function Gallery() {
   return (
-    <section id="gallery" className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10">
+    <section id="gallery" className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-white">
       <div className="max-w-[1200px] mx-auto">
         <Reveal>
           <div className="section-head">
@@ -141,63 +141,93 @@ function Gallery() {
 }
 
 function VisitUs() {
+  const contactItems = [
+    { icon: PinIcon, label: "Address", content: (
+      <>
+        <p className="text-white/90 text-[15px]">{BRAND.addressFull}</p>
+        <a href="https://maps.google.com/?q=Druh+Cafe+Ternopil+15+Kvitnia+2" target="_blank" rel="noopener" className="text-[13px] text-[var(--yellow-light)] font-bold underline-anim mt-1 inline-block py-1">Open in Google Maps</a>
+      </>
+    )},
+    { icon: PhoneIcon, label: "Call us", content: (
+      <a href={`tel:${BRAND.phoneLink}`} className="text-white/90 text-[15px] hover:text-[#ebe859] transition-colors inline-block py-1">{BRAND.phone}</a>
+    )},
+    { icon: ClockIcon, label: "Opening hours", content: (
+      <>
+        <p className="text-white/90 text-[15px]">Mon–Fri: {BRAND.hours.weekdays}</p>
+        <p className="text-white/90 text-[15px]">Sat–Sun: {BRAND.hours.weekends}</p>
+      </>
+    )},
+  ];
+
+  const serviceCards = [
+    { icon: ScooterIcon, title: "Delivery", desc: "Via Bolt Food & Glovo" },
+    { icon: BoxIcon, title: "Takeaway", desc: "Order ahead from our online menu" },
+    { icon: HandIcon, title: "Reservations", desc: "Call us to reserve a table" },
+  ];
+
   return (
     <section id="visit" className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#187492]">
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-        <Reveal variant="left">
+      <div className="max-w-[1200px] mx-auto">
+        <Reveal as="div" className="mb-10 lg:mb-14 text-center">
           <span className="eyebrow eyebrow--yellow">Visit us</span>
-          <h2 className="h-section text-white">
-            Come say hello
-          </h2>
-          <div className="space-y-8">
-            {[
-              { icon: PinIcon, label: "Address", content: (
-                <>
-                  <p className="text-white/90 text-[15px]">{BRAND.addressFull}</p>
-                  <a href="https://maps.google.com/?q=Druh+Cafe+Ternopil+15+Kvitnia+2" target="_blank" rel="noopener" className="text-[13px] text-[var(--yellow-light)] font-bold underline-anim mt-1 inline-block py-1">Open in Google Maps</a>
-                </>
-              )},
-              { icon: PhoneIcon, label: "Call us", content: (
-                <a href={`tel:${BRAND.phoneLink}`} className="text-white/90 text-[15px] hover:text-[#ebe859] transition-colors inline-block py-1">{BRAND.phone}</a>
-              )},
-              { icon: ClockIcon, label: "Opening hours", content: (
-                <>
-                  <p className="text-white/90 text-[15px]">Mon–Fri: {BRAND.hours.weekdays}</p>
-                  <p className="text-white/90 text-[15px]">Sat–Sun: {BRAND.hours.weekends}</p>
-                </>
-              )},
-            ].map((c) => (
-              <div key={c.label} className="flex items-start gap-5">
-                <c.icon className="mt-0.5 shrink-0" size={28} />
-                <div>
-                  <h4 className="font-display font-bold text-white text-[12px] uppercase tracking-[0.12em] mb-1.5">{c.label}</h4>
-                  {c.content}
-                </div>
-              </div>
-            ))}
-          </div>
+          <h2 className="h-section text-white">Come say hello</h2>
         </Reveal>
 
-        <Reveal variant="right">
-          <Reveal variant="stagger" className="space-y-4">
-            {[
-                { icon: ScooterIcon, title: "Delivery", desc: "Via Bolt Food & Glovo" },
-                { icon: BoxIcon, title: "Takeaway", desc: "Order ahead via our online menu" },
-                { icon: HandIcon, title: "Reservations", desc: "Call us to reserve a table" },
-              ].map((c) => (
-                <motion.div key={c.title} variants={STAGGER_CHILD} className="card-lift bg-black/10 hover:bg-white/10 p-6 flex items-start gap-5 rounded-xl transition-colors">
-                  <c.icon className="shrink-0 mt-0.5" size={32} />
-                  <div>
-                    <h4 className="font-display font-bold text-white text-[14px] mb-1">{c.title}</h4>
-                    <p className="text-[13px] text-white/90">{c.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-              <motion.a variants={STAGGER_CHILD} href={BRAND.socials.instagram} target="_blank" rel="noopener" className="card-lift block bg-[#ebe859] text-[#1A1715] p-6 text-center hover:bg-[#59eb59] transition-colors rounded-xl active:scale-[0.98]">
-                <p className="font-display font-bold text-[16px]">Follow @druh.cafe</p>
-                <p className="text-[#1A1715]/80 text-[13px] mt-1">Daily specials & behind the scenes</p>
-              </motion.a>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          <Reveal as="div" variant="left" className="lg:col-span-2">
+            <div className="rounded-xl overflow-hidden border border-white/20 shadow-xl aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[380px]">
+              <iframe
+                title="Druh Cafe on Google Maps"
+                src="https://maps.google.com/maps?q=Druh%20Cafe%2C%20vul.%2015-ho%20Kvitnia%202%2C%20Ternopil&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, width: "100%", height: "100%", minHeight: 260 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </Reveal>
+
+          <Reveal as="div" variant="right" className="flex flex-col justify-center bg-white/5 rounded-xl p-6 lg:p-8">
+            <div className="space-y-6">
+              {contactItems.map((c) => (
+                <div key={c.label} className="flex items-start gap-4">
+                  <c.icon className="mt-0.5 shrink-0" size={26} />
+                  <div>
+                    <h4 className="font-display font-bold text-white text-[12px] uppercase tracking-[0.12em] mb-1.5">{c.label}</h4>
+                    {c.content}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
+        <Reveal as="div" variant="stagger" className="mt-6 lg:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {serviceCards.map((c) => (
+            <motion.div
+              key={c.title}
+              variants={STAGGER_CHILD}
+              className="card-lift bg-black/10 hover:bg-white/10 p-5 rounded-xl flex items-start gap-4 transition-colors"
+            >
+              <c.icon className="shrink-0 mt-0.5" size={26} />
+              <div>
+                <h4 className="font-display font-bold text-white text-[13px] mb-1">{c.title}</h4>
+                <p className="text-[12px] text-white/90">{c.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+          <motion.a
+            variants={STAGGER_CHILD}
+            href={BRAND.socials.instagram}
+            target="_blank"
+            rel="noopener"
+            className="card-lift block bg-[#ebe859] text-[#1A1715] p-5 text-center hover:bg-[#59eb59] transition-colors rounded-xl active:scale-[0.98]"
+          >
+            <p className="font-display font-bold text-[15px]">Follow @druh.cafe</p>
+            <p className="text-[#1A1715]/80 text-[12px] mt-0.5">Daily specials & behind the scenes</p>
+          </motion.a>
         </Reveal>
       </div>
     </section>

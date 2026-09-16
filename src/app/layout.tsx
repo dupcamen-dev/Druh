@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Caveat } from "next/font/google";
+import { Montserrat, Caveat, Noto_Sans_JP } from "next/font/google";
 import localFont from "next/font/local";
 import { BRAND } from "@/data/brand";
 import Header from "@/components/Header";
@@ -27,6 +27,12 @@ const caveat = Caveat({
   weight: ["400", "500", "600", "700"],
 });
 
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-ja",
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+});
+
 export const metadata: Metadata = {
   title: {
     default: `DRUH — Café & Kitchen, Ternopil`,
@@ -48,7 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${comicSans.variable} ${caveat.variable} h-full`}
+      className={`${montserrat.variable} ${comicSans.variable} ${caveat.variable} ${notoSansJP.variable} h-full`}
     >
       <body className="min-h-full flex flex-col">
         <SplashScreen />
