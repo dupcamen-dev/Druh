@@ -132,7 +132,7 @@ export default function AsianKitchen() {
   return (
     <section
       id="asian"
-      className="relative py-20 lg:py-32 bg-[#12100D] overflow-hidden"
+      className="relative z-[5] py-20 lg:py-32 bg-[#12100D] overflow-hidden"
     >
       {/* warm glow accents */}
       <div className="asian-glow w-[480px] h-[480px] top-[-60px] left-[-120px] bg-[rgba(229,57,53,0.12)]" />

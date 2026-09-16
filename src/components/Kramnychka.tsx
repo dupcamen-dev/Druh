@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, type CSSProperties } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import {
@@ -285,13 +285,13 @@ export default function Kramnychka() {
     <section className="relative overflow-hidden py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-0"
+        className="beans-layer pointer-events-none fixed inset-0 z-0"
       >
         {GRAINS.map((g, i) => (
           <motion.div
             key={i}
             className="absolute"
-            style={{ left: g.x, top: g.y, width: g.size, height: Math.round(g.size / g.aspect) }}
+            style={{ left: g.x, top: g.y }}
             animate={{
               x: [0, g.flip ? -12 : 12, 0],
               y: [0, -16, 0],
@@ -312,14 +312,20 @@ export default function Kramnychka() {
               height={Math.round(g.size / g.aspect)}
               unoptimized
               draggable={false}
-              style={{ transform: `scaleX(${g.flip ? -1 : 1})` }}
+              style={{
+                "--g": `${g.size}px`,
+                transform: `scaleX(${g.flip ? -1 : 1})`,
+                width: "calc(var(--g) * var(--grainFactor, 1))",
+                height: "auto",
+                aspectRatio: String(g.aspect),
+              } as CSSProperties}
             />
           </motion.div>
         ))}
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] backdrop-blur-[4px]"
+        className="pointer-events-none absolute inset-0 z-[1] backdrop-blur-[2px]"
       />
       <div className="relative z-10 max-w-[1200px] mx-auto space-y-12 lg:space-y-20">
         {SHOP_BY_CATEGORY.map((cat) => (

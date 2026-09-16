@@ -2,7 +2,7 @@ import { BRAND } from "@/data/brand";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1A1715] text-white">
+    <footer className="relative z-[5] bg-[#1A1715] text-white">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>

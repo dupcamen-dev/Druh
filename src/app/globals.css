@@ -370,6 +370,14 @@ body {
   filter: blur(90px);
   pointer-events: none;
 }
+/* ========== SHOP BEAN GRAINS ========== */
+/* Each grain's size is a per-grain CSS var (--g). --grainFactor shrinks the
+   scatter slightly on small screens so the coffee feels lighter on mobile. */
+.beans-layer { --grainFactor: 1; }
+@media (max-width: 767px) {
+  .beans-layer { --grainFactor: 0.8; }
+}
+
 /* ========== REDUCED MOTION ========== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

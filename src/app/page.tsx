@@ -35,7 +35,7 @@ function Marquee() {
 
 function PdfBanner() {
   return (
-    <section className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
+    <section className="relative z-[5] py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
       <Reveal className="max-w-[600px] mx-auto text-center text-[#1A1715]">
         <h2 className="h-section">Take the menu with you</h2>
         <p className="lead mb-8 max-w-md mx-auto">
@@ -53,7 +53,7 @@ function PdfBanner() {
 /* ---- Our story teaser ---- */
 function StoryTeaser() {
   return (
-    <section className="py-16 lg:py-32 bg-white">
+    <section className="relative z-[5] py-16 lg:py-32 bg-white">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         <Reveal variant="up">
           <span className="eyebrow eyebrow--ink">
@@ -92,7 +92,7 @@ function StoryTeaser() {
 
 function Gallery() {
   return (
-    <section id="gallery" className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-white">
+    <section id="gallery" className="relative z-[5] py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-white">
       <div className="max-w-[1200px] mx-auto">
         <Reveal>
           <div className="section-head">
@@ -166,7 +166,7 @@ function VisitUs() {
   ];
 
   return (
-    <section id="visit" className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#187492]">
+    <section id="visit" className="relative z-[5] py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#187492]">
       <div className="max-w-[1200px] mx-auto">
         <Reveal as="div" className="mb-10 lg:mb-14 text-center">
           <span className="eyebrow eyebrow--yellow">Visit us</span>
@@ -178,7 +178,7 @@ function VisitUs() {
             <div className="rounded-xl overflow-hidden border border-white/20 shadow-xl aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[380px]">
               <iframe
                 title="Druh Cafe on Google Maps"
-                src="https://maps.google.com/maps?q=Druh%20Cafe%2C%20vul.%2015-ho%20Kvitnia%202%2C%20Ternopil&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=Druh%20Cafe%2C%20vul.%2015-ho%20Kvitnia%202%2C%20Ternopil&t=k&z=16&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0, width: "100%", height: "100%", minHeight: 260 }}
