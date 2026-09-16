@@ -21,8 +21,8 @@ const DISHES: Dish[] = [
   {
     img: "/images/asian/ramen-seafood.png",
     local: true,
-    w: 1000,
-    h: 563,
+    w: 1448,
+    h: 1086,
     name: "Seafood ramen",
     price: 325,
     weight: "540 g",

@@ -73,6 +73,9 @@ body {
 /* ========== HERO ========== */
 .hero-stage {
   position: relative;
+  /* sits above the pinned shop-bean scatter (fixed z-0) so grains never
+     show through the hero; later sections cover grains by DOM order */
+  z-index: 5;
   min-height: 100vh;
   background: #187492;
 }

@@ -18,7 +18,7 @@ const MARQUEE = [
 function Marquee() {
   const items = [...MARQUEE, ...MARQUEE, ...MARQUEE];
   return (
-    <section className="py-4 bg-[#ebe859] overflow-hidden">
+    <section className="relative z-[5] py-4 bg-[#ebe859] overflow-hidden">
       <div className="marquee-wrap">
         <div className="marquee-track">
           {items.map((item, i) => (

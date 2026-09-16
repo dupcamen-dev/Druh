@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import {
@@ -252,56 +252,11 @@ export default function Kramnychka() {
   });
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  /* Pinned bean scatter with viewport clipping: the layer is position:fixed
-     (beans stay put while the page scrolls) but is clipped with clip-path to
-     the shop section's current on-screen rectangle. That way beans appear the
-     moment the section peeks in, yet never render over the hero or any other
-     section — only over the shop itself.
-     Geometry and visibility are applied imperatively straight to the DOM in
-     the same rAF that reads the section rect, so nothing lags behind the
-     scroll and we never trigger a React re-render per frame. */
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const beanLayerRef = useRef<HTMLDivElement | null>(null);
-  const blurLayerRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    let ticking = false;
-    const update = () => {
-      ticking = false;
-      const beanLayer = beanLayerRef.current;
-      const blurLayer = blurLayerRef.current;
-      if (!beanLayer || !blurLayer) return;
-      const r = el.getBoundingClientRect();
-      const vw = document.documentElement.clientWidth || window.innerWidth;
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      const visible = r.top < vh && r.bottom > 0;
-      const inset = !visible
-        ? "inset(0px 0px 100% 0px)"
-        : `inset(${Math.max(0, r.top)}px ${Math.max(0, vw - r.right)}px ${Math.max(0, vh - r.bottom)}px 0px)`;
-      for (const ln of [beanLayer, blurLayer]) {
-        ln.style.clipPath = inset;
-        ln.style.visibility = visible ? "visible" : "hidden";
-        ln.style.opacity = visible ? "1" : "0";
-        ln.style.transition = visible
-          ? "opacity 0.35s ease"
-          : "opacity 0.35s ease, visibility 0s linear 0.35s";
-      }
-    };
-    const tick = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
-    };
-    update();
-    window.addEventListener("scroll", tick, { passive: true });
-    window.addEventListener("resize", tick, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", tick);
-      window.removeEventListener("resize", tick);
-    };
-  }, []);
+  /* Bean scatter is pinned to the viewport (position:fixed) so the coffee
+     stays put while the page scrolls, and it stays always visible — no clip,
+     no show/hide logic. The hero and marquee are raised above it with a
+     higher z-index, and every later section covers it naturally by DOM
+     order, so grains are only ever seen over the shop itself. */
 
   /* persist */
   useEffect(() => {
@@ -327,12 +282,10 @@ export default function Kramnychka() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
+    <section className="relative overflow-hidden py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
       <div
-        ref={beanLayerRef}
         aria-hidden
         className="pointer-events-none fixed inset-0 z-0"
-        style={{ visibility: "hidden", opacity: 0, clipPath: "inset(0px 0px 100% 0px)" }}
       >
         {GRAINS.map((g, i) => (
           <motion.div
@@ -365,10 +318,8 @@ export default function Kramnychka() {
         ))}
       </div>
       <div
-        ref={blurLayerRef}
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-[1] backdrop-blur-[4px]"
-        style={{ visibility: "hidden", opacity: 0, clipPath: "inset(0px 0px 100% 0px)" }}
+        className="pointer-events-none absolute inset-0 z-[1] backdrop-blur-[4px]"
       />
       <div className="relative z-10 max-w-[1200px] mx-auto space-y-12 lg:space-y-20">
         {SHOP_BY_CATEGORY.map((cat) => (
