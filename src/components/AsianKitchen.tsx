@@ -33,8 +33,8 @@ const DISHES: Dish[] = [
   {
     img: "/images/asian/ramen-beef.png",
     local: true,
-    w: 433,
-    h: 509,
+    w: 1448,
+    h: 1086,
     name: "Beef ramen",
     price: 285,
     weight: "520 g",
@@ -45,8 +45,8 @@ const DISHES: Dish[] = [
   {
     img: "/images/asian/ramen-katsu.png",
     local: true,
-    w: 1000,
-    h: 562,
+    w: 1447,
+    h: 1087,
     name: "Chicken katsu ramen",
     price: 265,
     weight: "580 g",
@@ -57,8 +57,8 @@ const DISHES: Dish[] = [
   {
     img: "/images/asian/yakitori-chicken.png",
     local: true,
-    w: 1154,
-    h: 769,
+    w: 1448,
+    h: 1086,
     name: "Yakitori chicken",
     price: 215,
     weight: "220 g",

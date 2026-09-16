@@ -175,7 +175,7 @@ function VisitUs() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           <Reveal as="div" variant="left" className="lg:col-span-2">
-            <div className="rounded-xl overflow-hidden border border-white/20 shadow-xl aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[380px]">
+            <div className="relative rounded-xl overflow-hidden border border-white/20 shadow-xl aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[380px]">
               <iframe
                 title="Druh Cafe on Google Maps"
                 src="https://maps.google.com/maps?q=Druh%20Cafe%2C%20vul.%2015-ho%20Kvitnia%202%2C%20Ternopil&t=k&z=16&ie=UTF8&iwloc=&output=embed"
@@ -186,6 +186,7 @@ function VisitUs() {
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
               />
+              <div aria-hidden className="pointer-events-none absolute inset-0 z-10 bg-black/10" />
             </div>
           </Reveal>
 
