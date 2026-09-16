@@ -132,7 +132,7 @@ export default function AsianKitchen() {
   return (
     <section
       id="asian"
-      className="relative z-[5] py-20 lg:py-32 bg-[#12100D] overflow-hidden"
+      className="relative z-[5] py-20 lg:py-32 bg-[#187492] overflow-hidden"
     >
       {/* warm glow accents */}
       <div className="asian-glow w-[480px] h-[480px] top-[-60px] left-[-120px] bg-[rgba(229,57,53,0.12)]" />
@@ -141,14 +141,14 @@ export default function AsianKitchen() {
       {/* ── ghost kanji watermarks ── */}
       <span
         aria-hidden
-        className="absolute top-[8%] left-[-2%] select-none pointer-events-none opacity-[0.045] text-[#E63946] text-[120px] lg:text-[180px] font-black leading-none"
+        className="absolute top-[8%] left-[-2%] select-none pointer-events-none opacity-[0.06] text-[#E63946] text-[120px] lg:text-[180px] font-black leading-none"
         style={{ fontFamily: "var(--font-ja), sans-serif" }}
       >
         ラーメン
       </span>
       <span
         aria-hidden
-        className="absolute bottom-[4%] right-[-3%] select-none pointer-events-none opacity-[0.045] text-[#F5EFE6] text-[110px] lg:text-[160px] font-black leading-none"
+        className="absolute bottom-[4%] right-[-3%] select-none pointer-events-none opacity-[0.05] text-[#F5EFE6] text-[110px] lg:text-[160px] font-black leading-none"
         style={{ fontFamily: "var(--font-ja), sans-serif" }}
       >
         焼き鳥
@@ -164,6 +164,16 @@ export default function AsianKitchen() {
         }}
       >
         海鮮ラーメン・牛ラーメン・カツラーメン・焼き鳥・海老・ハンバーグ
+      </span>
+      <span
+        aria-hidden
+        className="hidden lg:block absolute right-5 top-1/2 -translate-y-1/2 select-none pointer-events-none text-[11px] tracking-[6px] text-[rgba(245,239,230,0.12)] h-[320px] w-auto"
+        style={{
+          fontFamily: "var(--font-ja), sans-serif",
+          writingMode: "vertical-rl",
+        }}
+      >
+        寿司・おにぎり・サーモン丼・海老丼・家庭料理・緑茶
       </span>
 
       <div className="relative z-[2] max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-10">
