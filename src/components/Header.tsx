@@ -78,7 +78,7 @@ export default function Header() {
         borderBottom: isTop ? "none" : "2px solid #1A1715",
       }}
     >
-      <div className="max-w-[1360px] mx-auto flex items-center justify-between h-[76px] px-5 sm:px-8 lg:px-12">
+      <div className="relative z-50 max-w-[1360px] mx-auto flex items-center justify-between h-[76px] px-5 sm:px-8 lg:px-12">
         <Link href="/" className="shrink-0">
           <Image
             src={asset("/images/logo-new.png")}
@@ -104,14 +104,16 @@ export default function Header() {
 
         <div className="flex items-center gap-3 shrink-0">
           <LangSwitcher overDark={overDark} />
-          <a
-            href={asset("/menu/druh-menu-en.pdf")}
-            target="_blank"
-            rel="noopener"
-            className={`shine hidden md:inline-flex btn btn--sm btn--ink`}
-          >
-            {t("header.menu")}
-          </a>
+          <div className="hidden md:block">
+            <a
+              href={asset("/menu/druh-menu-en.pdf")}
+              target="_blank"
+              rel="noopener"
+              className="shine btn btn--sm btn--ink"
+            >
+              {t("header.menu")}
+            </a>
+          </div>
           <button
             onClick={() => setOpen(!open)}
             className={`md:hidden p-3 -m-1 transition-colors ${overDark ? "text-white" : "text-[#1A1715]"}`}
