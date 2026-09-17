@@ -63,6 +63,13 @@ export default function Header() {
   const onLightHero = isTop && pathname === "/menu";
   const overDark = isTop && !onLightHero;
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 animate-header"
@@ -101,7 +108,7 @@ export default function Header() {
             href={asset("/menu/druh-menu-en.pdf")}
             target="_blank"
             rel="noopener"
-            className={`shine hidden sm:inline-flex btn btn--sm btn--ink`}
+            className={`shine hidden md:inline-flex btn btn--sm btn--ink`}
           >
             {t("header.menu")}
           </a>
@@ -118,17 +125,45 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="md:hidden bg-white border-t-2 border-[#1A1715] animate-menu">
-          <nav className="flex flex-col p-5 gap-4">
-            {NAV_KEYS.map((n) => (
-              <a key={n.href} href={asset(n.href)} onClick={() => setOpen(false)} className="underline-anim block py-1.5 text-[13px] font-bold uppercase tracking-[0.1em] text-[#1A1715]/70 hover:text-[#187492] transition-colors">
-                {t(n.labelKey)}
-              </a>
-            ))}
-            <a href={asset("/menu/druh-menu-en.pdf")} target="_blank" rel="noopener" onClick={() => setOpen(false)} className="mt-2 btn btn--sm btn--ink btn--block">
+        <div className="md:hidden fixed inset-0 z-40 bg-[#FDFAF7] overflow-y-auto animate-menu">
+          <div className="min-h-full flex flex-col justify-center px-6 pb-10 pt-28">
+            <nav className="flex flex-col gap-1">
+              {NAV_KEYS.map((n, i) => (
+                <a
+                  key={n.href}
+                  href={asset(n.href)}
+                  onClick={() => setOpen(false)}
+                  className="group flex items-center justify-between py-4 border-b border-[#1A1715]/10"
+                >
+                  <span className="font-display font-bold uppercase tracking-[0.04em] text-[#1A1715] text-[clamp(1.6rem,6vw,2.4rem)] group-hover:text-[#187492] transition-colors">
+                    {t(n.labelKey)}
+                  </span>
+                  <span
+                    className="w-10 h-10 flex items-center justify-center rounded-full border border-[#1A1715]/15 text-[#187492] group-hover:bg-[#187492] group-hover:text-[#ebe859] transition-colors"
+                    style={{ transitionDelay: `${i * 20}ms` }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
+                      <path d="M4 12h16M14 6l6 6-6 6" />
+                    </svg>
+                  </span>
+                </a>
+              ))}
+            </nav>
+
+            <a
+              href={asset("/menu/druh-menu-en.pdf")}
+              target="_blank"
+              rel="noopener"
+              onClick={() => setOpen(false)}
+              className="shine mt-8 btn btn--block btn--ink"
+            >
               {t("header.menuPdf")}
             </a>
-          </nav>
+
+            <div className="mt-10 flex justify-center">
+              <LangSwitcher overDark={false} />
+            </div>
+          </div>
         </div>
       )}
     </header>
