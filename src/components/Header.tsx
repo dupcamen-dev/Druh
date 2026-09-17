@@ -4,17 +4,52 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/base";
+import { useLanguage, LOCALES } from "@/components/LanguageProvider";
 
-const NAV = [
-  { href: "/#asian", label: "Asian kitchen" },
-  { href: "/#gallery", label: "Gallery" },
-  { href: "/#visit", label: "Visit us" },
-  { href: "/about", label: "About" },
+const NAV_KEYS = [
+  { href: "/#asian", labelKey: "nav.asian" },
+  { href: "/#gallery", labelKey: "nav.gallery" },
+  { href: "/#visit", labelKey: "nav.visit" },
+  { href: "/about", labelKey: "nav.about" },
 ];
+
+function LangSwitcher({ overDark }: { overDark: boolean }) {
+  const { lang, setLang } = useLanguage();
+  return (
+    <div
+      className={`flex items-center gap-0.5 rounded-full border p-0.5 text-[11px] font-bold uppercase tracking-wider transition-colors ${
+        overDark ? "border-white/40" : "border-[#1A1715]/25"
+      }`}
+      role="group"
+      aria-label="Language"
+    >
+      {LOCALES.map((loc) => {
+        const active = lang === loc;
+        return (
+          <button
+            key={loc}
+            onClick={() => setLang(loc)}
+            aria-pressed={active}
+            className={`px-2 py-0.5 rounded-full transition-colors ${
+              active
+                ? "bg-[#ebe859] text-[#1A1715]"
+                : overDark
+                  ? "text-white/70 hover:text-white"
+                  : "text-[#1A1715]/60 hover:text-[#1A1715]"
+            }`}
+          >
+            {loc === "ua" ? "UA" : "EN"}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -26,6 +61,7 @@ export default function Header() {
   const isTop = !scrolled;
   const pathname = usePathname();
   const onLightHero = isTop && pathname === "/menu";
+  const overDark = isTop && !onLightHero;
 
   return (
     <header
@@ -48,30 +84,31 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          {NAV.map((n) => (
+          {NAV_KEYS.map((n) => (
             <a
               key={n.href}
               href={asset(n.href)}
-              className={`underline-anim text-[12px] font-bold uppercase tracking-[0.12em] transition-colors ${isTop ? (onLightHero ? "text-[#1A1715]/80 hover:text-[#1A1715]" : "text-white/90 hover:text-[#ebe859]") : "text-[#1A1715]/60 hover:text-[#1A1715]"}`}
+              className={`underline-anim text-[12px] font-bold uppercase tracking-[0.12em] transition-colors ${overDark ? "text-white/90 hover:text-[#ebe859]" : "text-[#1A1715]/60 hover:text-[#1A1715]"}`}
             >
-              {n.label}
+              {t(n.labelKey)}
             </a>
           ))}
         </nav>
 
         <div className="flex items-center gap-3 shrink-0">
+          <LangSwitcher overDark={overDark} />
           <a
             href={asset("/menu/druh-menu-en.pdf")}
             target="_blank"
             rel="noopener"
             className={`shine hidden sm:inline-flex btn btn--sm btn--ink`}
           >
-            Menu
+            {t("header.menu")}
           </a>
           <button
             onClick={() => setOpen(!open)}
-            className={`md:hidden p-3 -m-1 transition-colors ${isTop ? (onLightHero ? "text-[#1A1715]" : "text-white") : "text-[#1A1715]"}`}
-            aria-label="Toggle menu"
+            className={`md:hidden p-3 -m-1 transition-colors ${overDark ? "text-white" : "text-[#1A1715]"}`}
+            aria-label={t("header.toggle")}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
               {open ? <path d="M18 6L6 18M6 6l12 12" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
@@ -83,13 +120,13 @@ export default function Header() {
       {open && (
         <div className="md:hidden bg-white border-t-2 border-[#1A1715] animate-menu">
           <nav className="flex flex-col p-5 gap-4">
-            {NAV.map((n) => (
+            {NAV_KEYS.map((n) => (
               <a key={n.href} href={asset(n.href)} onClick={() => setOpen(false)} className="underline-anim block py-1.5 text-[13px] font-bold uppercase tracking-[0.1em] text-[#1A1715]/70 hover:text-[#187492] transition-colors">
-                {n.label}
+                {t(n.labelKey)}
               </a>
             ))}
             <a href={asset("/menu/druh-menu-en.pdf")} target="_blank" rel="noopener" onClick={() => setOpen(false)} className="mt-2 btn btn--sm btn--ink btn--block">
-              Menu (PDF)
+              {t("header.menuPdf")}
             </a>
           </nav>
         </div>

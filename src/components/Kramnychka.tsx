@@ -5,10 +5,31 @@ import { motion } from "motion/react";
 import {
   SHOP_BY_CATEGORY,
   SHOP_ITEMS,
-  fmtPrice,
   buildTelegramOrder,
 } from "@/data/shop";
 import { asset } from "@/lib/base";
+import { useLanguage } from "@/components/LanguageProvider";
+import type { Locale } from "@/i18n/dictionary";
+
+const CAT_KEY: Record<string, string> = {
+  "kava-v-zernah": "shop.catCoffee",
+  "matcha-v-sashe": "shop.catMatcha",
+};
+
+const ITEM_KEY: Record<string, string> = {
+  "cafeboutique-decaf-colombia": "shop.decafColombia",
+  "cafeboutique-ethiopia-gedeb": "shop.ethiopiaGedeb",
+  "cafeboutique-brazil-divisa": "shop.brazilDivisa",
+  "cafeboutique-peru-piura": "shop.peruPiura",
+  "cafeboutique-kenya-kikuyu": "shop.kenyaKikuyu",
+  "cafeboutique-peru-santa-rosa": "shop.peruSantaRosa",
+  "kokosoviy-matcha-late": "shop.matchaCoconut",
+  "kokosoviy-cbd-matcha-late": "shop.matchaCbd",
+  "kokosoviy-kolagen-matcha-late": "shop.matchaCollagen",
+};
+
+const fmtLocal = (n: number, lang: Locale) =>
+  `${n.toLocaleString("uk-UA", { maximumFractionDigits: 0 })} ${lang === "ua" ? "грн" : "UAH"}`;
 
 function Stepper({
   qty,
@@ -19,12 +40,13 @@ function Stepper({
   onAdd: () => void;
   onRemove: () => void;
 }) {
+  const { t } = useLanguage();
   return (
     <div className="flex items-center border border-black/15 rounded-xl overflow-hidden text-[13px] font-bold text-[#1A1715]">
       <button
         onClick={onRemove}
         className="w-10 h-10 flex items-center justify-center text-[#1A1715] hover:bg-black/5 transition-colors active:scale-90"
-        aria-label="Remove"
+        aria-label={t("shop.remove")}
       >
         −
       </button>
@@ -32,7 +54,7 @@ function Stepper({
       <button
         onClick={onAdd}
         className="w-10 h-10 flex items-center justify-center text-[#1A1715] hover:bg-black/5 transition-colors active:scale-90"
-        aria-label="Add"
+        aria-label={t("shop.add")}
       >
         +
       </button>
@@ -51,6 +73,7 @@ function CartDrawer({
   cart: Record<string, number>;
   setCart: React.Dispatch<React.SetStateAction<Record<string, number>>>;
 }) {
+  const { t, lang } = useLanguage();
   const items = useMemo(
     () =>
       Object.entries(cart)
@@ -93,12 +116,12 @@ function CartDrawer({
         {/* header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#1A1715]/10">
           <h3 className="font-display font-bold text-[#1A1715] text-[18px]">
-            Cart {count > 0 && <span className="text-[#555] text-[14px]">({count})</span>}
+            {t("shop.cart")} {count > 0 && <span className="text-[#555] text-[14px]">({count})</span>}
           </h3>
           <button
             onClick={onClose}
             className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-[#1A1715]/5 transition-colors"
-            aria-label="Close"
+            aria-label={t("shop.close")}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1715" strokeWidth="2" strokeLinecap="square">
               <path d="M18 6L6 18M6 6l12 12" />
@@ -111,9 +134,9 @@ function CartDrawer({
           <div className="flex-1 flex items-center justify-center px-6 text-center">
             <div>
               <p className="font-display font-bold text-[#1A1715] text-[16px] mb-2">
-                Your cart is empty
+                {t("shop.cartEmpty")}
               </p>
-              <p className="text-[#555] text-[14px]">Add something tasty</p>
+              <p className="text-[#555] text-[14px]">{t("shop.cartEmptySub")}</p>
             </div>
           </div>
         ) : (
@@ -123,7 +146,7 @@ function CartDrawer({
                 <div className="relative w-[72px] h-[54px] shrink-0 rounded-xl overflow-hidden bg-[#1A1715]/5">
                   <Image
                     src={asset(it.imageUrl)}
-                    alt={it.name}
+                    alt={t(ITEM_KEY[it.id] + ".name")}
                     fill
                     className="object-cover"
                     sizes="72px"
@@ -131,10 +154,10 @@ function CartDrawer({
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-display font-bold text-[#1A1715] text-[13px] leading-tight truncate">
-                    {it.name.replace(/^[\p{Emoji}\u200d\ufe0f]+\s*/u, "")}
+                    {t(ITEM_KEY[it.id] + ".name")}
                   </p>
                   <p className="text-[#555] text-[12px] mt-0.5">
-                    {fmtPrice(it.priceGrn)} / {it.weight} {it.weightType}
+                    {fmtLocal(it.priceGrn, lang)} / {it.weight} {it.weightType}
                   </p>
                   <div className="flex items-center justify-between mt-2">
                     <Stepper
@@ -143,7 +166,7 @@ function CartDrawer({
                       onRemove={() => setQty(it.id, it.qty - 1)}
                     />
                     <p className="font-display font-bold text-[#1A1715] text-[14px]">
-                      {fmtPrice(it.priceGrn * it.qty)}
+                      {fmtLocal(it.priceGrn * it.qty, lang)}
                     </p>
                   </div>
                 </div>
@@ -156,9 +179,9 @@ function CartDrawer({
         {items.length > 0 && (
           <div className="border-t border-[#1A1715]/10 px-6 py-5 space-y-4">
             <div className="flex items-center justify-between">
-              <p className="font-display font-bold text-[#1A1715] text-[15px]">Total</p>
+              <p className="font-display font-bold text-[#1A1715] text-[15px]">{t("shop.total")}</p>
               <p className="font-display font-extrabold text-[#1A1715] text-[18px]">
-                {fmtPrice(total)}
+                {fmtLocal(total, lang)}
               </p>
             </div>
 
@@ -168,7 +191,7 @@ function CartDrawer({
               rel="noopener noreferrer"
               className="btn btn--yellow btn--block"
             >
-              Order via Telegram
+              {t("shop.orderTelegram")}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
                 <path d="M18 8l4 4-4 4M6 20V11a1 1 0 0 1 1-1h11" />
               </svg>
@@ -178,7 +201,7 @@ function CartDrawer({
               onClick={() => setCart({})}
               className="w-full text-center text-[#555] text-[13px] font-bold underline-anim"
             >
-              Clear cart
+              {t("shop.clearCart")}
             </button>
           </div>
         )}
@@ -241,6 +264,7 @@ const GRAINS: Grain[] = (() => {
 })();
 
 export default function Kramnychka() {
+  const { t, lang } = useLanguage();
   const [cart, setCart] = useState<Record<string, number>>(() => {
     if (typeof window === "undefined") return {};
     try {
@@ -335,13 +359,13 @@ export default function Kramnychka() {
                 className="eyebrow eyebrow--ink"
                 style={{ color: "#187492" }}
               >
-                Little shop
+                {t("shop.eyebrow")}
               </span>
               <h2
                 className="h-section"
                 style={{ color: "#1A1715", fontSize: "clamp(2.1rem, 4.6vw, 3rem)" }}
               >
-                {cat.name}
+                {t(CAT_KEY[cat.id])}
               </h2>
             </div>
 
@@ -357,7 +381,7 @@ export default function Kramnychka() {
                     <div className="relative aspect-[4/3]">
                       <Image
                         src={asset(it.imageUrl)}
-                        alt={it.name}
+                        alt={t(ITEM_KEY[it.id] + ".name")}
                         fill
                         className="object-contain transition-transform duration-700 group-hover:scale-110"
                         sizes="(max-width: 1024px) 100vw, 33vw"
@@ -367,19 +391,22 @@ export default function Kramnychka() {
                     {/* body */}
                     <div className="p-5 flex flex-col flex-1">
                       <p className="font-display font-bold text-[#1A1715] text-[18px] leading-snug mb-1.5">
-                        {it.name}
+                        {t(ITEM_KEY[it.id] + ".name")}
                       </p>
                       <p className="text-[#1A1715]/80 text-[12px] leading-[1.6] mb-4 line-clamp-3">
-                        {it.description.replace(/\n+/g, " · ").replace(/Tasting notes: /, "")}
+                        {t(ITEM_KEY[it.id] + ".desc")
+                          .replace(/\n+/g, " · ")
+                          .replace(/Tasting notes: /g, "")
+                          .replace(/Смакові ноти: /g, "")}
                       </p>
                       <div className="mt-auto flex items-end justify-between gap-3">
                         <div>
                           <p className="font-display font-extrabold text-[#1A1715] text-[18px]">
-                            {fmtPrice(it.priceGrn)}
+                            {fmtLocal(it.priceGrn, lang)}
                           </p>
                           <p className="text-[#1A1715]/80 text-[12px]">
                             {it.weight} {it.weightType}
-                            {it.kcal ? ` · ${it.kcal} kcal` : ""}
+                            {it.kcal ? ` · ${it.kcal} ${t("shop.kcal")}` : ""}
                           </p>
                         </div>
                         {qty === 0 ? (
@@ -387,7 +414,7 @@ export default function Kramnychka() {
                             onClick={() => addItem(it.id)}
                             className="shine shrink-0 btn btn--sm btn--yellow"
                           >
-                            Add
+                            {t("shop.add")}
                           </button>
                         ) : (
                           <Stepper
@@ -412,7 +439,7 @@ export default function Kramnychka() {
         className={`fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full bg-[#187492] text-white flex items-center justify-center shadow-lg hover:bg-[#155f78] hover:scale-110 hover:rotate-6 active:scale-90 transition-all duration-300 ${
           cartCount > 0 ? "scale-100 opacity-100" : "scale-90 opacity-0 pointer-events-none"
         }`}
-        aria-label="Open cart"
+        aria-label={t("shop.openCart")}
       >
         {/* bag icon */}
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

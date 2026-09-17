@@ -10,6 +10,7 @@ import {
   m,
 } from "motion/react";
 import { asset } from "@/lib/base";
+import { useLanguage } from "@/components/LanguageProvider";
 
 /* easeSmoothOut: quick-ish start but a long decelerating tail, so the
      composition settles over many scroll steps instead of one big jump —
@@ -17,6 +18,7 @@ import { asset } from "@/lib/base";
 const easeSmoothOut = (t: number) => 1 - Math.pow(1 - t, 2.2);
 
 export default function Hero() {
+  const { t } = useLanguage();
   const reduced = useReducedMotion() ?? false;
   const heroRef = useRef<HTMLElement>(null);
 
@@ -111,7 +113,7 @@ export default function Hero() {
 
   return (
     <LazyMotion features={domAnimation} strict>
-      <section id="hero" ref={heroRef} aria-label="Druh — where every guest is a friend" className="hero-stage">
+      <section id="hero" ref={heroRef} aria-label={t("hero.aria")} className="hero-stage">
         <div className="hero-track">
           <div className="hero-pin">
             <div aria-hidden className="hero-bg" />
@@ -201,25 +203,25 @@ export default function Hero() {
             <div suppressHydrationWarning className="relative z-10 w-full max-w-[1100px] mx-auto px-5 sm:px-8 text-center pt-16 pb-24">
               <div>
                 <m.p {...enter(0.35)} className="font-hand text-yellow-light text-[clamp(1.05rem,2.2vw,1.45rem)] mb-5 tracking-wide">
-                  where every guest is a friend
+                  {t("hero.tagline")}
                 </m.p>
 
                 <h1 className="font-display font-extrabold uppercase text-white drop-shadow-[0_6px_28px_rgba(4,28,34,0.45)] leading-[0.98]">
                   <m.span {...enter(0.5)} className="block tracking-tight" style={{ fontSize: "clamp(1.9rem, 6.2vw, 4.6rem)" }}>
-                    where every guest
+                    {t("hero.h1a")}
                   </m.span>
                   <m.span {...enter(0.62)} className="block mt-1 text-white/85 tracking-[0.06em]" style={{ fontSize: "clamp(1.1rem, 3.2vw, 2.1rem)" }}>
-                    is a
+                    {t("hero.h1b")}
                   </m.span>
                   <span className="block leading-none">
                     <m.span {...enter(0.74)} className="relative inline-block font-hand font-bold text-yellow mt-2" style={{ fontSize: "clamp(4.2rem, 13vw, 9.5rem)", lineHeight: 0.95 }}>
-                      friend
+                      {t("hero.friend")}
                     </m.span>
                   </span>
                 </h1>
 
                 <m.p {...enter(0.9)} className="font-hand text-white/90 mt-7 mx-auto leading-snug" style={{ fontSize: "clamp(1.2rem, 2.6vw, 1.7rem)" }}>
-                  Bold Asian flavors, shared around one table.
+                  {t("hero.subtitle")}
                 </m.p>
               </div>
 
@@ -231,10 +233,10 @@ export default function Hero() {
                   rel="noopener"
                   className="group shine btn btn--yellow"
                 >
-                  Browse the menu
+                  {t("hero.cta1")}
                 </m.a>
                 <m.a {...enter(1.18)} href="#asian" className="shine btn btn--outline-light">
-                  Explore the kitchen
+                  {t("hero.cta2")}
                 </m.a>
               </div>
             </div>

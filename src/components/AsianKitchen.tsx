@@ -3,132 +3,144 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import CornerFlyIn from "@/components/CornerFlyIn";
 import { asset } from "@/lib/base";
+import { useLanguage } from "@/components/LanguageProvider";
 
 type Dish = {
+  id: string;
   img: string;
   local: boolean;
   w: number;
   h: number;
-  name: string;
+  nameKey: string;
+  descKey: string;
   price: number;
   weight: string;
-  desc: string;
   rotate: number;
   corner: "tl" | "tr" | "bl" | "br";
 };
 
 const DISHES: Dish[] = [
   {
+    id: "ramen-seafood",
     img: "/images/asian/ramen-seafood.png",
     local: true,
     w: 1448,
     h: 1086,
-    name: "Seafood ramen",
+    nameKey: "asian.ramenSeafood.name",
+    descKey: "asian.ramenSeafood.desc",
     price: 325,
     weight: "540 g",
-    desc: "Umami broth with prawns, squid, marinated egg & tofu, corn and nori.",
     rotate: -4,
     corner: "tl",
   },
   {
+    id: "ramen-beef",
     img: "/images/asian/ramen-beef.png",
     local: true,
     w: 1448,
     h: 1086,
-    name: "Beef ramen",
+    nameKey: "asian.ramenBeef.name",
+    descKey: "asian.ramenBeef.desc",
     price: 285,
     weight: "520 g",
-    desc: "Su-vid beef, spicy chili oil, marinated egg, corn and nori chips.",
     rotate: 3,
     corner: "tr",
   },
   {
+    id: "ramen-katsu",
     img: "/images/asian/ramen-katsu.png",
     local: true,
     w: 1447,
     h: 1087,
-    name: "Chicken katsu ramen",
+    nameKey: "asian.ramenKatsu.name",
+    descKey: "asian.ramenKatsu.desc",
     price: 265,
     weight: "580 g",
-    desc: "Crispy golden katsu, wood-ear mushroom, marinated egg, house noodles.",
     rotate: -3,
     corner: "bl",
   },
   {
+    id: "yakitori-chicken",
     img: "/images/asian/yakitori-chicken.png",
     local: true,
     w: 1448,
     h: 1086,
-    name: "Yakitori chicken",
+    nameKey: "asian.yakitoriChicken.name",
+    descKey: "asian.yakitoriChicken.desc",
     price: 215,
     weight: "220 g",
-    desc: "Charcoal-grilled thigh brushed with tare — soy, mirin and sake.",
     rotate: 5,
     corner: "br",
   },
   {
+    id: "yakitori-prawn",
     img: "/images/asian/yakitori-prawn.png",
     local: true,
     w: 1024,
     h: 769,
-    name: "Yakitori prawn",
+    nameKey: "asian.yakitoriPrawn.name",
+    descKey: "asian.yakitoriPrawn.desc",
     price: 185,
     weight: "120 g",
-    desc: "Juicy prawns with spinach, lime and citrus yuzu sauce.",
     rotate: -2,
     corner: "tl",
   },
   {
+    id: "onigiri-eel",
     img: "/images/asian/onigiri-eel.png",
     local: true,
     w: 1024,
     h: 769,
-    name: "Onigiri with eel",
+    nameKey: "asian.onigiriEel.name",
+    descKey: "asian.onigiriEel.desc",
     price: 155,
     weight: "125 g",
-    desc: "Warm sushi rice, glazed eel, unagi sauce and a crisp nori wrap.",
     rotate: -2,
     corner: "tl",
   },
   {
+    id: "onigiri-salmon",
     img: "/images/asian/onigiri-salmon.png",
     local: true,
     w: 1024,
     h: 769,
-    name: "Onigiri with salmon",
+    nameKey: "asian.onigiriSalmon.name",
+    descKey: "asian.onigiriSalmon.desc",
     price: 155,
     weight: "120 g",
-    desc: "Warm sushi rice wrapped in nori, filled with fresh salmon.",
     rotate: 2,
     corner: "tr",
   },
   {
+    id: "bowl-salmon",
     img: "/images/asian/salmon-bowl.png",
     local: true,
     w: 1155,
     h: 769,
-    name: "Salmon rice bowl",
+    nameKey: "asian.bowlSalmon.name",
+    descKey: "asian.bowlSalmon.desc",
     price: 325,
     weight: "300 g",
-    desc: "Japanese rice bowl topped with salmon and fresh seasonal greens.",
     rotate: 3,
     corner: "br",
   },
   {
+    id: "bowl-prawn",
     img: "/images/asian/prawn-bowl.png",
     local: true,
     w: 1366,
     h: 769,
-    name: "Prawn rice bowl",
+    nameKey: "asian.bowlPrawn.name",
+    descKey: "asian.bowlPrawn.desc",
     price: 245,
     weight: "300 g",
-    desc: "Japanese rice bowl with grilled prawns and a citrus dressing.",
     rotate: -3,
     corner: "bl",
   },
 ];
 
 export default function AsianKitchen() {
+  const { t } = useLanguage();
   return (
     <section
       id="asian"
@@ -180,33 +192,30 @@ export default function AsianKitchen() {
         {/* ── header ── */}
         <Reveal className="max-w-[760px] mx-auto mb-14 lg:mb-20 text-center">
           <span className="eyebrow" style={{ color: "#FFD27F" }}>
-            Asian kitchen
+            {t("asian.eyebrow")}
           </span>
           <h2 className="h-section" style={{ color: "#F5EFE6" }}>
-            Tokyo street food,{" "}
+            {t("asian.title1")}{" "}
             <br className="hidden sm:block" />
-            brewed right here
+            {t("asian.title2")}
           </h2>
           <p
             className="lead"
             style={{ color: "rgba(245,239,230,0.55)" }}
           >
-            From the broth-bubbling stalls of Osaka to the sizzling grills of
-            Tokyo&apos;s alleyways — a Japanese street walk, without leaving
-            Ternopil. Each dish tells a story of tradition, craft, and the
-            freshest seasonal ingredients.
+            {t("asian.lead")}
           </p>
         </Reveal>
 
         {/* ── dish grid ── */}
         <div className="grid grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-2 xl:grid-cols-3 pt-2">
           {DISHES.map((d, i) => (
-            <div key={d.name} className="group relative">
+            <div key={d.id} className="group relative">
               <CornerFlyIn corner={d.corner} rotate={d.rotate}>
                 {/* transparent photo, no frame — just the dish */}
                 <Image
                   src={d.local ? asset(d.img) : d.img}
-                  alt={d.name}
+                  alt={t(d.nameKey)}
                   width={d.w}
                   height={d.h}
                   priority={i < 2}
@@ -218,10 +227,10 @@ export default function AsianKitchen() {
                 <div className="pt-3 px-1 flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <h3 className="font-display font-bold text-[#F5EFE6] text-[15px] leading-snug">
-                      {d.name}
+                      {t(d.nameKey)}
                     </h3>
                     <p className="text-[rgba(245,239,230,0.45)] text-[11px] leading-[1.6] mt-1 line-clamp-2">
-                      {d.desc}
+                      {t(d.descKey)}
                     </p>
                   </div>
 

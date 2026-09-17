@@ -8,46 +8,41 @@ import { asset } from "@/lib/base";
 import { PinIcon, PhoneIcon, ClockIcon, ScooterIcon, BoxIcon, HandIcon } from "@/components/OutlineIcons";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
+import { useLanguage } from "@/components/LanguageProvider";
 
 /* -------------------------------------------------------------------------- */
 /*  Hero                                                                      */
 /* -------------------------------------------------------------------------- */
 function Hero() {
+  const { t } = useLanguage();
   return (
     <section className="relative overflow-hidden bg-[#187492] pt-28 pb-20 lg:pt-36 lg:pb-28">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* left copy */}
         <Reveal variant="up">
           <span className="eyebrow eyebrow--on-dark">
-            About Druh
+            {t("about.heroEyebrow")}
           </span>
           <h1
             className="font-display font-extrabold text-white leading-[1.05] mb-6 tracking-tight"
             style={{ fontSize: "clamp(2.4rem, 5.5vw, 3.6rem)" }}
           >
-            Come as a guest,<br />leave as a{" "}
+            {t("about.heroTitle1")}<br />{t("about.heroTitle2")}{" "}
             <AnimatedGradientText colorFrom="#ebe859" colorTo="#187492">
-              friend
+              {t("hero.friend")}
             </AnimatedGradientText>
           </h1>
           <p className="lead lead--white max-w-lg mb-10">
-            A corner of Ternopil where mornings last all day, the broth bubbles since sunrise, and
-            every seat comes with a smile.
+            {t("about.heroLead")}
           </p>
           <div className="flex flex-wrap gap-4">
-            <a
-              href="#story"
-              className="shine btn btn--blue"
-            >
-              Read our story
-            </a>
             <a
               href={asset("/menu/druh-menu-en.pdf")}
               target="_blank"
               rel="noopener"
               className="btn btn--outline-light-soft"
             >
-              See the menu
+              {t("about.heroCta2")}
             </a>
           </div>
         </Reveal>
@@ -92,11 +87,12 @@ function Hero() {
 /*  Stats                                                                      */
 /* -------------------------------------------------------------------------- */
 function Stats() {
+  const { t } = useLanguage();
   const items = [
-    { val: 24, label: "Specialty drinks" },
-    { val: 30, label: "Dishes on the menu", suffix: "+" },
-    { val: 100, label: "Percent homemade", suffix: "%" },
-    { val: 4.9, label: "Average rating", decimals: 1 },
+    { val: 24, label: t("stats.drinks") },
+    { val: 30, label: t("stats.dishes"), suffix: "+" },
+    { val: 100, label: t("stats.homemade"), suffix: "%" },
+    { val: 4.9, label: t("stats.rating"), decimals: 1 },
   ];
 
   return (
@@ -129,6 +125,7 @@ function Stats() {
 /*  Story                                                                      */
 /* -------------------------------------------------------------------------- */
 function Story() {
+  const { t } = useLanguage();
   return (
     <section id="story" className="py-16 lg:py-32 bg-[#187492]">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
@@ -157,24 +154,19 @@ function Story() {
         {/* copy */}
         <Reveal variant="right">
           <span className="eyebrow eyebrow--yellow">
-            Our story
+            {t("story.eyebrow")}
           </span>
           <h2
             className="h-section text-[#F5EFE6]"
           >
-            A place where strangers become friends
+            {t("story.title")}
           </h2>
           <div className="space-y-4 text-[15px] leading-[1.8]" style={{ color: "rgba(245,239,230,0.55)" }}>
             <p>
-              DRUH was born from the simple belief that a café should feel like home.
-              Tucked away on a quiet street in Ternopil, we opened our doors for mornings that never
-              seem to end, bowls of broth that warm you from the inside, and a little shop where
-              you can take a piece of that warmth with you.
+              {t("about.storyP1")}
             </p>
             <p>
-              Whether you&apos;re grabbing a flat white before work, exploring our
-              Japanese-inspired plates, or lingering over a cinnabon with friends — every guest is
-              exactly that: a friend.
+              {t("about.storyP2")}
             </p>
           </div>
         </Reveal>
@@ -187,36 +179,37 @@ function Story() {
 /*  Find Us                                                                     */
 /* -------------------------------------------------------------------------- */
 function FindUs() {
+  const { t } = useLanguage();
   const contactItems = [
-    { icon: PinIcon, label: "Address", content: (
+    { icon: PinIcon, label: t("visit.address"), content: (
       <>
         <p className="text-white/90 text-[15px]">{BRAND.addressFull}</p>
-        <a href="https://maps.google.com/?q=Druh+Cafe+Ternopil+15+Kvitnia+2" target="_blank" rel="noopener" className="text-[13px] text-[var(--yellow-light)] font-bold underline-anim mt-1 inline-block py-1">Open in Google Maps</a>
+        <a href="https://maps.google.com/?q=Druh+Cafe+Ternopil+15+Kvitnia+2" target="_blank" rel="noopener" className="text-[13px] text-[var(--yellow-light)] font-bold underline-anim mt-1 inline-block py-1">{t("visit.mapLink")}</a>
       </>
     )},
-    { icon: PhoneIcon, label: "Call us", content: (
+    { icon: PhoneIcon, label: t("visit.call"), content: (
       <a href={`tel:${BRAND.phoneLink}`} className="text-white/90 text-[15px] hover:text-[#ebe859] transition-colors inline-block py-1">{BRAND.phone}</a>
     )},
-    { icon: ClockIcon, label: "Opening hours", content: (
+    { icon: ClockIcon, label: t("visit.hours"), content: (
       <>
-        <p className="text-white/90 text-[15px]">Mon–Fri: {BRAND.hours.weekdays}</p>
-        <p className="text-white/90 text-[15px]">Sat–Sun: {BRAND.hours.weekends}</p>
+        <p className="text-white/90 text-[15px]">{t("visit.monFri")} {BRAND.hours.weekdays}</p>
+        <p className="text-white/90 text-[15px]">{t("visit.satSun")} {BRAND.hours.weekends}</p>
       </>
     )},
   ];
 
   const serviceCards = [
-    { icon: ScooterIcon, title: "Delivery", desc: "Via Bolt Food & Glovo" },
-    { icon: BoxIcon, title: "Takeaway", desc: "Order ahead from our online menu" },
-    { icon: HandIcon, title: "Reservations", desc: "Call us to reserve a table" },
+    { icon: ScooterIcon, title: t("visit.deliveryTitle"), desc: t("visit.deliveryDesc") },
+    { icon: BoxIcon, title: t("visit.takeawayTitle"), desc: t("visit.takeawayDesc") },
+    { icon: HandIcon, title: t("visit.reservationTitle"), desc: t("visit.reservationDesc") },
   ];
 
   return (
     <section id="visit" className="relative z-[5] py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#187492]">
       <div className="max-w-[1200px] mx-auto">
         <Reveal as="div" className="mb-10 lg:mb-14 text-center">
-          <span className="eyebrow eyebrow--yellow">Visit us</span>
-          <h2 className="h-section text-white">Come say hello</h2>
+          <span className="eyebrow eyebrow--yellow">{t("visit.eyebrow")}</span>
+          <h2 className="h-section text-white">{t("visit.title")}</h2>
         </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
@@ -272,8 +265,8 @@ function FindUs() {
             rel="noopener"
             className="card-lift block bg-[#ebe859] text-[#1A1715] p-5 text-center hover:bg-[#59eb59] transition-colors rounded-xl active:scale-[0.98]"
           >
-            <p className="font-display font-bold text-[15px]">Follow @druh.cafe</p>
-            <p className="text-[#1A1715]/80 text-[12px] mt-0.5">Daily specials & behind the scenes</p>
+            <p className="font-display font-bold text-[15px]">{t("visit.followTitle")}</p>
+            <p className="text-[#1A1715]/80 text-[12px] mt-0.5">{t("visit.followSub")}</p>
           </motion.a>
         </Reveal>
       </div>
@@ -285,16 +278,17 @@ function FindUs() {
 /*  CTA                                                                        */
 /* -------------------------------------------------------------------------- */
 function CTA() {
+  const { t } = useLanguage();
   return (
     <section className="py-16 lg:py-32 bg-[#ebe859]">
       <Reveal className="max-w-[700px] mx-auto px-5 text-center">
         <h2
           className="h-section"
         >
-          Ready to take a seat?
+          {t("about.ctaTitle")}
         </h2>
         <p className="lead lead--soft mb-10 max-w-lg mx-auto">
-          Browse the full menu, drop by for a matcha, or grab a bag of our house-roasted coffee to go.
+          {t("about.ctaLead")}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
@@ -303,7 +297,7 @@ function CTA() {
             rel="noopener"
             className="shine btn btn--dark"
           >
-            Open the menu
+            {t("about.cta1")}
           </a>
           <a
             href={BRAND.socials.instagram}
@@ -311,7 +305,7 @@ function CTA() {
             rel="noopener"
             className="btn btn--outline-dark"
           >
-            Follow us
+            {t("about.cta2")}
           </a>
         </div>
       </Reveal>

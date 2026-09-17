@@ -1,16 +1,19 @@
+"use client";
 import { asset } from "@/lib/base";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function MenuPage() {
+  const { t } = useLanguage();
   return (
     <main className="flex-1">
       <section className="py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#ebe859]">
         <div className="max-w-[600px] mx-auto text-center text-[#1A1715]">
-          <span className="eyebrow eyebrow--ink">Menu</span>
+          <span className="eyebrow eyebrow--ink">{t("menu.eyebrow")}</span>
           <h1 className="h-section">
-            Take the menu with you
+            {t("pdf.title")}
           </h1>
           <p className="lead mb-8 max-w-md mx-auto">
-            Our full menu is a beautifully designed PDF — open it to browse everything, anytime.
+            {t("menu.lead")}
           </p>
           <a
             href={asset("/menu/druh-menu-en.pdf")}
@@ -18,7 +21,7 @@ export default function MenuPage() {
             rel="noopener"
             className="group shine btn btn--dark"
           >
-            Open menu (PDF)
+            {t("pdf.cta")}
             <svg
               className="transition-transform duration-300 group-hover:translate-x-1"
               width="16"

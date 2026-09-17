@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import SplashScreen from "@/components/SplashScreen";
 import ScrollToTop from "@/components/ScrollToTop";
 import Grain from "@/components/Grain";
+import LanguageProvider from "@/components/LanguageProvider";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -53,15 +54,21 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="ua"
       className={`${montserrat.variable} ${comicSans.variable} ${caveat.variable} ${notoSansJP.variable} h-full`}
     >
+      <head>
+        <meta name="color-scheme" content="only light" />
+        <meta name="theme-color" content="#FDFAF7" />
+      </head>
       <body className="min-h-full flex flex-col">
         <SplashScreen />
         <ScrollToTop />
-        <Header />
-        {children}
-        <Footer />
+        <LanguageProvider>
+          <Header />
+          {children}
+          <Footer />
+        </LanguageProvider>
         <Grain />
       </body>
     </html>
