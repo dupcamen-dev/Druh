@@ -21,8 +21,19 @@ Font.register({ family: "Caveat", fonts: [
 const raw = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../src/data-menu.json"), "utf8"));
 const dishes = raw.dishes;
 
+// Strip characters the PDF fonts cannot render (emoji, flags, pictographs,
+// variation selectors) and normalize weird apostrophes to ASCII.
+function sanitize(str) {
+  if (!str) return str;
+  return str
+    .replace(/[\u{1F1E6}-\u{1F1FF}\u{1F300}-\u{1FAFF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{200D}\u{FE00}-\u{FE0F}\u{20E3}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{2190}-\u{21FF}\u{2300}-\u{23FF}\u{1FB00}-\u{1FBFF}]/gu, "")
+    .replace(/[ʼ’]/g, "'")
+    .replace(/[ \t]+/g, " ")
+    .trim();
+}
+
 const C = {
-  blue: "#2596be",
+  blue: "#187492",
   yellow: "#ebe859",
   green: "#59eb59",
   ink: "#111111",
@@ -32,13 +43,9 @@ const C = {
 
 const ACCENTS = [C.blue, C.yellow, C.green, C.blue, C.yellow, C.green, C.blue, C.yellow, C.green, C.blue, C.yellow, C.green];
 
-// Each page gets one of these style backgrounds, cycling.
+// Each page uses this single blue background.
 const THEMES = [
-  { bg: C.cream, fg: C.ink, line: "rgba(17,17,17,0.16)", label: "cream" },
-  { bg: C.white, fg: C.ink, line: "rgba(17,17,17,0.16)", label: "white" },
-  { bg: C.blue,  fg: C.white, line: "rgba(255,255,255,0.25)", label: "blue" },
-  { bg: C.yellow, fg: C.ink, line: "rgba(17,17,17,0.28)", label: "yellow" },
-  { bg: C.green, fg: C.ink, line: "rgba(17,17,17,0.25)", label: "green" },
+  { bg: C.blue, fg: C.white, line: "rgba(255,255,255,0.25)", label: "blue" },
 ];
 
 const s = StyleSheet.create({
@@ -96,14 +103,14 @@ const s = StyleSheet.create({
   page: {
     fontFamily: "Montserrat",
     size: "A4",
-    padding: "46 48 56 48",
+    padding: "46 48 46 48",
   },
 
   sectionBanner: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 16,
-    marginTop: 14,
+    marginBottom: 14,
+    marginTop: 10,
     paddingBottom: 10,
     borderBottomWidth: 2,
     borderBottomStyle: "solid",
@@ -114,19 +121,19 @@ const s = StyleSheet.create({
     marginRight: 10,
   },
   sectionHeader: {
-    fontFamily: "ComicSans",
+    fontFamily: "Montserrat",
     fontSize: 23,
     fontWeight: 700,
     letterSpacing: 3,
   },
 
   category: {
-    fontFamily: "ComicSans",
+    fontFamily: "Montserrat",
     fontSize: 13.5,
-    fontWeight: 600,
-    marginBottom: 9,
-    marginTop: 16,
-    letterSpacing: 1.5,
+    fontWeight: 700,
+    marginBottom: 8,
+    marginTop: 14,
+    letterSpacing: 2,
     textTransform: "uppercase",
   },
 
@@ -134,10 +141,11 @@ const s = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "baseline",
-    marginBottom: 8,
-    paddingBottom: 7,
+    marginBottom: 7,
+    paddingBottom: 6,
     borderBottomWidth: 0.5,
     borderBottomStyle: "solid",
+    breakInside: "avoid",
   },
   dishLeft: {
     flex: 1,
@@ -244,15 +252,15 @@ const SECTIONS = [
 function DishItem({ d, st }) {
   const options = (d.optionsGroups || []).flatMap((g) =>
     g.items.filter((it) => it.price > 0).map((it) =>
-      h(Text, { key: it.name, style: st.option }, `+ ${it.name}  ${it.price} грн`)
+      h(Text, { key: it.name, style: st.option }, `+ ${sanitize(it.name)}  ${it.price} грн`)
     )
   );
 
-  const meta = (d.weight || "") + (d.weight && d.kcal ? `  ·  ${d.kcal} kcal` : "") + (!d.weight && d.kcal ? `${d.kcal} kcal` : "");
+  const meta = (sanitize(d.weight) || "") + (d.weight && d.kcal ? `  ·  ${d.kcal} kcal` : "") + (!d.weight && d.kcal ? `${d.kcal} kcal` : "");
 
   return h(View, { style: st.dishRow },
     h(View, { style: s.dishLeft },
-      h(Text, { style: st.dishName }, d.name),
+      h(Text, { style: st.dishName }, sanitize(d.name)),
       meta && h(Text, { style: st.dishMeta }, meta),
       ...options
     ),
@@ -266,7 +274,7 @@ function SectionView({ sec, st }) {
 
   const byCat = {};
   for (const d of secDishes) {
-    const cat = d.category || "Інше";
+    const cat = sanitize(d.category) || "Інше";
     (byCat[cat] = byCat[cat] || []).push(d);
   }
 
@@ -275,7 +283,7 @@ function SectionView({ sec, st }) {
   return h(View, null,
     h(View, { style: st.sectionBanner },
       h(View, { style: { ...st.sectionColorDot, backgroundColor: accentColor } }),
-      h(Text, { style: st.sectionHeader }, sec.name),
+      h(Text, { style: st.sectionHeader }, sanitize(sec.name)),
     ),
     ...Object.entries(byCat).map(([cat, items]) =>
       h(View, { key: cat },
@@ -322,7 +330,7 @@ function DrinksPage({ pageNum, totalPages, theme }) {
 
   const byCat = {};
   for (const d of drinkDishes) {
-    const cat = d.category || "Інше";
+    const cat = sanitize(d.category) || "Інше";
     (byCat[cat] = byCat[cat] || []).push(d);
   }
 

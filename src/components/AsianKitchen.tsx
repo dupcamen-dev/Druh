@@ -240,30 +240,7 @@ export default function AsianKitchen() {
           ))}
         </div>
 
-        {/* ── CTA row ── */}
-        <Reveal className="mt-12 lg:mt-16 flex flex-wrap justify-center gap-4">
-          <a
-            href={asset("/menu/druh-menu-en.pdf")}
-            target="_blank"
-            rel="noopener"
-            className="group shine btn btn--yellow"
-          >
-            Open menu (PDF)
-            <svg
-              className="transition-transform duration-300 group-hover:translate-x-1"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="square"
-            >
-              <path d="M18 8l4 4-4 4M6 20V11a1 1 0 0 1 1-1h11" />
-            </svg>
-          </a>
-        </Reveal>
-      </div>
+        </div>
     </section>
   );
 }

@@ -2,21 +2,19 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import Reveal from "@/components/Reveal";
+import Reveal, { STAGGER_CHILD } from "@/components/Reveal";
 import { BRAND } from "@/data/brand";
 import { asset } from "@/lib/base";
-import { BentoGrid, BentoCard } from "@/components/ui/bento-grid";
-import { BorderBeam } from "@/components/ui/border-beam";
+import { PinIcon, PhoneIcon, ClockIcon, ScooterIcon, BoxIcon, HandIcon } from "@/components/OutlineIcons";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
-import { TextReveal } from "@/components/ui/text-reveal";
 
 /* -------------------------------------------------------------------------- */
 /*  Hero                                                                      */
 /* -------------------------------------------------------------------------- */
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#1A1715] pt-28 pb-20 lg:pt-36 lg:pb-28">
+    <section className="relative overflow-hidden bg-[#187492] pt-28 pb-20 lg:pt-36 lg:pb-28">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* left copy */}
         <Reveal variant="up">
@@ -132,11 +130,11 @@ function Stats() {
 /* -------------------------------------------------------------------------- */
 function Story() {
   return (
-    <section id="story" className="py-16 lg:py-32 bg-white">
+    <section id="story" className="py-16 lg:py-32 bg-[#187492]">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* image collage */}
         <Reveal variant="left" className="relative h-[260px] sm:h-[320px] lg:h-[380px]">
-          <div className="absolute left-0 bottom-0 z-10 w-[58%] overflow-hidden rounded-xl shadow-xl ring-1 ring-black/5">
+          <div className="absolute left-0 bottom-0 z-10 w-[58%] overflow-hidden rounded-xl shadow-xl ring-1 ring-white/10">
             <Image
               src={asset("/images/hero-5.jpg")}
               alt="Interior at Druh"
@@ -145,7 +143,7 @@ function Story() {
               className="h-auto w-full object-cover"
             />
           </div>
-          <div className="absolute right-0 top-0 z-20 w-[55%] overflow-hidden rounded-xl shadow-xl ring-1 ring-black/5 rotate-2">
+          <div className="absolute right-0 top-0 z-20 w-[55%] overflow-hidden rounded-xl shadow-xl ring-1 ring-white/10 rotate-2">
             <Image
               src={asset("/images/story-new.png")}
               alt="About Druh"
@@ -158,15 +156,15 @@ function Story() {
 
         {/* copy */}
         <Reveal variant="right">
-          <span className="eyebrow">
+          <span className="eyebrow eyebrow--yellow">
             Our story
           </span>
           <h2
-            className="h-section"
+            className="h-section text-[#F5EFE6]"
           >
             A place where strangers become friends
           </h2>
-          <div className="space-y-4 text-[15px] text-[#555] leading-[1.8]">
+          <div className="space-y-4 text-[15px] leading-[1.8]" style={{ color: "rgba(245,239,230,0.55)" }}>
             <p>
               DRUH was born from the simple belief that a café should feel like home.
               Tucked away on a quiet street in Ternopil, we opened our doors for mornings that never
@@ -186,129 +184,97 @@ function Story() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Manifesto (scroll reveal)                                                  */
-/* -------------------------------------------------------------------------- */
-function Manifesto() {
-  return (
-    <section className="py-16 lg:py-32 bg-[#FDFAF7]">
-      <div className="max-w-[900px] mx-auto px-5 sm:px-8 lg:px-10">
-        <TextReveal>
-          A café should feel like coming home — where the barista knows your order, the ramen
-          bubbles since morning, and everyone leaves a little lighter.
-        </TextReveal>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/*  Values Bento                                                               */
-/* -------------------------------------------------------------------------- */
-function Values() {
-  return (
-    <section id="values" className="py-16 lg:py-32 bg-[#FDFAF7]">
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10">
-        <Reveal className="section-head">
-          <span className="eyebrow">
-            What we stand for
-          </span>
-          <h2
-            className="h-section"
-          >
-            Small things, done right
-          </h2>
-          <p className="lead">
-            Every detail on the menu is a choice — honest ingredients, time, and care.
-          </p>
-        </Reveal>
-
-        <BentoGrid className="md:auto-rows-[18rem]">
-          <BentoCard
-            name="Breakfast, all day"
-            className="md:col-span-2 bg-gradient-to-br from-[#ebe859]/20 to-transparent"
-            background={
-              <div className="absolute inset-0 bg-[url('/images/dish-cinnabon-nectarine.jpg')] bg-cover bg-center opacity-20 mix-blend-multiply" />
-            }
-            icon={<span>🍳</span>}
-            description="Fluffy pancakes, syrnyky and eggs — available from open to close."
-            href={asset("/menu/druh-menu-en.pdf")}
-            cta="See breakfasts"
-          />
-
-          <BentoCard
-            name="Home-cooked & honest"
-            icon={<span>🏠</span>}
-            description="Every recipe on the menu is made from scratch, using seasonal and local ingredients."
-            className="bg-white"
-          />
-
-          <BentoCard
-            name="Tokyo street food"
-            icon={<span>🍜</span>}
-            description="Ramen, yakitori and onigiri — transported straight from Osaka and Tokyo's alleyways."
-            className="bg-white"
-          />
-
-          <BentoCard
-            name="Little shop"
-            icon={<span>🛒</span>}
-            description="Packaged coffee from roasters we love, matcha kits, and handmade treats to take home."
-            className="bg-white"
-          />
-
-          {/* card with border beam */}
-          <div className="relative overflow-hidden rounded-xl md:col-span-1">
-            <BorderBeam
-              colorFrom="#ebe859"
-              colorTo="#187492"
-              size={80}
-              duration={4}
-              className="rounded-xl"
-            />
-            <BentoCard
-              name="Friendly, always"
-              icon={<span>💛</span>}
-              description="Because the best meals are shared with the best people."
-              className="bg-white"
-            />
-          </div>
-        </BentoGrid>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
 /*  Find Us                                                                     */
 /* -------------------------------------------------------------------------- */
 function FindUs() {
+  const contactItems = [
+    { icon: PinIcon, label: "Address", content: (
+      <>
+        <p className="text-white/90 text-[15px]">{BRAND.addressFull}</p>
+        <a href="https://maps.google.com/?q=Druh+Cafe+Ternopil+15+Kvitnia+2" target="_blank" rel="noopener" className="text-[13px] text-[var(--yellow-light)] font-bold underline-anim mt-1 inline-block py-1">Open in Google Maps</a>
+      </>
+    )},
+    { icon: PhoneIcon, label: "Call us", content: (
+      <a href={`tel:${BRAND.phoneLink}`} className="text-white/90 text-[15px] hover:text-[#ebe859] transition-colors inline-block py-1">{BRAND.phone}</a>
+    )},
+    { icon: ClockIcon, label: "Opening hours", content: (
+      <>
+        <p className="text-white/90 text-[15px]">Mon–Fri: {BRAND.hours.weekdays}</p>
+        <p className="text-white/90 text-[15px]">Sat–Sun: {BRAND.hours.weekends}</p>
+      </>
+    )},
+  ];
+
+  const serviceCards = [
+    { icon: ScooterIcon, title: "Delivery", desc: "Via Bolt Food & Glovo" },
+    { icon: BoxIcon, title: "Takeaway", desc: "Order ahead from our online menu" },
+    { icon: HandIcon, title: "Reservations", desc: "Call us to reserve a table" },
+  ];
+
   return (
-    <section id="find" className="py-16 lg:py-32 bg-[#187492]">
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-10">
-        <Reveal variant="up">
-          <span className="eyebrow eyebrow--yellow">Find us</span>
-          <h3 className="h-sub text-white">{BRAND.name}</h3>
-          <p className="text-white/90 text-[15px] leading-relaxed">{BRAND.addressFull}</p>
+    <section id="visit" className="relative z-[5] py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#187492]">
+      <div className="max-w-[1200px] mx-auto">
+        <Reveal as="div" className="mb-10 lg:mb-14 text-center">
+          <span className="eyebrow eyebrow--yellow">Visit us</span>
+          <h2 className="h-section text-white">Come say hello</h2>
         </Reveal>
 
-        <Reveal variant="up">
-          <span className="eyebrow eyebrow--yellow">Opening hours</span>
-          <div className="text-white/90 text-[15px] leading-relaxed space-y-1">
-            <p>Mon – Fri: {BRAND.hours.weekdays}</p>
-            <p>Sat – Sun: {BRAND.hours.weekends}</p>
-          </div>
-        </Reveal>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          <Reveal as="div" variant="left" className="lg:col-span-2">
+            <div className="relative rounded-xl overflow-hidden border border-white/20 shadow-xl aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[380px]">
+              <iframe
+                title="Druh Cafe on Google Maps"
+                src="https://maps.google.com/maps?q=Druh%20Cafe%2C%20vul.%2015-ho%20Kvitnia%202%2C%20Ternopil&t=k&z=16&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, width: "100%", height: "100%", minHeight: 260 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <div aria-hidden className="pointer-events-none absolute inset-0 z-10 bg-black/10" />
+            </div>
+          </Reveal>
 
-        <Reveal variant="up">
-          <span className="eyebrow eyebrow--yellow">Say hello</span>
-          <div className="space-y-2">
-            <a href={`tel:${BRAND.phoneLink}`} className="block text-white/90 text-[15px] hover:text-white transition-colors">
-              {BRAND.phone}
-            </a>
-            <a href={BRAND.socials.instagram} target="_blank" rel="noopener" className="block text-white/90 text-[15px] hover:text-white transition-colors">
-              Instagram
-            </a>
-          </div>
+          <Reveal as="div" variant="right" className="flex flex-col justify-center bg-white/5 rounded-xl p-6 lg:p-8">
+            <div className="space-y-6">
+              {contactItems.map((c) => (
+                <div key={c.label} className="flex items-start gap-4">
+                  <c.icon className="mt-0.5 shrink-0" size={26} />
+                  <div>
+                    <h4 className="font-display font-bold text-white text-[12px] uppercase tracking-[0.12em] mb-1.5">{c.label}</h4>
+                    {c.content}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
+        <Reveal as="div" variant="stagger" className="mt-6 lg:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {serviceCards.map((c) => (
+            <motion.div
+              key={c.title}
+              variants={STAGGER_CHILD}
+              className="card-lift bg-black/10 hover:bg-white/10 p-5 rounded-xl flex items-start gap-4 transition-colors"
+            >
+              <c.icon className="shrink-0 mt-0.5" size={26} />
+              <div>
+                <h4 className="font-display font-bold text-white text-[13px] mb-1">{c.title}</h4>
+                <p className="text-[12px] text-white/90">{c.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+          <motion.a
+            variants={STAGGER_CHILD}
+            href={BRAND.socials.instagram}
+            target="_blank"
+            rel="noopener"
+            className="card-lift block bg-[#ebe859] text-[#1A1715] p-5 text-center hover:bg-[#59eb59] transition-colors rounded-xl active:scale-[0.98]"
+          >
+            <p className="font-display font-bold text-[15px]">Follow @druh.cafe</p>
+            <p className="text-[#1A1715]/80 text-[12px] mt-0.5">Daily specials & behind the scenes</p>
+          </motion.a>
         </Reveal>
       </div>
     </section>
@@ -362,8 +328,6 @@ export default function AboutPage() {
       <Hero />
       <Stats />
       <Story />
-      <Manifesto />
-      <Values />
       <FindUs />
       <CTA />
     </main>

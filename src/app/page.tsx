@@ -53,18 +53,18 @@ function PdfBanner() {
 /* ---- Our story teaser ---- */
 function StoryTeaser() {
   return (
-    <section className="relative z-[5] py-16 lg:py-32 bg-white">
+    <section className="relative z-[5] py-16 lg:py-32 bg-[#187492]">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         <Reveal variant="up">
-          <span className="eyebrow eyebrow--ink">
+          <span className="eyebrow eyebrow--yellow">
             Our story
           </span>
           <h2
-            className="h-section text-[#1A1715]"
+            className="h-section text-[#F5EFE6]"
           >
             A place where strangers<br className="hidden sm:block" /> become friends
           </h2>
-          <p className="text-[#1A1715]/70 text-[15px] leading-[1.8] max-w-lg mb-10">
+          <p className="text-[rgba(245,239,230,0.55)] text-[15px] leading-[1.8] max-w-lg mb-10">
             A café should feel like home — mornings that never seem to end, broth that warms you
             from the inside, and a little shop to take that warmth with you.
           </p>
@@ -74,7 +74,7 @@ function StoryTeaser() {
         </Reveal>
 
         <Reveal variant="scale" className="relative mx-auto w-full max-w-[480px]">
-          <div className="overflow-hidden rounded-xl shadow-2xl ring-1 ring-black/10 rotate-2 bg-white">
+          <div className="overflow-hidden rotate-2">
             <Image
               src={asset("/images/story-new.png")}
               alt="About Druh"
@@ -92,17 +92,17 @@ function StoryTeaser() {
 
 function Gallery() {
   return (
-    <section id="gallery" className="relative z-[5] py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-white">
+    <section id="gallery" className="relative z-[5] py-16 lg:py-32 px-5 sm:px-8 lg:px-10 bg-[#187492] text-[#F5EFE6]">
       <div className="max-w-[1200px] mx-auto">
         <Reveal>
           <div className="section-head">
-            <span className="eyebrow">Gallery</span>
+            <span className="eyebrow eyebrow--yellow">Gallery</span>
             <h2 className="h-section">
               Moments at Druh
             </h2>
-            <p className="lead">
+            <p className="lead" style={{ color: "rgba(245,239,230,0.55)" }}>
               Follow us on{" "}
-              <a href={BRAND.socials.instagram} className="underline-anim font-bold" target="_blank" rel="noopener">
+              <a href={BRAND.socials.instagram} className="underline-anim font-bold text-[#EAE7AE]" target="_blank" rel="noopener">
                 @druh.cafe
               </a>
             </p>
