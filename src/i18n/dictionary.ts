@@ -26,8 +26,8 @@ export const dict: RawDict = {
   "footer.terms": { ua: "Умови користування", en: "Terms of Service" },
 
   /* ── hero ── */
-  "hero.aria": { ua: "DRUH — де кожен гість — друг", en: "Druh — where every guest is a friend" },
-  "hero.tagline": { ua: "де кожен гість — друг", en: "where every guest is a friend" },
+  "hero.aria": { ua: "DRUH — кафе та кухня · Тернопіль", en: "Druh — Café & Kitchen · Ternopil" },
+  "hero.tagline": { ua: "кафе та кухня · тернопіль", en: "café & kitchen · ternopil" },
   "hero.h1a": { ua: "де кожен гість", en: "where every guest" },
   "hero.h1b": { ua: "це", en: "is a" },
   "hero.friend": { ua: "друг", en: "friend" },
