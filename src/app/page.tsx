@@ -1,6 +1,7 @@
 "use client";
+import { useRef } from "react";
 import Image from "next/image";
-import { motion } from "motion/react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import Reveal, { STAGGER_CHILD } from "@/components/Reveal";
 import { PinIcon, PhoneIcon, ClockIcon, ScooterIcon, BoxIcon, HandIcon } from "@/components/OutlineIcons";
 import Kramnychka from "@/components/Kramnychka";
@@ -56,6 +57,17 @@ function PdfBanner() {
 /* ---- Our story teaser ---- */
 function StoryTeaser() {
   const { t } = useLanguage();
+  const parallaxRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: parallaxRef,
+    offset: ["start end", "end start"],
+  });
+  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]), {
+    stiffness: 70,
+    damping: 24,
+    mass: 0.4,
+  });
+
   return (
     <section className="relative z-[5] py-16 lg:py-32 bg-[#187492]">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
@@ -76,16 +88,18 @@ function StoryTeaser() {
           </a>
         </Reveal>
 
-        <Reveal variant="scale" className="relative mx-auto w-full max-w-[480px]">
-          <div className="overflow-hidden rotate-2">
-            <Image
-              src={asset("/images/story-new.png")}
-              alt="About Druh"
-              width={480}
-              height={480}
-              className="h-auto w-full object-contain"
-              sizes="(max-width: 768px) 100vw, 40vw"
-            />
+        <Reveal variant="scale" className="relative mx-auto w-full max-w-[560px]">
+          <div ref={parallaxRef} className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+            <motion.div style={{ y, willChange: "transform" }} className="absolute -inset-y-[20%] inset-x-0">
+              <Image
+                src={asset("/images/story-new.webp")}
+                alt="About Druh"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 40vw"
+              />
+            </motion.div>
           </div>
         </Reveal>
       </div>

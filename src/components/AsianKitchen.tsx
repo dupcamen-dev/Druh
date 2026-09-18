@@ -76,8 +76,8 @@ const DISHES: Dish[] = [
     id: "yakitori-prawn",
     img: "/images/asian/yakitori-prawn.png",
     local: true,
-    w: 1024,
-    h: 769,
+    w: 1447,
+    h: 1087,
     nameKey: "asian.yakitoriPrawn.name",
     descKey: "asian.yakitoriPrawn.desc",
     price: 185,
@@ -136,6 +136,58 @@ const DISHES: Dish[] = [
     weight: "300 g",
     rotate: -3,
     corner: "bl",
+  },
+  {
+    id: "hambagu",
+    img: "/images/asian/hambagu.png",
+    local: true,
+    w: 1154,
+    h: 769,
+    nameKey: "asian.hambagu.name",
+    descKey: "asian.hambagu.desc",
+    price: 285,
+    weight: "400 g",
+    rotate: 2,
+    corner: "br",
+  },
+  {
+    id: "don-unagi",
+    img: "https://cdn-media.choiceqr.com/prod-eat-drug/menu/lSOocjr-NNyblDU-lXLNIpI_prepare.jpeg",
+    local: false,
+    w: 1200,
+    h: 900,
+    nameKey: "asian.donUnagi.name",
+    descKey: "asian.donUnagi.desc",
+    price: 345,
+    weight: "300 g",
+    rotate: -2,
+    corner: "tl",
+  },
+  {
+    id: "sweet-sour-chicken",
+    img: "https://cdn-media.choiceqr.com/prod-eat-drug/menu/DbeYiKI-CBFxddX-BGHRVGM_prepare.jpeg",
+    local: false,
+    w: 1200,
+    h: 900,
+    nameKey: "asian.sweetSourChicken.name",
+    descKey: "asian.sweetSourChicken.desc",
+    price: 190,
+    weight: "220 g",
+    rotate: 3,
+    corner: "bl",
+  },
+  {
+    id: "bbq-beef",
+    img: "https://cdn-media.choiceqr.com/prod-eat-drug/menu/NksVHrH-TrGbLDR-JwRhJdG_prepare.jpeg",
+    local: false,
+    w: 1200,
+    h: 900,
+    nameKey: "asian.bbqBeef.name",
+    descKey: "asian.bbqBeef.desc",
+    price: 345,
+    weight: "410 g",
+    rotate: -3,
+    corner: "tr",
   },
 ];
 
@@ -208,41 +260,40 @@ export default function AsianKitchen() {
         </Reveal>
 
         {/* ── dish grid ── */}
-        <div className="grid grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-2 xl:grid-cols-3 pt-2">
+        <div className="flex flex-wrap justify-center gap-5 sm:gap-6 pt-2">
           {DISHES.map((d, i) => (
-            <div key={d.id} className="group relative">
+            <div key={d.id} className="group relative w-full sm:w-[calc(50%-12px)] xl:w-[calc(33.333%-16px)]">
               <CornerFlyIn corner={d.corner} rotate={d.rotate}>
-                {/* transparent photo, no frame — just the dish */}
-                <Image
-                  src={d.local ? asset(d.img) : d.img}
-                  alt={t(d.nameKey)}
-                  width={d.w}
-                  height={d.h}
-                  priority={i < 2}
-                  className="w-full h-auto transition-transform duration-500 ease-out group-hover:scale-[1.04] drop-shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
-                  sizes="(max-width: 1024px) 90vw, (max-width: 1280px) 45vw, 30vw"
-                />
+                <div className="relative aspect-[4/3] w-full">
+                  <Image
+                    src={d.local ? asset(d.img) : d.img}
+                    alt={t(d.nameKey)}
+                    width={d.w}
+                    height={d.h}
+                    priority={i < 2}
+                    className={`w-full h-full transition-transform duration-500 ease-out group-hover:scale-[1.04] drop-shadow-[0_12px_28px_rgba(0,0,0,0.35)] ${
+                      d.local ? "object-contain" : "object-cover"
+                    }`}
+                    sizes="(max-width: 1024px) 90vw, (max-width: 1280px) 45vw, 30vw"
+                  />
+                </div>
 
                 {/* caption — floats on the dark bg */}
-                <div className="pt-3 px-1 flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <h3 className="font-display font-bold text-[#F5EFE6] text-[15px] leading-snug">
+                <div className="pt-3 px-1">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="min-w-0 font-display font-bold text-[#F5EFE6] text-[18px] leading-tight">
                       {t(d.nameKey)}
                     </h3>
-                    <p className="text-[rgba(245,239,230,0.45)] text-[11px] leading-[1.6] mt-1 line-clamp-2">
-                      {t(d.descKey)}
-                    </p>
-                  </div>
-
-                  {/* price + weight */}
-                  <div className="shrink-0 text-right">
-                    <span className="block font-display font-bold text-[#F1E05A] text-[17px] leading-none">
+                    <span className="shrink-0 font-display font-bold text-[#F1E05A] text-[21px] leading-none whitespace-nowrap tabular-nums">
                       {d.price} ₴
                     </span>
-                    <span className="block text-[rgba(245,239,230,0.3)] text-[10px] mt-1">
-                      {d.weight}
-                    </span>
                   </div>
+                  <p className="text-[rgba(245,239,230,0.45)] text-[13px] leading-[1.6] mt-1.5 line-clamp-2">
+                    {t(d.descKey)}
+                  </p>
+                  <p className="text-[rgba(245,239,230,0.3)] text-[12px] mt-1">
+                    {d.weight}
+                  </p>
                 </div>
               </CornerFlyIn>
             </div>

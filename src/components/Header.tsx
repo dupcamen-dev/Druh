@@ -90,6 +90,11 @@ export default function Header() {
           />
         </Link>
 
+        {/* centred language switcher — mobile only */}
+        <div className="absolute left-1/2 -translate-x-1/2 md:hidden">
+          <LangSwitcher overDark={overDark} />
+        </div>
+
         <nav className="hidden md:flex items-center gap-8">
           {NAV_KEYS.map((n) => (
             <a
@@ -103,7 +108,9 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3 shrink-0">
-          <LangSwitcher overDark={overDark} />
+          <div className="hidden md:block">
+            <LangSwitcher overDark={overDark} />
+          </div>
           <div className="hidden md:block">
             <a
               href={asset("/menu/druh-menu-en.pdf")}

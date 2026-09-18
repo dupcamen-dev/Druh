@@ -29,8 +29,8 @@ export default function CornerFlyIn({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, x: start.x, y: start.y, rotate }}
-      animate={{ opacity: 1, x: 0, y: 0, rotate }}
+      initial={{ opacity: 0, x: start.x, y: start.y, rotate: rotate * 2 }}
+      animate={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
       transition={{ duration: 0.5, ease: SNAP }}
     >
       {children}

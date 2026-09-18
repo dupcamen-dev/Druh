@@ -174,6 +174,26 @@ export const dict: RawDict = {
     ua: "Японський рисовий боул із грильованими креветками та цитрусовою заправкою.",
     en: "Japanese rice bowl with grilled prawns and a citrus dressing.",
   },
+  "asian.hambagu.name": { ua: "Хамбагу", en: "Hambagu" },
+  "asian.hambagu.desc": {
+    ua: "Хіт сучасного Токіо — пухкий біфштекс сувід із запіканням, азійський рис, маринований жовток та умамі-соус.",
+    en: "Modern Tokyo's absolute hit — a fluffy beef steak sous-vide and baked, Asian rice, marinated egg yolk and rich umami sauce.",
+  },
+  "asian.donUnagi.name": { ua: "Дон унагі", en: "Unagi don" },
+  "asian.donUnagi.desc": {
+    ua: "Преміальна японська класика — ніжне філе вугра в соусі нікірі, маринований жовток, хрусткий бамбук та шпинат шоюдзуке.",
+    en: "Premium Japanese classic — delicate eel fillet in Nikiri sauce, marinated yolk, crisp bamboo shoots and shoyuzuke spinach.",
+  },
+  "asian.sweetSourChicken.name": { ua: "Курка в кислосолодкому соусі", en: "Sweet & sour chicken" },
+  "asian.sweetSourChicken.desc": {
+    ua: "Ніжне куряче філе з делікатною скоринкою в авторському соусі, де томатна основа зустрічається зі стиглим манго.",
+    en: "Tender chicken fillet glazed with a house sauce where tomato meets ripe mango.",
+  },
+  "asian.bbqBeef.name": { ua: "Яловичина в азійському BBQ", en: "Beef in Asian BBQ" },
+  "asian.bbqBeef.desc": {
+    ua: "Яловичина су-від із печерицями, пюре, маринованим огірком і щедрою порцією азійського BBQ-соусу.",
+    en: "Sous-vide beef with mushrooms, mash, pickled cucumber and a bold helping of Asian BBQ sauce.",
+  },
 
   /* ── shop / kramnychka ── */
   "shop.eyebrow": { ua: "Крамничка", en: "Little shop" },
