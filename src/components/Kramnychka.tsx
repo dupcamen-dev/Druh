@@ -378,7 +378,11 @@ export default function Kramnychka() {
                     className="card-lift group relative flex flex-col rounded-xl overflow-hidden bg-[#187492] z-10"
                   >
                     {/* image */}
-                    <div className="relative aspect-[4/3]">
+                    <div
+                      className={`relative aspect-[4/3] ${
+                        it.id === "cafeboutique-kenya-kikuyu" ? "p-[9%]" : ""
+                      }`}
+                    >
                       <Image
                         src={asset(it.imageUrl)}
                         alt={t(ITEM_KEY[it.id] + ".name")}
