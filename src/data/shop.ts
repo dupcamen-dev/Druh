@@ -100,7 +100,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     description:
       "Process: washed\nRegion: Nyeri\nStation: Various\nVariety: SL-28, SL-34, RUIRU 11\n\nTasting notes: baked apple, redcurrant, rhubarb",
     imageUrl:
-      "/images/shop/cafeboutique-kenya-kikuyu.png",
+      "/images/shop/cafeboutique-kenya-kikuyu.webp",
     labels: [],
   },
   {
